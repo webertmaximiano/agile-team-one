@@ -193,8 +193,8 @@ $firstdomain = $firstdomain[0];
     if( $insubdominio ) {
       include("404.php");
     } else {
-      //include("localizacao/index.php");// DESMASCAR PARA USAR MARKETPLACE COMO PAGINA PADRAO
-      header("Location: https://conheca.estouon.app.br");
+      include("localizacao/index.php");// DESMASCAR PARA USAR MARKETPLACE COMO PAGINA PADRAO
+      //header("Location: https://conheca.ominichanel.redewe2m.com.br/");
     }
 
   }
