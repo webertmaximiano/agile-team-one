@@ -9,7 +9,7 @@ $gowww = $httprotocol.$simple_url;
 $firstdomain = explode(".", $simple_url);
 $firstdomain = $firstdomain[0];
 
-// Mapeando subdominio
+// Mapeando subdominio //
 
   $insubdominio = $_GET['insubdominio'];
   if( !$insubdominio ) {
