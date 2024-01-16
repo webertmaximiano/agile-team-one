@@ -1,0 +1,9 @@
+<?php
+include('functions/db.php');
+require("functions/phpmailer/PHPMailerAutoload.php");
+include('functions/general.php');
+include('functions/data.php');
+include('functions/upload.php');
+include('functions/user.php');
+include('functions/aditional.php');
+?>

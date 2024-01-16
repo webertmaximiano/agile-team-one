@@ -1,0 +1,62 @@
+.align-middle {
+display: flex;
+align-items: center;
+}
+
+.flex {
+display: flex;
+}
+
+.nopadd {
+padding: 0;
+}
+
+/* US */
+
+@media (max-width: 320px)  {
+
+}
+
+/* XS */
+
+@media (max-width: 544px)  {
+
+}
+
+/* SMALL */
+
+@media (min-width: 545px) and (max-width: 767px)  {
+
+}
+
+/* MEDIUM */
+
+@media (min-width: 546px) and (max-width: 991px)  {
+
+}
+
+/* LARGE */
+
+@media (min-width: 992px) and (max-width: 1199px)  {
+
+}
+
+/* EXTRA LARGE */
+
+@media (min-width: 1200px) {
+
+}
+
+/* NAVBAR */
+
+@media (min-width: 992px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+}
+
+/* ALL MOBILE */
+
+@media (max-width: 991px) {
+
+}

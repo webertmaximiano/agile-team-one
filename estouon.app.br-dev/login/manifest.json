@@ -1,0 +1,17 @@
+{
+  "name": "SeuSite Admin",
+  "short_name": "SeuSite Admin",
+  "theme_color": "#261C43",
+  "background_color": "#261C43",
+  "display": "fullscreen",
+  "Scope": "https://seusite.com/login/index.php",
+  "start_url": "https://seusite.com/login/index.php",
+  "icons": [
+    {
+      "src": "https://seusite.com/login/img/258x258.png",
+      "sizes": "258x258",
+      "type": "image/png"
+    } 
+  ],
+  "splash_pages": null
+}

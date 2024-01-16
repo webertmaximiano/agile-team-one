@@ -1,0 +1,13 @@
+[21-Jul-2020 10:34:11 America/Sao_Paulo] PHP Warning:  session_start(): Cannot start session when headers already sent in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 3
+[21-Jul-2020 10:35:23 America/Sao_Paulo] PHP Warning:  Illegal string offset 'nome' in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 252
+[21-Jul-2020 10:35:23 America/Sao_Paulo] PHP Warning:  Illegal string offset 'email' in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 253
+[21-Jul-2020 10:35:23 America/Sao_Paulo] PHP Warning:  Illegal string offset 'level' in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 254
+[21-Jul-2020 10:35:23 America/Sao_Paulo] PHP Warning:  Illegal string offset 'status' in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 255
+[21-Jul-2020 10:35:23 America/Sao_Paulo] PHP Warning:  Illegal string offset 'level' in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 271
+[21-Jul-2020 10:35:35 America/Sao_Paulo] PHP Warning:  session_start(): Cannot start session when headers already sent in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 3
+[21-Jul-2020 10:36:03 America/Sao_Paulo] PHP Warning:  session_start(): Cannot start session when headers already sent in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 3
+[21-Jul-2020 10:37:57 America/Sao_Paulo] PHP Warning:  session_start(): Cannot start session when headers already sent in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 3
+[21-Jul-2020 10:41:18 America/Sao_Paulo] PHP Warning:  session_start(): Cannot start session when headers already sent in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 3
+[21-Jul-2020 10:41:18 America/Sao_Paulo] PHP Notice:  Undefined variable: _SESSION in /home2/tevend39/public_html/_core/_includes/config.php on line 65
+[21-Jul-2020 10:41:18 America/Sao_Paulo] PHP Notice:  Undefined variable: _SESSION in /home2/tevend39/public_html/_core/_includes/config.php on line 74
+[21-Jul-2020 10:41:18 America/Sao_Paulo] PHP Notice:  Undefined index: rel_lojas_id in /home2/tevend39/public_html/_core/_includes/functions/user.php on line 102

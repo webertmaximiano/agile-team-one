@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="en"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Image-Uploader</title>
+
+    <link rel="stylesheet" href="src/image-uploader.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,700|Montserrat:300,400,500,600,700|Source+Code+Pro&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<main>
+
+    <form method="POST" name="form-example-2" id="form-example-2" enctype="multipart/form-data" action="submit.php">
+
+        <div class="input-field">
+            <input type="text" name="name-2" id="name-2" value="John Doe">
+            <label for="name-2" class="active">Name</label>
+        </div>
+
+        <div class="input-field">
+            <input type="text" name="description-2" id="description-2"
+            value="This form is already filed with some data, including images!">
+            <label for="description-2" class="active">Description</label>
+        </div>
+
+        <div class="input-field">
+            <span class="addnew" style="display: block; margin:30px; cursor: pointer; background: gray; padding: 20px;">Adicionar imagem</span>
+            <label class="active">Photos</label>
+            <div class="input-images-2" style="padding-top: .5rem;"></div>
+        </div>
+
+        <button>Submit and display data</button>
+
+    </form>
+
+</main>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+<script>
+
+function kill_image(fileid) {
+    alert(fileid);
+}
+
+</script>
+
+<script type="text/javascript" src="src/image-uploader.js"></script>
+
+<script>
+    $(function () {
+
+        let preloaded = [
+            {id: 1540, src: 'https://picsum.photos/500/500?random=1'},
+            {id: 2, src: 'https://picsum.photos/500/500?random=2'},
+            {id: 3, src: 'https://picsum.photos/500/500?random=3'},
+            {id: 4, src: 'https://picsum.photos/500/500?random=4'},
+            {id: 5, src: 'https://picsum.photos/500/500?random=5'},
+            {id: 6, src: 'https://picsum.photos/500/500?random=6'},
+        ];
+
+        $('.input-images-2').imageUploader({
+            preloaded: preloaded,
+            imagesInputName: 'photos',
+            preloadedInputName: 'old',
+            maxFiles: 7
+        });
+
+        $( ".addnew" ).click(function() {
+
+            $( ".input-images-2 input[type=file]" ).trigger("click");
+
+        });
+
+
+    });
+</script>
+
+</body>
+</html>

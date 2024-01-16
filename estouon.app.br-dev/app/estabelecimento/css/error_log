@@ -1,0 +1,18 @@
+[13-Aug-2020 21:10:19 America/Sao_Paulo] PHP Notice:  Undefined index: HTTPS in /home2/tevend39/public_html/_core/_includes/config.php on line 25
+[13-Aug-2020 21:10:26 America/Fortaleza] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home2/tevend39/public_html/app/estabelecimento/css/style.php on line 4
+[13-Aug-2020 21:10:26 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home2/tevend39/public_html/app/estabelecimento/css/style.php on line 5
+[13-Aug-2020 21:10:26 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home2/tevend39/public_html/app/estabelecimento/css/style.php on line 6
+[13-Aug-2020 21:14:13 America/Sao_Paulo] PHP Notice:  Undefined index: HTTPS in /home2/tevend39/public_html/_core/_includes/config.php on line 25
+[13-Aug-2020 21:14:37 America/Sao_Paulo] PHP Notice:  Undefined index: HTTPS in /home2/tevend39/public_html/_core/_includes/config.php on line 25
+[13-Aug-2020 21:14:37 America/Sao_Paulo] PHP Notice:  Undefined index: user in /home2/tevend39/public_html/_core/_includes/config.php on line 79
+[13-Aug-2020 21:14:37 America/Sao_Paulo] PHP Notice:  Undefined index: keepalive in /home2/tevend39/public_html/_core/_includes/config.php on line 86
+[13-Aug-2020 21:14:37 America/Sao_Paulo] PHP Notice:  Undefined index: user in /home2/tevend39/public_html/_core/_includes/config.php on line 88
+[13-Aug-2020 21:15:12 America/Sao_Paulo] PHP Notice:  Undefined index: HTTPS in /home2/tevend39/public_html/_core/_includes/config.php on line 25
+[13-Aug-2020 21:15:40 America/Sao_Paulo] PHP Notice:  Undefined index: HTTPS in /home2/tevend39/public_html/_core/_includes/config.php on line 25
+[13-Aug-2020 21:16:20 America/Sao_Paulo] PHP Notice:  Undefined index: HTTPS in /home2/tevend39/public_html/_core/_includes/config.php on line 25
+[19-Aug-2020 23:58:25 America/Fortaleza] PHP Warning:  mysqli_real_escape_string() expects parameter 1 to be mysqli, null given in /home2/tevend39/public_html/app/estabelecimento/css/style.php on line 4
+[19-Aug-2020 23:58:25 America/Fortaleza] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home2/tevend39/public_html/app/estabelecimento/css/style.php on line 5
+[19-Aug-2020 23:58:25 America/Fortaleza] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home2/tevend39/public_html/app/estabelecimento/css/style.php on line 6
+[21-Aug-2020 09:25:45 America/Sao_Paulo] PHP Notice:  Undefined index: HTTPS in /home2/tevend39/public_html/_core/_includes/config.php on line 25
+[21-Aug-2020 09:25:45 America/Sao_Paulo] PHP Notice:  Undefined index: user in /home2/tevend39/public_html/_core/_includes/config.php on line 79
+[21-Aug-2020 09:25:45 America/Sao_Paulo] PHP Notice:  Undefined index: user in /home2/tevend39/public_html/_core/_includes/config.php on line 88

@@ -1,0 +1,437 @@
+.wizard .content {
+min-height: 0;
+}
+
+.wizard .content > .body {
+width: 100%;
+height: auto;
+position: absolute;
+}
+
+.wizard .content .body.current {
+position: relative;
+}
+
+.wizard {
+display: block;
+width: 100%;
+overflow: hidden;
+}
+
+.wizard a {
+outline: 0;
+}
+
+.wizard ul {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.wizard ul > li {
+display: block;
+padding: 0;
+}
+
+.wizard > .steps {
+position: relative;
+margin-bottom: 30px;
+display: block;
+width: 100%;
+white-space: nowrap;
+}
+
+.wizard > .steps .current-info {
+position: absolute;
+left: -999em;
+}
+
+.wizard > .steps .number {
+font-size: 13px;
+}
+
+.wizard > .steps > ul > li {
+width: 16.6%;
+float: left;
+text-align: center;
+}
+
+.wizard > .steps a {
+display: block;
+width: auto;
+padding: 16px 12px 12px 12px;
+text-decoration: none;
+border-radius: 4px;
+margin-right: 10px;
+background: rgba(0,0,0,.05);
+color: #434a54;
+}
+
+.wizard > .steps li:last-child a {
+margin-right: 0;
+}
+
+.wizard > .steps .disabled a {
+background: #e6e9ed;
+color: #434a54;
+cursor: default;
+}
+
+.wizard > .steps .disabled a:hover {
+background: #e6e9ed;
+color: #434a54;
+cursor: default;
+}
+
+.wizard > .steps .disabled a:active {
+background: #e6e9ed e;
+color: #434a54;
+cursor: default;
+}
+
+.wizard > .steps .current a {
+background: rgba(39,41,62,1);
+transition: 0.2s;
+color: #ffffff;
+cursor: default;
+}
+
+.wizard > .steps .current a:hover {
+background: rgba(39,41,62,1);
+transition: 0.2s;
+color: #ffffff;
+cursor: default;
+}
+
+.wizard > .steps .current a:active {
+background: rgba(39,41,62,1);
+transition: 0.2s;
+color: #ffffff;
+cursor: default;
+}
+
+.wizard > .steps .done a {
+background: rgba(0,0,0,.05);
+transition: 0.2s;
+color: #434a54;
+}
+
+.wizard > .steps .done a:hover {
+background: rgba(39,41,62,1);
+transition: 0.2s;
+color: #ffffff;
+}
+
+.wizard > .steps .done a:active {
+background: rgba(39,41,62,1);
+transition: 0.2s;
+color: #ffffff;
+}
+
+.wizard > .steps .error a {
+background: #fe7c96;
+color: #fff;
+}
+
+.wizard > .steps .error a:hover {
+background: #fe7c96;
+color: #fff;
+}
+
+.wizard > .steps .error a:active {
+background: #fe7c96;
+color: #fff;
+}
+
+.wizard > .content {
+display: block;
+min-height: 200px;
+overflow: inherit;
+height: auto;
+position: relative;
+width: auto;
+border-radius: 5px;
+}
+
+.wizard > .content > .title {
+position: absolute;
+left: -999em;
+}
+
+.wizard > .content > .body {
+float: left;
+width: 100%;
+height: auto;
+}
+
+.wizard > .actions {
+padding-top: 20px;
+position: relative;
+display: block;
+text-align: right;
+width: 100%;
+}
+
+.wizard > .actions > ul {
+display: inline-block;
+text-align: right;
+}
+
+.wizard > .actions > ul > li {
+float: left;
+margin: 0 0.5em;
+}
+
+.wizard.vertical > .steps {
+display: inline;
+float: left;
+width: 30%;
+}
+
+.wizard > .actions {
+margin-bottom: 20px;
+}
+
+.wizard .actions ul li {
+margin: 0; 
+}
+
+.wizard .actions ul li:nth-child(1) {
+margin-right: 10px;
+}
+
+.wizard .actions a {
+border-radius: 4px;
+text-align: center;
+width: 100%;
+background: rgba(39,41,62,1);
+padding: 16px 30px 11px 30px;
+color: #fff;
+}
+
+.wizard.vertical > .steps > ul > li {
+float: none;
+width: 100%;
+text-align: left;
+}
+
+.wizard.vertical > .content {
+display: inline;
+float: left;
+margin: 0 2.5% 0.5em 2.5%;
+width: 65%;
+}
+
+.wizard.vertical > .actions {
+display: inline;
+float: right;
+margin: 0 2.5%;
+width: 95%;
+}
+
+.wizard.vertical > .actions > ul > li {
+margin: 0 0 0 1em;
+}
+
+.tabcontrol {
+display: block;
+width: 100%;
+overflow: hidden;
+}
+
+.tabcontrol a {
+outline: 0;
+}
+
+.tabcontrol ul {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.tabcontrol ul > li {
+display: block;
+padding: 0;
+}
+
+.tabcontrol > .steps {
+position: relative;
+display: block;
+width: 100%;
+}
+
+.tabcontrol > .steps .current-info {
+position: absolute;
+left: -999em;
+}
+
+.tabcontrol > .steps > ul {
+position: relative;
+margin: 6px 0 0 0;
+top: 1px;
+z-index: 1;
+}
+
+.tabcontrol > .steps > ul > li {
+float: left;
+margin: 5px 2px 0 0;
+padding: 1px;
+-webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+}
+
+.tabcontrol > .steps > ul > li:hover {
+background: #edecec;
+border: 1px solid #ebedf2;
+padding: 0;
+}
+
+.tabcontrol > .steps > ul > li > a {
+color: #aab2bd;
+display: inline-block;
+border: 0 none;
+margin: 0;
+padding: 10px 30px;
+text-decoration: none;
+}
+
+.tabcontrol > .steps > ul > li > a:hover {
+text-decoration: none;
+}
+
+.tabcontrol > .steps > ul > li.current {
+background: #ffffff;
+border: 1px solid #ebedf2;
+border-bottom: 0 none;
+padding: 0 0 1px 0;
+margin-top: 0;
+}
+
+.tabcontrol > .steps > ul > li.current > a {
+padding: 15px 30px 10px 30px;
+}
+
+.tabcontrol > .content {
+position: relative;
+display: inline-block;
+width: 100%;
+height: 35em;
+overflow: hidden;
+border-top: 1px solid #ebedf2;
+padding-top: 20px;
+}
+
+.tabcontrol > .content > .title {
+position: absolute;
+left: -999em;
+}
+
+.tabcontrol > .content > .body {
+float: left;
+position: absolute;
+width: 95%;
+height: 95%;
+padding: 2.5%;
+}
+
+.tabcontrol > .content > .body ul {
+list-style: disc;
+}
+
+.tabcontrol > .content > .body ul > li {
+display: list-item;
+}
+
+.wizard > .actions > ul > li.disabled {
+  display: none;
+}
+
+.wizard .actions a[href="#finish"] {
+background: rgba(4, 170, 96, 1) !important;
+}
+
+/* MOBILE */
+
+@media (max-width: 980px) {
+
+    .wizard > .steps > ul > li {
+    width: 50%;
+    }
+    .wizard.vertical > .steps {
+    width: 42%;
+    }
+    .wizard.vertical > .content {
+    width: 52%;
+    }
+    .wizard.vertical > .actions {
+    margin: 0;
+    width: 100%;
+    }
+
+    .wizard > .actions {
+    padding-top: 5px;
+    text-align: center !important;
+    }
+
+    .wizard > .steps {
+    margin-bottom: 10px;
+    }
+
+    .wizard > .steps a {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    }
+
+    .wizard > .steps li:nth-child(2n+2) a {
+    margin-right: 0;
+    }
+
+    .wizard > .actions > ul {
+    display: block;
+    }
+
+    .wizard .actions ul li {
+    float: left !important;
+    margin: 0;
+    width: 48% !important;
+    }
+
+    .wizard .actions ul li:nth-child(1) {
+    margin-right: 4%;
+    }
+
+    .wizard .actions ul li a {
+    display: block;
+    width: 100%;
+    }
+
+    .wizard > .steps li.last a {
+    /*margin-right: 10px;*/
+    }
+
+    .wizard .actions ul li:last-child {
+    margin-left: 0 !important;
+    }
+
+    .editer .wizard .actions ul li,
+    .editer .wizard .actions ul li:last-child {
+    float: left !important;
+    margin: 10px 0 0 0 !important;
+    width: 100% !important;
+    }
+
+    .editer .wizard .actions ul li a {
+    float: left !important;
+    margin: 0 !important;
+    width: 100% !important;
+    }
+
+    .editer .wizard .actions a[href="#finish"] {
+    background: green !important;
+    }
+
+}

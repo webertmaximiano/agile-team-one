@@ -1,0 +1,47 @@
+1. OBJETO
+
+1.1. Pelo presente contrato, o Usuário adere ao "%nome_plano%" do seusite.com, cujo objeto final é a utilização do "Plano Trimestral" durante o periodo de "%duracao_plano%" dias.
+
+1.2. As funcionalidades do plano serão todas as disponíveis no plano "Teste gratuito" com o adicional de: %funcionalidade_plano%
+
+2. DADOS CADASTRAIS, PREÇO E FORMAS DE PAGAMENTO
+
+2.1. O Usuário declara e garante possuir capacidade jurídica para celebrar este contrato e se compromete a manter seus dados pessoais informados no cadastro devidamente atualizados junto ao seusite.com, principalmente o CPF/CNPJ, e-mail e o contato telefônico.
+
+2.2. O Usuário poderá optar entre duas formas de pagamento distintas: Boleto e cartão de crédito.
+
+2.3. Caso a cobrança seja feita por boleto bancário, o tempo de processamento do boleto pode ser de até 3 dias úteis. Aos finais de semana e feriados não ocorre processamento do boleto, por isso, o processamento será feita no próximo dia útil.
+
+2.4. Caso a cobrança seja efetuada por cartão de crédito, o tempo para processamento do pagamento irá variar de acordo a o prazo de verificação da operadora do cartão de crédito.
+
+2.4.1. Caso a cobrança no cartão de crédito seja rejeitada por qualquer motivo ou ocorra algum erro referente ao valor debitado, poderão ser realizadas novas tentativas de cobranças nos dias seguintes.
+
+3. REGRAS E PRAZOS
+
+3.1. O seusite.com só ativará o plano ao Usuário depois de confirmado o pagamento da respectiva cobrança via cartão de crédito ou boleto bancário.
+
+3.2. O prazo de entrega será de no máximo 72 horas após confirmação do pagamento.
+
+4. DA SUSPENSÃO E DO CANCELAMENTO 
+
+4.1. Em caso de impossibilidade de lançamento da cobrança do plano por culpa do Usuário, o seusite.com irá suspender automaticamente o plano, até que seja regularizada a pendência.
+
+4.2. Em caso de estorno ou bloqueio do pagamento o plano será automaticamente cancelado.
+
+5 VIGÊNCIA E RESCISÃO IMOTIVADA
+
+5.1. Este contrato é celebrado por prazo de "%duracao_plano%" dias, entrando em vigor na data de sua aprovação eletrônica, que se dá pela efetivação do cadastro dos dados pessoais, de contato e de cobrança do cartão de crédito do Usuário no site do seusite.com, ou, no caso de optante por boleto bancário, no momento em que efetuado o pagamento antecipado.
+
+5.2. O Usuário terá o direito de usar o serviço durante todo o período escolhido, não sendo o catálogo obrigado a restituir quantias pagas, caso o Usuário desista do serviço contratado durante a vigência do contrato.
+
+6. DISPOSIÇÕES FINAIS
+
+6.1. O seusite.com reserva-se ao direito de, a seu critério e a qualquer tempo, modificar, adicionar ou remover quaisquer itens ou condições deste "Plano Trimestral", comunicando ao Usuário, previamente, por e-mail e mediante publicação em suas redes sociais, com antecedência mínima de 10 dias.
+
+6.2. Qualquer espécie de campanha promocional e seus regulamentos, tais como cupons de desconto e preços promocionais de planos, ou programas de benefícios adicionais oferecidos aos UsuárioS, serão divulgados separadamente e terão vigência de acordo com as regras neles estipuladas.
+
+6.3. O seusite.com compromete-se a manter serviço adequado e eficaz de atendimento pelo endereço (https://www.seusite.com) e e-mail (contato@seusite.com), possibilitando ao Usuário a resolução de demandas referentes a informações, dúvidas e reclamações.
+
+6.4. A POLÍTICA DE PRIVACIDADE E SEGURANÇA é parte integrante deste contrato, e as partes contratantes comprometem-se a cumpri-lo.
+
+6.5. As partes elegem o foro da cidade de BARREIRAS/BA, para dirimir quaisquer dúvidas ou litígios relacionados a este termo, renunciando a qualquer outro por mais privilegiado que seja.

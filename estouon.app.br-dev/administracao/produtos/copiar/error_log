@@ -1,0 +1,36 @@
+[21-Jul-2020 10:33:15 America/Sao_Paulo] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function dinheiro(), 1 passed in /home2/tevend39/public_html/administracao/produtos/editar/index.php on line 42 and exactly 2 expected in /home2/tevend39/public_html/_core/_includes/functions/general.php:252
+Stack trace:
+#0 /home2/tevend39/public_html/administracao/produtos/editar/index.php(42): dinheiro('21,00')
+#1 {main}
+  thrown in /home2/tevend39/public_html/_core/_includes/functions/general.php on line 252
+[21-Jul-2020 10:39:40 America/Sao_Paulo] PHP Notice:  Undefined variable: seo_description in /home2/tevend39/public_html/_core/_includes/functions/general.php on line 72
+[21-Jul-2020 10:39:40 America/Sao_Paulo] PHP Notice:  Undefined index: busca in /home2/tevend39/public_html/administracao/_layout/top.php on line 27
+[21-Jul-2020 10:39:40 America/Sao_Paulo] PHP Notice:  Undefined index: busca in /home2/tevend39/public_html/administracao/_layout/sidebars.php on line 20
+[21-Jul-2020 10:39:40 America/Sao_Paulo] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function dinheiro(), 1 passed in /home2/tevend39/public_html/administracao/produtos/editar/index.php on line 42 and exactly 2 expected in /home2/tevend39/public_html/_core/_includes/functions/general.php:252
+Stack trace:
+#0 /home2/tevend39/public_html/administracao/produtos/editar/index.php(42): dinheiro('21,00')
+#1 {main}
+  thrown in /home2/tevend39/public_html/_core/_includes/functions/general.php on line 252
+[21-Jul-2020 10:40:17 America/Sao_Paulo] PHP Notice:  Undefined variable: seo_description in /home2/tevend39/public_html/_core/_includes/functions/general.php on line 72
+[21-Jul-2020 10:40:17 America/Sao_Paulo] PHP Notice:  Undefined index: busca in /home2/tevend39/public_html/administracao/_layout/top.php on line 27
+[21-Jul-2020 10:40:17 America/Sao_Paulo] PHP Notice:  Undefined index: busca in /home2/tevend39/public_html/administracao/_layout/sidebars.php on line 20
+[21-Jul-2020 10:40:17 America/Sao_Paulo] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function dinheiro(), 1 passed in /home2/tevend39/public_html/administracao/produtos/editar/index.php on line 42 and exactly 2 expected in /home2/tevend39/public_html/_core/_includes/functions/general.php:252
+Stack trace:
+#0 /home2/tevend39/public_html/administracao/produtos/editar/index.php(42): dinheiro('21,00')
+#1 {main}
+  thrown in /home2/tevend39/public_html/_core/_includes/functions/general.php on line 252
+[21-Jul-2020 10:41:09 America/Sao_Paulo] PHP Notice:  Undefined variable: seo_description in /home2/tevend39/public_html/_core/_includes/functions/general.php on line 72
+[21-Jul-2020 10:41:09 America/Sao_Paulo] PHP Notice:  Undefined index: busca in /home2/tevend39/public_html/administracao/_layout/top.php on line 27
+[21-Jul-2020 10:41:09 America/Sao_Paulo] PHP Notice:  Undefined index: busca in /home2/tevend39/public_html/administracao/_layout/sidebars.php on line 20
+[21-Jul-2020 10:41:09 America/Sao_Paulo] PHP Notice:  Undefined variable: rootpath in /home2/tevend39/public_html/_core/_includes/functions/data.php on line 1114
+[21-Jul-2020 10:41:09 America/Sao_Paulo] PHP Warning:  unlink(/_core/_uploads/7/2020/07/1008210720dad9e4ik7j.jpg): No such file or directory in /home2/tevend39/public_html/_core/_includes/functions/data.php on line 1114
+[21-Jul-2020 10:41:09 America/Sao_Paulo] PHP Notice:  Undefined variable: new_width in /home2/tevend39/public_html/_core/_includes/functions/upload.php on line 346
+[21-Jul-2020 10:41:09 America/Sao_Paulo] PHP Notice:  Undefined variable: new_height in /home2/tevend39/public_html/_core/_includes/functions/upload.php on line 346
+[21-Jul-2020 10:41:09 America/Sao_Paulo] PHP Notice:  Undefined index: msg in /home2/tevend39/public_html/administracao/produtos/editar/index.php on line 174
+[21-Jul-2020 10:41:09 America/Sao_Paulo] PHP Notice:  Undefined index: msg in /home2/tevend39/public_html/administracao/produtos/editar/index.php on line 180
+[21-Jul-2020 10:41:10 America/Sao_Paulo] PHP Notice:  Undefined variable: seo_description in /home2/tevend39/public_html/_core/_includes/functions/general.php on line 72
+[21-Jul-2020 10:41:10 America/Sao_Paulo] PHP Notice:  Undefined index: busca in /home2/tevend39/public_html/administracao/_layout/top.php on line 27
+[21-Jul-2020 10:41:10 America/Sao_Paulo] PHP Notice:  Undefined index: busca in /home2/tevend39/public_html/administracao/_layout/sidebars.php on line 20
+[21-Jul-2020 10:41:10 America/Sao_Paulo] PHP Notice:  Undefined index: formdata in /home2/tevend39/public_html/administracao/produtos/editar/index.php on line 32
+[21-Jul-2020 10:41:10 America/Sao_Paulo] PHP Notice:  Undefined variable: checkerrors in /home2/tevend39/public_html/administracao/produtos/editar/index.php on line 172
+[21-Jul-2020 11:01:55 America/Fortaleza] PHP Parse error:  syntax error, unexpected end of file in /home2/tevend39/public_html/administracao/produtos/editar/index.php on line 506

@@ -1,0 +1,272 @@
+body {
+width: 100%;
+min-height: 100vh;
+overflow-x: hidden;
+/*background: rgba(0,0,0,.05);*/
+}
+
+.clear {
+clear: both;
+}
+
+.header {
+background: rgba(39,41,62,.98);	
+/*border-radius: 0 0 30px 30px;*/
+}
+
+.top {
+}
+
+.top {
+top: 0;
+position: absolute;
+background: rgba(39,41,62,.98);
+width: 100%;
+padding: 20px 0 20px 0;
+border-radius: 0 0 20px 20px;
+z-index: 2;
+}
+
+.top i {
+display: block;
+text-align: center;
+font-size: 22px;
+transform: translateY(1px);
+color: rgba(255,255,255,.85);
+}
+
+.cover {
+margin: auto;
+border-radius: 0 0 30px 30px;
+width: 100%;
+overflow: hidden;
+z-index: 1;
+background-attachment: fixed !important;
+background-position: center center !important;
+-webkit-background-size: cover !important;
+-moz-background-size: cover !important;
+-o-background-size: cover !important;
+background-size: cover !important;
+/*opacity: .65;*/
+filter: grayscale(45%);
+height: 160px;
+}
+
+.cover .opacity {
+padding-top: 160px;
+background: rgba(39,41,62,.3);
+}
+
+.avatar {
+display: block;
+position: absolute;
+left: 0;
+right: 0;
+margin: -70px auto auto auto;
+background: #fff;
+width: 110px;
+height: 110px;
+border-radius: 100%;
+box-shadow: 0 0 5px rgba(0,0,0,.2);
+z-index: 3;
+}
+
+.avatar .holder {
+margin: 8px;
+border-radius: 100%;
+overflow: hidden;
+}
+
+.avatar img {
+display: block;
+margin: auto;
+width: 100%;
+height: auto;
+}
+
+.head-holder {
+width: 100%;
+height: 240px;
+}
+
+.app-infos {
+/*background: rgba(0,0,0,.05);*/
+margin: auto auto auto auto;
+padding: 50px 12px 26px 12px;
+}
+
+.app-infos .title {
+display: block;
+margin: 0 0 5px 0;
+text-align: center;
+font-size: 22px;
+font-weight: 700;
+color: #fff;
+}
+
+.app-infos .description {
+display: block;
+margin: 0 0 3px 0;
+text-align: center;
+color: #fff;
+font-size: 14px;
+line-height: 19px;
+}
+
+.app-infos .info-badges {
+width: 100%;
+max-width: 400px;
+margin: auto;
+padding: 10px 10px 10px 10px;
+}
+
+.app-infos .info-badge {
+display: block;
+width: 100%;
+margin: 3px 3px 3px 3px;
+padding: 5px 3px 4px 3px;
+text-align: center;
+font-size: 12px;
+color: rgba(255,255,255,.8);
+/*background: rgba(255,255,255,.1);*/
+border: 1px solid rgba(255,255,255,.5);
+border-radius: 6px;
+}
+
+.content {
+margin: -20px auto auto auto;
+width: 100%;
+height: 200px;
+background: #fff;
+border-radius: 20px 20px 0 0;
+}
+
+.sidebars {
+display: none;
+}
+
+.sidebar {
+
+}
+
+.sidr {
+background: #fbfbfb !important;
+box-shadow: 0 0 transparent !important;
+border-right: 1px solid #e5e5e5;
+border-left: 1px solid #e5e5e5;
+}
+
+.sidebar .sidebar-header {
+border-bottom: 1px solid #e5e5e5;
+padding: 14px 12px 12px 12px;
+}
+
+.sidebar .sidebar-header .close-sidebar {
+font-size: 22px;
+float: right;
+color: rgba(4, 170, 96, 1);
+cursor: pointer;
+}
+
+.sidebar-content {
+padding: 9px 12px 6px 12px;
+}
+
+.user-badge {
+}
+
+.user-badge span {
+display: block;
+margin-bottom: 10px;
+text-align: center;
+}
+
+.user-badge .avatar span {
+display: block;
+margin: 6px auto 18px auto;
+width: 70px;
+height: 70px;
+color: #fff;
+background: rgba(4, 170, 96, 1);
+font-size: 32px;
+line-height: 68px;
+border-radius: 100%;
+}
+
+.avatar-thumb-holder {
+margin: 10px auto 16px auto;
+border: 1px solid rgba(0,0,0,.1);
+border-radius: 100%;
+width: 90px;
+height: 90px;
+overflow: hidden;
+}
+
+.avatar-thumb {
+margin: auto;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 100%;
+width: 90px;
+height: 90px;
+border: 10px solid #fff;
+overflow: hidden;
+}
+
+.avatar-thumb .img img {
+display: block;
+margin: auto;
+width: auto;
+height: 90px;
+}
+
+/* US */
+
+@media (max-width: 320px)  {
+
+}
+
+/* XS */
+
+@media (max-width: 544px)  {
+
+}
+
+/* SMALL */
+
+@media (min-width: 545px) and (max-width: 767px)  {
+
+}
+
+/* MEDIUM */
+
+@media (min-width: 546px) and (max-width: 991px)  {
+
+}
+
+/* LARGE */
+
+@media (min-width: 992px) and (max-width: 1199px)  {
+
+}
+
+/* EXTRA LARGE */
+
+@media (min-width: 1200px) {
+
+}
+
+/* NAVBAR */
+
+@media (min-width: 992px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+}
+
+/* ALL MOBILE */
+
+@media (max-width: 991px) {
+
+}

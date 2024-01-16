@@ -1,0 +1,35 @@
+[04-Apr-2022 09:49:18 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 09:49:18 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 09:49:18 America/Fortaleza] PHP Warning:  include(): Failed opening '/_layout/define.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 09:49:18 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function is_active() in /home1/veloximportscom/public_html/app/estabelecimento/index.php:7
+Stack trace:
+#0 {main}
+  thrown in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 7
+[04-Apr-2022 09:49:26 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 09:49:26 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 09:49:26 America/Fortaleza] PHP Warning:  include(): Failed opening '/_layout/define.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 09:49:26 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function is_active() in /home1/veloximportscom/public_html/app/estabelecimento/index.php:7
+Stack trace:
+#0 {main}
+  thrown in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 7
+[04-Apr-2022 09:49:27 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 09:49:27 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 09:49:27 America/Fortaleza] PHP Warning:  include(): Failed opening '/_layout/define.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 09:49:27 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function is_active() in /home1/veloximportscom/public_html/app/estabelecimento/index.php:7
+Stack trace:
+#0 {main}
+  thrown in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 7
+[04-Apr-2022 10:25:48 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 10:25:48 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 10:25:48 America/Fortaleza] PHP Warning:  include(): Failed opening '/_layout/define.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 10:25:48 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function is_active() in /home1/veloximportscom/public_html/app/estabelecimento/index.php:7
+Stack trace:
+#0 {main}
+  thrown in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 7
+[04-Apr-2022 10:25:54 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 10:25:54 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 10:25:54 America/Fortaleza] PHP Warning:  include(): Failed opening '/_layout/define.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 3
+[04-Apr-2022 10:25:54 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function is_active() in /home1/veloximportscom/public_html/app/estabelecimento/index.php:7
+Stack trace:
+#0 {main}
+  thrown in /home1/veloximportscom/public_html/app/estabelecimento/index.php on line 7

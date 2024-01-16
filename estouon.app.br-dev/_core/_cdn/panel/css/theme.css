@@ -1,0 +1,54 @@
+.text-center {
+display: block;
+text-align: center;
+}
+
+.colored {
+color: #ff5400;
+}
+
+.panel-green i {
+color: #55a630;
+}
+
+.panel-green .number,
+.panel-green i,
+.color-green {
+color: #55a630 !important;
+}
+
+.panel-green .panel-heading a {
+color: #55a630;
+}
+
+.panel-red .number,
+.panel-red i,
+.color-red {
+color: #ff6d7b !important;
+}
+
+.panel-yellow .number,
+.panel-yellow i,
+.color-yellow {
+color: #f7ca18 !important;
+}
+
+.color-gray {
+color: rgba(255,255,255,.8) !important;
+}
+
+.bg-green {
+background: rgba(4, 170, 96, 1) !important;
+}
+
+.bg-red {
+background: #ff6d7b !important;
+}
+
+.bg-yellow {
+background: #f7ca18 !important;
+}
+
+.color-white {
+color: #fff !important;
+}

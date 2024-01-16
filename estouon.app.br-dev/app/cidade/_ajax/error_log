@@ -1,0 +1,35 @@
+[13-Aug-2020 21:17:10 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:17:10 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:17:10 America/Fortaleza] PHP Warning:  include(): Failed opening '/_layout/define.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:17:10 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function is_active() in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php:6
+Stack trace:
+#0 {main}
+  thrown in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 6
+[13-Aug-2020 21:17:10 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:17:10 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:17:10 America/Fortaleza] PHP Warning:  include(): Failed opening '/_layout/define.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:17:10 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function is_active() in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php:6
+Stack trace:
+#0 {main}
+  thrown in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 6
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Warning:  include(): Failed opening '/_layout/define.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function is_active() in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php:6
+Stack trace:
+#0 {main}
+  thrown in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 6
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Warning:  include(): Failed opening '/_layout/define.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function is_active() in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php:6
+Stack trace:
+#0 {main}
+  thrown in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 6
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Warning:  include(/_layout/define.php): failed to open stream: No such file or directory in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Warning:  include(): Failed opening '/_layout/define.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 3
+[13-Aug-2020 21:18:07 America/Fortaleza] PHP Fatal error:  Uncaught Error: Call to undefined function is_active() in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php:6
+Stack trace:
+#0 {main}
+  thrown in /home2/tevend39/public_html/app/estabelecimento/_ajax/sacola.php on line 6
