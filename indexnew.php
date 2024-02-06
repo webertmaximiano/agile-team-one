@@ -1,20 +1,11 @@
-<?php 
-include('_core/_includes/config.php');
+<?php
+require_once __DIR__ . '/app/config/config.php';
 
-  // Globais
-  $rootpath;
-  $httprotocol;
-  $simple_url;
-  $gowww = $httprotocol.$simple_url;
-  $firstdomain = explode(".", $simple_url);
-  $firstdomain = $firstdomain[0];
-
-  // Mapeando subdominio
-  $insubdominio = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
-  if (strpos($insubdominio, '.') !== false) {
-    $insubdominio = substr($insubdominio, 0, strpos($insubdominio, '.'));
-  }
-
+ // Mapeando subdominio
+ $insubdominio = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
+ if (strpos($insubdominio, '.') !== false) {
+   $insubdominio = substr($insubdominio, 0, strpos($insubdominio, '.'));
+ }
 
   // Estabelecimento
   if( mysqli_num_rows( mysqli_query( $db_con, "SELECT id,subdominio FROM estabelecimentos WHERE subdominio = '$insubdominio' AND excluded != '1' LIMIT 1" ) ) ) {
@@ -130,6 +121,3 @@ include('_core/_includes/config.php');
     }
 
   }
-
-
-?>
