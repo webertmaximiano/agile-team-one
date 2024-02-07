@@ -21,10 +21,10 @@ global $db_con;
 
 // Variables
 
-$estabelecimento = mysqli_real_escape_string( $db_con, $_GET['estabelecimento_id'] );
-$nome = mysqli_real_escape_string( $db_con, $_GET['nome'] );
-$visible = mysqli_real_escape_string( $db_con, $_GET['visible'] );
-$status = mysqli_real_escape_string( $db_con, $_GET['status'] );
+$estabelecimento = mysqli_real_escape_string( $db_con, isset($_GET['estabelecimento_id']) );
+$nome = mysqli_real_escape_string( $db_con, isset($_GET['nome']) );
+$visible = mysqli_real_escape_string( $db_con, isset($_GET['visible']) );
+$status = mysqli_real_escape_string( $db_con, isset($_GET['status']) );
 
 $getdata = "";
 
@@ -37,11 +37,11 @@ foreach($_GET as $query_string_variable => $value) {
 // Config
 
 $limite = 20;
-$pagina = $_GET["pagina"] == "" ? 1 : $_GET["pagina"];
+$pagina = isset($_GET["pagina"]) == "" ? 1 : $_GET["pagina"];
 $inicio = ($pagina * $limite) - $limite;
 
 // Query
-
+$query = '';
 $query .= "SELECT * FROM categorias ";
 
 $query .= "WHERE 1=1 ";
@@ -86,13 +86,13 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 
 ?>
 
-<?php if( $_GET['msg'] == "erro" ) { ?>
+<?php if( isset($_GET['msg']) == "erro" ) { ?>
 
 <?php modal_alerta("Erro, tente novamente!","erro"); ?>
 
 <?php } ?>
 
-<?php if( $_GET['msg'] == "sucesso" ) { ?>
+<?php if( isset($_GET['msg']) == "sucesso" ) { ?>
 
 <?php modal_alerta("Ação efetuada com sucesso!","sucesso"); ?>
 
@@ -140,7 +140,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 								</a>
 							</h4>
 						</div>
-						<div id="collapse-filtros" class="panel-collapse collapse <?php if( $_GET['filtered'] ) { echo 'in'; }; ?>">
+						<div id="collapse-filtros" class="panel-collapse collapse <?php if( isset($_GET['filtered']) ) { echo 'in'; }; ?>">
 							<div class="panel-body">
 
 								<form class="form-filters form-100" method="GET">
@@ -149,8 +149,8 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 										<div class="col-md-3">
 							              <div class="form-field-default">
 							                  <label>Estabelecimento:</label>
-							                  <input class="autocompleter <?php if( $_GET['estabelecimento'] && $_GET['estabelecimento_id'] ) { echo "autocomplete-selected"; } ?>" type="text" name="estabelecimento" placeholder="Estabelecimento" value="<?php echo htmlclean( $_GET['estabelecimento'] ); ?>" completer_url="<?php just_url(); ?>/_core/_ajax/autocomplete_estabelecimentos.php" completer_field="estabelecimento_id"/>
-							                  <input class="fakehidden" type="text" name="estabelecimento_id" value="<?php echo htmlclean( $_GET['estabelecimento_id'] ); ?>"/>
+							                  <input class="autocompleter <?php if( isset($_GET['estabelecimento']) && isset($_GET['estabelecimento_id']) ) { echo "autocomplete-selected"; } ?>" type="text" name="estabelecimento" placeholder="Estabelecimento" value="<?php echo htmlclean(isset($_GET['estabelecimento']) ); ?>" completer_url="<?php just_url(); ?>/_core/_ajax/autocomplete_estabelecimentos.php" completer_field="estabelecimento_id"/>
+							                  <input class="fakehidden" type="text" name="estabelecimento_id" value="<?php echo htmlclean( isset($_GET['estabelecimento_id']) ); ?>"/>
 							              </div>
 										</div>
 										<div class="col-md-3">
@@ -167,7 +167,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 												<select name="visible">
 													<option></option>
 		                                            <?php for( $x = 0; $x < count( $numeric_data['visibilidade'] ); $x++ ) { ?>
-		                                            <option value="<?php echo $numeric_data['visibilidade'][$x]['value']; ?>" <?php if( $_GET['visible'] == $numeric_data['visibilidade'][$x]['value'] ) { echo 'SELECTED'; }; ?>><?php echo $numeric_data['visibilidade'][$x]['name']; ?></option>
+		                                            <option value="<?php echo $numeric_data['visibilidade'][$x]['value']; ?>" <?php if( isset($_GET['visible']) == $numeric_data['visibilidade'][$x]['value'] ) { echo 'SELECTED'; }; ?>><?php echo $numeric_data['visibilidade'][$x]['name']; ?></option>
 		                                            <?php } ?>
 												</select>
 												<div class="clear"></div>
@@ -182,7 +182,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 												<select name="status">
 													<option></option>
 		                                            <?php for( $x = 0; $x < count( $numeric_data['status'] ); $x++ ) { ?>
-		                                            <option value="<?php echo $numeric_data['status'][$x]['value']; ?>" <?php if( $_GET['status'] == $numeric_data['status'][$x]['value'] ) { echo 'SELECTED'; }; ?>><?php echo $numeric_data['status'][$x]['name']; ?></option>
+		                                            <option value="<?php echo $numeric_data['status'][$x]['value']; ?>" <?php if( isset($_GET['status']) == $numeric_data['status'][$x]['value'] ) { echo 'SELECTED'; }; ?>><?php echo $numeric_data['status'][$x]['name']; ?></option>
 		                                            <?php } ?>
 												</select>
 												<div class="clear"></div>
@@ -200,7 +200,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 											</div>
 										</div>
 									</div>
-									<?php if( $_GET['filtered'] ) { ?>
+									<?php if( isset($_GET['filtered']) ) { ?>
 									<div class="row">
 										<div class="col-md-12">
 										    <a href="<?php admin_url(); ?>/categorias" class="limpafiltros"><i class="lni lni-close"></i> Limpar filtros</a>
