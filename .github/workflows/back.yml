@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: main
+    branches: back
 
 name: 🚀 Deploy Estou On push Back
 jobs:
