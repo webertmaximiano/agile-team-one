@@ -8,13 +8,12 @@ $subtitle = "Gerenciar";
 
 <?php
 
-	$id = $_GET['id'];
+	$id = isset($_GET['id']);
 	$id = mysqli_real_escape_string( $db_con, $_GET['id'] );
 
 	$queryestabelecimento = mysqli_query( $db_con, "SELECT * FROM estabelecimentos WHERE id = '$id' LIMIT 1");
 	$hasdataestabelecimento = mysqli_num_rows( $queryestabelecimento );
 	$dataestabelecimento = mysqli_fetch_array( $queryestabelecimento );
-
 	if( $dataestabelecimento ) {
 
 		$_SESSION['estabelecimento']['id'] = $dataestabelecimento['id'];

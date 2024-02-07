@@ -1358,7 +1358,8 @@ function atualiza_estabelecimento( $eid,$mode ) {
 		$expiracao = "0";
 
 	}
-
+	
+	$limite_produtos = 0;
 	mysqli_query( $db_con, "UPDATE estabelecimentos SET 
 		status = '$status',
 		funcionalidade_marketplace = '$funcionalidade_marketplace', 
