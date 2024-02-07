@@ -11,6 +11,7 @@ include('_core/_includes/config.php');
 
   // Mapeando subdominio
   $insubdominio = parse_url(isset($_SERVER['HTTP_HOST']), PHP_URL_HOST);
+  //var_dump( $insubdominio);
   if (strpos($insubdominio, '.') !== false) {
     $insubdominio = substr($insubdominio, 0, strpos($insubdominio, '.'));
   }
@@ -68,7 +69,7 @@ include('_core/_includes/config.php');
 
 
     // Roteando
-    $router = $_GET['inrouter'];
+    $router = isset($_GET['inrouter']);
     $router = explode('/', $router);
     $inacao = $router[0];
     $inparametro = $router[1];

@@ -45,12 +45,16 @@ $inicio = ($pagina * $limite) - $limite;
 
 // Query
 $query = '';
-$query .= "SELECT id,nome,perfil,cidade,estado,status,excluded,subdominio FROM estabelecimentos ";
+$query .= "SELECT e.id, e.nome, e.perfil, c.nome AS cidade, es.nome AS estado, e.status, e.excluded, e.subdominio ";
+$query .= "FROM estabelecimentos AS e ";
+$query .= "JOIN cidades AS c ON e.cidade = c.id ";
+$query .= "JOIN estados AS es ON e.estado = es.id ";
+$query .= "WHERE 1=1 ";
 
 if($oper != 1) {
-    $query .= "WHERE 1=1 AND cidade = $cidop ";
+    $query .= "AND cidade = $cidop ";
 } else {
-    $query .= "WHERE 1=1 ";
+    $query .= "AND 1=1 ";
 }
 
 
@@ -84,6 +88,7 @@ if($oper == 1) {
 } else {
     $query .= "ORDER BY created DESC LIMIT $inicio,$limite";
 }
+
 // Run
 //var_dump($query);
 $sql = mysqli_query($db_con, $query);
@@ -101,6 +106,7 @@ if(!$pagina or $pagina > $total_paginas or !is_numeric($pagina)) {
     $pagina = 1;
 
 }
+
 
 ?>
 
@@ -190,8 +196,8 @@ if(!$pagina or $pagina > $total_paginas or !is_numeric($pagina)) {
 													    <option value="">Estado</option>
 													    <?php
                                                         $quicksql = mysqli_query($db_con, "SELECT * FROM estados ORDER BY nome ASC LIMIT 999");
-while($quickdata = mysqli_fetch_array($quicksql)) {
-    ?>
+														while($quickdata = mysqli_fetch_array($quicksql)) {
+															?>
 
 													      <option <?php if(isset($_POST['estado']) == $quickdata['id']) {
 													          echo "SELECTED";
@@ -335,14 +341,14 @@ while($quickdata = mysqli_fetch_array($quicksql)) {
                                 	</a>
 								</td>
 								<td class="hidden-xs hidden-sm">
-                                    <span class="fake-table-title hidden-xs hidden-sm">Cidade</span>
-                                    <div class="fake-table-data"><?php echo data_info("cidades", $data['cidade'], "nome"); ?></div>
-                                    <div class="fake-table-break"></div>
+									<span class="fake-table-title hidden-xs hidden-sm">Cidade</span>
+									<div class="fake-table-data"><?php echo $data['cidade']; ?></div>
+									<div class="fake-table-break"></div>
 								</td>
 								<td class="hidden-xs hidden-sm">
-                                    <span class="fake-table-title hidden-xs hidden-sm">Estado</span>
-                                    <div class="fake-table-data"><?php echo data_info("estados", $data['estado'], "nome"); ?></div>
-                                    <div class="fake-table-break"></div>
+									<span class="fake-table-title hidden-xs hidden-sm">Estado</span>
+									<div class="fake-table-data"><?php echo $data['estado']; ?></div>
+									<div class="fake-table-break"></div>
 								</td>
 								<td>
 									<span class="fake-table-title">Ações</span>
