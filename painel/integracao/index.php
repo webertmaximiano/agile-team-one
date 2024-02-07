@@ -3,7 +3,7 @@
 include('../../_core/_includes/config.php');
 // RESTRICT
 restrict(2);
-atualiza_estabelecimento( $_SESSION['estabelecimento']['id'], "online" );
+atualiza_estabelecimento( isset($_SESSION['estabelecimento']['id']), "online" );
 // SEO
 $seo_subtitle = "Integração";
 $seo_description = "";
@@ -16,7 +16,7 @@ include('../_layout/sidebars.php');
 include('../_layout/modal.php');
 
 global $db_con;
-$eid = $_SESSION['estabelecimento']['id'];
+$eid = isset($_SESSION['estabelecimento']['id']);
 $meudominio = $httprotocol.data_info("estabelecimentos",$_SESSION['estabelecimento']['id'],"subdominio").".".$simple_url;
 
 ?>
@@ -63,46 +63,54 @@ $meudominio = $httprotocol.data_info("estabelecimentos",$_SESSION['estabelecimen
 	              </div>
 
 	            </div>
+					
+				<!-- Sacolinha Instagram -->
+				<div class="row">
 
-<!-- 	            <div class="row">
+					<div class="col-md-9">
 
-	              <div class="col-md-12">
+					<div class="form-field-default">
 
-		              <div class="form-field-default">
+						<label>URL de importação:</label>
+						<input id="copyme" type="text" value="<?php echo isset($meudominio); ?>/shopping.xml" DISABLED/>
 
-		                  <label>Tutorial (Passo a passo):</label>
-		                  <span class="form-tip">Assista o vídeo abaixo para aprender como importar os seus produtos automaticamente par ao seu facebook / instagram shopping.</span>
-		                  <iframe></iframe>
+					</div>
 
-		              </div>
+					</div>
 
-	              </div>
+					<div class="col-md-3">
+						<label></label>
+						<button class="fullwidth" data-clipboard-text="<?php echo isset($meudominio); ?>/shopping.xml">
+							<span>
+								<i class="lni lni-clipboard"></i> Copiar
+							</span>
+						</button>
+					</div>
 
-	            </div> -->
+				</div>
 
-	          <div class="row">
+				<div class="row">
 
-	            <div class="col-md-9">
+					<div class="col-md-9">
 
-	              <div class="form-field-default">
+					<div class="form-field-default">
 
-	                  <label>URL de importação:</label>
-	                  <input id="copyme" type="text" value="<?php echo $meudominio; ?>/shopping.xml" DISABLED/>
+						<label>Tutorial (Passo a passo):</label>
+						<span class="form-tip">Assista o vídeo para aprender como importar os seus produtos automaticamente par ao seu facebook / instagram shopping.</span>
+					</div>
 
-	              </div>
+					</div>
 
-	            </div>
+					<div class="col-md-3">
+						<label></label>
+						<button class="fullwidth" >
+							<span>
+								<i class="lni lni-clipboard"></i> Assistir
+							</span>
+						</button>
+					</div>
 
-	            <div class="col-md-3">
-	            	<label></label>
-	              	<button class="fullwidth" data-clipboard-text="<?php echo $meudominio; ?>/shopping.xml">
-	              		<span>
-	              			<i class="lni lni-clipboard"></i> Copiar
-	              		</span>
-	              	</button>
-	              </div>
-
-	          </div>
+				</div>
 
 			</div>
 

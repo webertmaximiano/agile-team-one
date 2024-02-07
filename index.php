@@ -12,7 +12,7 @@ include('_core/_includes/config.php');
   // Mapeando subdominio
   $insubdominio = parse_url(isset($_SERVER['HTTP_HOST']), PHP_URL_HOST);
   //var_dump( $insubdominio);
-  if (strpos($insubdominio, '.') !== false) {
+  if (strpos(isset($insubdominio), '.') !== false) {
     $insubdominio = substr($insubdominio, 0, strpos($insubdominio, '.'));
   }
 
