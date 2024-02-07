@@ -19,14 +19,8 @@ global $db_con;
 $eid = isset($_SESSION['estabelecimento']['id']); //estabelecimento logado
 $meudominio = $httprotocol.data_info("estabelecimentos",$_SESSION['estabelecimento']['id'],"subdominio").".".$simple_url;
 
-//pega os dados do estabelecimento que sera atualizado 
-$queryestabelecimento = mysqli_query( $db_con, "SELECT * FROM estabelecimentos WHERE id = '$eid' LIMIT 1");
-$hasdataestabelecimento = mysqli_num_rows( $queryestabelecimento );
-$dataestabelecimento = mysqli_fetch_array( $queryestabelecimento );
-var_dump($dataestabelecimento );
-
 //cria a funcao para atualizar a tabela estabelecimento
-function update_estabelecimento( $db_con, $public_key, $secret_key, $id)
+function update_estabelecimento( $db_con, $public_key, $secret_key, $eid)
 {
 	// Sanitizar os dados
     $public_key = mysqli_real_escape_string($db_con, $public_key);
@@ -39,7 +33,7 @@ function update_estabelecimento( $db_con, $public_key, $secret_key, $id)
     $stmt = mysqli_prepare($db_con, $sql);
 
     // Vincular os parâmetros
-    mysqli_stmt_bind_param($stmt, "sss", $public_key, $secret_key, $id);
+    mysqli_stmt_bind_param($stmt, "sss", $public_key, $secret_key, $eid);
 
     // Executar a consulta
     mysqli_stmt_execute($stmt);
@@ -88,9 +82,45 @@ if ($formdata) {
 	  }
 
 }
-var_dump($public_key);
-var_dump($secret_key);
 ?>
+
+<script>
+//bonus javascript validacao
+$(document).ready( function() {
+          
+  // Globais
+  $("#the_form").validate({
+
+      /* REGRAS DE VALIDAÇÃO DO FORMULÁRIO */
+      rules:{
+
+        public_key:{
+        required: true
+        },
+        secret_key:{
+        required: true
+        }
+      },
+          
+      /* DEFINIÇÃO DAS MENSAGENS DE ERRO */
+              
+      messages:{
+
+        public_key:{
+          required: "Esse campo é obrigatório"
+        },
+        secret_key:{
+          required: "Cadastre e selecione uma categoria"
+        },        
+
+      }
+
+    });
+
+  });
+
+</script>
+
 
 <div class="middle minfit bg-gray">
 
@@ -228,6 +258,23 @@ var_dump($secret_key);
 
 							</div>
 
+							<div class="col-md-9">
+
+							<?php if( $checkerrors ) { list_errors(); } ?>
+
+							<?php if( isset($_GET['msg']) == "erro" ) { ?>
+
+								<?php modal_alerta("Erro, tente novamente!","erro"); ?>
+
+							<?php } ?>
+
+							<?php if( isset($_GET['msg']) == "sucesso" ) { ?>
+
+								<?php modal_alerta("Alterado com sucesso!","sucesso"); ?>
+
+							<?php } ?>
+
+							</div>
 							</div>
 
 							<div class="col-md-3">
