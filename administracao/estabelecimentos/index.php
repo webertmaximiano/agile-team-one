@@ -40,7 +40,7 @@ foreach($_GET as $query_string_variable => $value) {
 // Config
 
 $limite = 20;
-$pagina = $_GET["pagina"] == "" ? 1 : $_GET["pagina"];
+$pagina = isset($_GET["pagina"]) == "" ? 1 : isset($_GET["pagina"]);
 $inicio = ($pagina * $limite) - $limite;
 
 // Query
@@ -104,13 +104,13 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 
 ?>
 
-<?php if( $_GET['msg'] == "erro" ) { ?>
+<?php if( isset($_GET['msg']) == "erro" ) { ?>
 
 <?php modal_alerta("Erro, tente novamente!","erro"); ?>
 
 <?php } ?>
 
-<?php if( $_GET['msg'] == "sucesso" ) { ?>
+<?php if( isset($_GET['msg']) == "sucesso" ) { ?>
 
 <?php modal_alerta("Ação efetuada com sucesso!","sucesso"); ?>
 
@@ -158,7 +158,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 								</a>
 							</h4>
 						</div>
-						<div id="collapse-filtros" class="panel-collapse collapse <?php if( $_GET['filtered'] ) { echo 'in'; }; ?>">
+						<div id="collapse-filtros" class="panel-collapse collapse <?php if( isset($_GET['filtered']) ) { echo 'in'; }; ?>">
 							<div class="panel-body">
 
 								<form class="form-filters form-100" method="GET">
@@ -191,7 +191,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 													    while( $quickdata = mysqli_fetch_array( $quicksql ) ) {
 													    ?>
 
-													      <option <?php if( $_POST['estado'] == $quickdata['id'] ) { echo "SELECTED"; }; ?> value="<?php echo $quickdata['id']; ?>"><?php echo $quickdata['nome']; ?></option>
+													      <option <?php if( isset($_POST['estado']) == $quickdata['id'] ) { echo "SELECTED"; }; ?> value="<?php echo $quickdata['id']; ?>"><?php echo $quickdata['nome']; ?></option>
 
 													    <?php } ?>
 
@@ -237,7 +237,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 											</div>
 										</div>
 									</div>
-									<?php if( $_GET['filtered'] ) { ?>
+									<?php if( isset($_GET['filtered']) ) { ?>
 									<div class="row">
 										<div class="col-md-12">
 										    <a href="<?php admin_url(); ?>/estabelecimentos" class="limpafiltros"><i class="lni lni-close"></i> Limpar filtros</a>
@@ -342,7 +342,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 										<div class="form-actions pull-right">
 											<a target="_blank" class="color-white" href="<?php admin_url(); ?>/estabelecimentos/gerenciar?id=<?php echo $data['id']; ?>" title="Gerenciar"><i class="lni lni-lock"></i></a>
 											<a class="color-yellow" href="<?php admin_url(); ?>/assinaturas?estabelecimento_id=<?php echo $data['id']; ?>&filtered=1" title="Assinaturas"><i class="lni lni-star"></i></a>
-											<a class="color-red" onclick="if(confirm('Tem certeza que deseja remover este estabelecimento?')) document.location = '<?php admin_url(); ?>/estabelecimentos/deletar/?id=<?php echo $data['id']; ?>&mode=<?php echo $_GET['mode']; ?>'" href="#" title="Ed"><i class="lni lni-trash"></i></a>
+											<a class="color-red" onclick="if(confirm('Tem certeza que deseja remover este estabelecimento?')) document.location = '<?php admin_url(); ?>/estabelecimentos/deletar/?id=<?php echo isset($data['id']); ?>&mode=<?php echo isset($_GET['mode']); ?>'" href="#" title="Ed"><i class="lni lni-trash"></i></a>
 										</div>
                                     </div>
                                     <div class="fake-table-break"></div>
@@ -449,7 +449,7 @@ include('../_layout/footer.php');
   $( "#input-estado" ).change(function() {
     exibe_cidades();
   });
-  <?php if( $_POST['estado'] ) { ?>
+  <?php if( isset($_POST['estado']) ) { ?>
     exibe_cidades();
   <?php } ?>
 
