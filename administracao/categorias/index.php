@@ -64,6 +64,8 @@ if( $status ) {
 
 $query_full = $query;
 
+//var_dump($query_full);
+
 $query .= "ORDER BY nome ASC LIMIT $inicio,$limite";
 
 // Run

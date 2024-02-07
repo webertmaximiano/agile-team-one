@@ -23,15 +23,15 @@ include('../../_layout/modal.php');
 
   // Checar se formulário foi executado
 
-  $formdata = $_POST['formdata'];
+  $formdata = isset($_POST['formdata']);
 
   if( $formdata ) {
 
     // Setar campos
 
-    $estabelecimento = mysqli_real_escape_string( $db_con, $_POST['estabelecimento_id'] );
-    $nome = mysqli_real_escape_string( $db_con, $_POST['nome'] );
-    $visible = mysqli_real_escape_string( $db_con, $_POST['visible'] );
+    $estabelecimento = mysqli_real_escape_string( $db_con, isset($_POST['estabelecimento_id']) );
+    $nome = mysqli_real_escape_string( $db_con, isset($_POST['nome']) );
+    $visible = mysqli_real_escape_string( $db_con, isset($_POST['visible']) );
     $status = "1";
 
     // Checar Erros
@@ -110,15 +110,15 @@ include('../../_layout/modal.php');
 
             <div class="col-md-12">
 
-              <?php if( $checkerrors ) { list_errors(); } ?>
+              <?php if( isset($checkerrors) ) { list_errors(); } ?>
 
-              <?php if( $_GET['msg'] == "erro" ) { ?>
+              <?php if( isset($_GET['msg']) == "erro" ) { ?>
 
                 <?php modal_alerta("Erro, tente novamente!","erro"); ?>
 
               <?php } ?>
 
-              <?php if( $_GET['msg'] == "sucesso" ) { ?>
+              <?php if( isset($_GET['msg']) == "sucesso" ) { ?>
 
                 <?php modal_alerta("Cadastro efetuado com sucesso!","sucesso"); ?>
 
@@ -135,8 +135,8 @@ include('../../_layout/modal.php');
               <div class="form-field-default">
 
                   <label>Estabelecimento:</label>
-                  <input class="autocompleter <?php if( $_POST['estabelecimento'] && $_POST['estabelecimento_id'] ) { echo "autocomplete-selected"; } ?>" type="text" name="estabelecimento" placeholder="Estabelecimento" value="<?php echo htmlclean( $_POST['estabelecimento'] ); ?>" completer_url="<?php just_url(); ?>/_core/_ajax/autocomplete_estabelecimentos.php" completer_field="estabelecimento_id"/>
-                  <input class="fakehidden" type="text" name="estabelecimento_id" value="<?php echo htmlclean( $_POST['estabelecimento_id'] ); ?>"/>
+                  <input class="autocompleter <?php if( isset($_POST['estabelecimento']) && isset($_POST['estabelecimento_id']) ) { echo "autocomplete-selected"; } ?>" type="text" name="estabelecimento" placeholder="Estabelecimento" value="<?php echo htmlclean( isset($_POST['estabelecimento']) ); ?>" completer_url="<?php just_url(); ?>/_core/_ajax/autocomplete_estabelecimentos.php" completer_field="estabelecimento_id"/>
+                  <input class="fakehidden" type="text" name="estabelecimento_id" value="<?php echo htmlclean( isset($_POST['estabelecimento_id']) ); ?>"/>
 
               </div>
 
@@ -151,7 +151,7 @@ include('../../_layout/modal.php');
               <div class="form-field-default">
 
                   <label>Nome:</label>
-                  <input type="text" id="input-nome" name="nome" placeholder="Nome" value="<?php echo htmlclean( $_POST['nome'] ); ?>">
+                  <input type="text" id="input-nome" name="nome" placeholder="Nome" value="<?php echo htmlclean( isset($_POST['nome']) ); ?>">
 
               </div>
 
@@ -170,10 +170,10 @@ include('../../_layout/modal.php');
                   <div class="radios">
                     <div class="spacer"></div>
                     <div class="form-field-radio">
-                      <input type="radio" name="visible" value="1" <?php if( $_POST['visible'] == 1 OR !$_POST['visible'] ){ echo 'CHECKED'; }; ?>> Sim
+                      <input type="radio" name="visible" value="1" <?php if( isset($_POST['visible']) == 1 OR !isset($_POST['visible']) ){ echo 'CHECKED'; }; ?>> Sim
                     </div>
                     <div class="form-field-radio">
-                      <input type="radio" name="visible" value="2" <?php if( $_POST['visible'] == 2 ){ echo 'CHECKED'; }; ?>> Não
+                      <input type="radio" name="visible" value="2" <?php if( isset($_POST['visible']) == 2 ){ echo 'CHECKED'; }; ?>> Não
                     </div>
                     <div class="clear"></div>
                   </div>
