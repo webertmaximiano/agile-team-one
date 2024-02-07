@@ -2,7 +2,7 @@ on:
   push:
     branches: main
 
-name: 🚀 Deploy Estou On push Main
+name: 🚀 Deploy Ominichanel push Main
 jobs:
   web-deploy:
     name: 🎉 Deploy

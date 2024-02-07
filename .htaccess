@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /var/www/ominichanel.redewe2m.com.dev/agile-team-one
+RewriteBase /var/www/ominichanel.dev
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{HTTP_HOST} ^([a-z0-9-]+).ominichanel.redewe2m.com.dev [NC]
