@@ -3,9 +3,8 @@
 // CORE
 include('../_core/_includes/config.php');
 
-// APP
+// APP 
 global $app;
-
 
 $token = mysqli_real_escape_string( $db_con, $_GET['token'] );
 
