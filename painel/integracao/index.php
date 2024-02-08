@@ -18,8 +18,10 @@ include('../_layout/modal.php');
 global $db_con;
 $eid = isset($_SESSION['estabelecimento']['id']); //estabelecimento logado
 $meudominio = $httprotocol.data_info("estabelecimentos",$_SESSION['estabelecimento']['id'],"subdominio").".".$simple_url;
+
+// Id do estabelecimento logado 
 $id = $_SESSION['estabelecimento']['id'];
-var_dump($id);
+
 // Variáveis de inicialização
 $public_key = "";
 $secret_key = "";
@@ -27,9 +29,11 @@ $secret_key = "";
 // Consultar as chaves do banco de dados
 $sql = "SELECT public_key, secret_key FROM estabelecimentos WHERE id = ?";
 $stmt = mysqli_prepare($db_con, $sql);
-mysqli_stmt_bind_param($stmt, "i", $eid);
+mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
+
+var_dump($result);
 
 if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
