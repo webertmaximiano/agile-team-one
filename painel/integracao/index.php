@@ -19,6 +19,12 @@ global $db_con;
 $eid = isset($_SESSION['estabelecimento']['id']); //estabelecimento logado
 $meudominio = $httprotocol.data_info("estabelecimentos",$_SESSION['estabelecimento']['id'],"subdominio").".".$simple_url;
 
+//setar as variaveis
+$public_key = $_POST['input-public-key'];
+$secret_key = $_POST['input-secret-key'];
+
+var_dump($public_key);
+
 //cria a funcao para atualizar a tabela estabelecimento
 function update_estabelecimento( $db_con, $public_key, $secret_key, $eid)
 {
@@ -69,7 +75,7 @@ if ($formdata) {
 
 	  if( !$checkerrors ) {
 		//tem como atualizar sem passar todas as colunas?
-		if( update_estabelecimento( $db_con, $id, $public_key, $secret_key ) ) {
+		if( update_estabelecimento( $db_con, $public_key, $secret_key, $eid) ) {
   
 		  header("Location: index.php?msg=sucesso&id=".$id);
   
@@ -83,7 +89,7 @@ if ($formdata) {
 
 }
 ?>
-
+<!--
 <script>
 //bonus javascript validacao
 $(document).ready( function() {
@@ -93,7 +99,6 @@ $(document).ready( function() {
 
       /* REGRAS DE VALIDAÇÃO DO FORMULÁRIO */
       rules:{
-
         public_key:{
         required: true
         },
@@ -120,7 +125,7 @@ $(document).ready( function() {
   });
 
 </script>
-
+-->
 
 <div class="middle minfit bg-gray">
 
