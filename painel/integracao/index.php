@@ -33,14 +33,13 @@ mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
-var_dump($result);
-
 if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
     $public_key = $row['public_key'];
     $secret_key = $row['secret_key'];
 }
 
+var_dump($public_key);
 // Preenchimento dos campos do formulário
 if (isset($_POST['formdata'])) {
     $public_key = htmlclean($_POST['input-public-key']);
