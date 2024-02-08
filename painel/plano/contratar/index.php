@@ -25,19 +25,20 @@ global $mp_acess_token;
 global $mp_client_id;
 global $mp_client_secret;
 global $external_token;
+
 //require_once '../../../api/mercadopago.php';
 
-require_once __DIR__ . '/vendor/mercadopago/src/MercadoPago/MercadoPagoConfig.php';
+//require_once __DIR__ . 'vendor/mercadopago/src/MercadoPago/MercadoPagoConfig.php';
 //require_once '../../../vendor/mercadopago/src/MercadoPago/Client/Preference/PreferenceClient.php';
 //require_once '../../../vendor/mercadopago/src/MercadoPago/Exceptions/MPApiException.php';
 
-use MercadoPago\MercadoPagoConfig;
+//use MercadoPago\MercadoPagoConfig;
 
-use MercadoPago\Client\Preference\PreferenceClient;
-use MercadoPago\Exceptions\MPApiException;
+//use MercadoPago\Client\Preference\PreferenceClient;
+//use MercadoPago\Exceptions\MPApiException;
 
- $config = MercadoPagoConfig::setAccessToken($mp_acess_token);
- var_dump($config);
+ //$config = MercadoPagoConfig::setAccessToken($mp_acess_token);
+ ///var_dump($config);
 //MercadoPago\SDK::setAccessToken($mp_acess_token);
 ?>
 
@@ -125,9 +126,12 @@ use MercadoPago\Exceptions\MPApiException;
         $assinatura_nome = $data['nome']." - ".$seo_title;
         $assinatura_valor = $data['valor_total'];
         $assinatura_parcelas = intval( $data['duracao_meses'] );
-
+      }
+    }
+  }
         //$preference = new MercadoPago\Preference();
-        $client = new PreferenceClient();
+//        $client = new PreferenceClient();
+      /*
         $preference = $client->create([
           "external_reference" => $transaction_ref,
           "items"=> array(
@@ -152,20 +156,21 @@ use MercadoPago\Exceptions\MPApiException;
           "installments"  => 12,
           "default_installments" => 1
         ]
-      ]);
-      
+        ]);
+      */
 
 
         // Cria um item na preferência
-        $payer = new MercadoPago\Payer();
-        $payer->email = $email_cliente;
+      //  $payer = new MercadoPago\Payer();
+        //$payer->email = $email_cliente;
         //$item = new MercadoPago\Item();
         //$item->title = $assinatura_nome;
         //$item->quantity = 1;
         //$item->unit_price = $assinatura_valor;
        // $preference->items = [$item];
        // $preference->external_reference = $transaction_ref;
-        $preference->back_urls = array(
+/*
+       $preference->back_urls = array(
             "success" => get_just_url()."/painel/plano?msg=obrigado",
             "failure" => get_just_url()."/painel/plano?msg=erro",
             "pending" => get_just_url()."/painel/plano?msg=obrigado"
@@ -217,7 +222,7 @@ use MercadoPago\Exceptions\MPApiException;
     }
 
   }
-  
+  */
 ?>
 
 <div class="middle minfit bg-gray">
@@ -410,37 +415,37 @@ include('../../_layout/footer.php');
 
 $(document).ready( function() {
           
-  // Globais
+    // Globais
 
-  var form = $("#the_form");
-  form.validate({
-      focusInvalid: true,
-      invalidHandler: function() {
-        // alert("Existem campos obrigatórios a serem preenchidos!");
-      },
-      errorPlacement: function errorPlacement(error, element) { element.after(error); },
-      rules:{
+    var form = $("#the_form");
+    form.validate({
+        focusInvalid: true,
+        invalidHandler: function() {
+          // alert("Existem campos obrigatórios a serem preenchidos!");
+        },
+        errorPlacement: function errorPlacement(error, element) { element.after(error); },
+        rules:{
 
-      	/* REGRAS DE VALIDAÇÃO DO FORMULÁRIO */
+          /* REGRAS DE VALIDAÇÃO DO FORMULÁRIO */
 
-        terms:{
-        required: true
+          terms:{
+          required: true
+          }
+
+        },
+            
+        /* DEFINIÇÃO DAS MENSAGENS DE ERRO */
+                
+        messages:{
+
+          terms:{
+            required: "Esse campo é obrigatório"
+          }
+
         }
 
-      },
-          
-      /* DEFINIÇÃO DAS MENSAGENS DE ERRO */
-              
-      messages:{
-
-        terms:{
-          required: "Esse campo é obrigatório"
-        }
-
-      }
+      });
 
     });
-
-  });
 
 </script>
