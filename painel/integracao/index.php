@@ -104,9 +104,9 @@ if ($formdata) {
 
 	  if( !$checkerrors ) {
 		//tem como atualizar sem passar todas as colunas?
-		if( update_estabelecimento( $db_con, $public_key, $secret_key, $eid) ) {
+		if( update_estabelecimento( $db_con, $public_key, $secret_key, $id) ) {
   
-			var_dump($eid['estabelecimento']['id']);
+			var_dump($id);
 		  //header("Location: index.php?msg=sucesso&id=".$id);
   
 		} else {
