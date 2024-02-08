@@ -28,7 +28,7 @@ global $external_token;
 
 //require_once '../../../api/mercadopago.php';
 
-include('../../../vendor/mercadopago/dx-php/src/MercadoPago/MercadoPagoConfig.php');
+include('../../vendor/mercadopago/dx-php/src/MercadoPago/MercadoPagoConfig.php');
 //require_once '../../../vendor/mercadopago/src/MercadoPago/Client/Preference/PreferenceClient.php';
 //require_once '../../../vendor/mercadopago/src/MercadoPago/Exceptions/MPApiException.php';
 
