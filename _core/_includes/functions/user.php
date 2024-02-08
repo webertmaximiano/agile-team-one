@@ -1579,7 +1579,7 @@ function aplicar_voucher( $eid,$voucher ) {
 
 }
 
-function aplicar_plano( $eid,$plano ) {
+function aplicar_plano( $eid, $plano) {
 
 	global $db_con;
 	global $_SESSION;
@@ -1712,7 +1712,7 @@ function consulta_pagamento( $gateway_ref ) {
 	$dados = json_decode($res,1);
 	// print("<pre>".print_r($dados,true)."</pre>");
 
-	if( $dados['elements'][0] ) {
+	if( isset($dados['elements'][0]) ) {
 		$consulta = $dados['elements'][0];
 		$retorno['gateway_ref'] = $consulta['external_reference'];
 		$retorno['status'] = $consulta['order_status'];
