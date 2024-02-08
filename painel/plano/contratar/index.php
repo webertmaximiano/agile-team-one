@@ -226,7 +226,7 @@ global $external_token;
 ?>
 
 <div class="middle minfit bg-gray">
-
+<script src="https://sdk.mercadopago.com/js/v2"></script>
   <div class="container">
 
     <div class="row">
