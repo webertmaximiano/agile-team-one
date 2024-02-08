@@ -26,7 +26,12 @@ global $mp_client_id;
 global $mp_client_secret;
 global $external_token;
 require_once '../../../vendor/autoload.php';
-MercadoPago\SDK::setAccessToken($mp_acess_token);
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Exceptions\MPApiException;
+
+MercadoPagoConfig::setAccessToken($mp_acess_token);
+//MercadoPago\SDK::setAccessToken($mp_acess_token);
 ?>
 
 <?php
@@ -114,17 +119,45 @@ MercadoPago\SDK::setAccessToken($mp_acess_token);
         $assinatura_valor = $data['valor_total'];
         $assinatura_parcelas = intval( $data['duracao_meses'] );
 
-        $preference = new MercadoPago\Preference();
+        //$preference = new MercadoPago\Preference();
+        $client = new PreferenceClient();
+        $preference = $client->create([
+          "external_reference" => $transaction_ref,
+          "items"=> array(
+            array(
+              "id" => "4567",
+              "title" => $assinatura_nome,
+              //"description" => "Dummy description",
+              //"picture_url" => "http://www.myapp.com/myimage.jpg",
+              //"category_id" => "eletronico",
+              "quantity" => 1,
+              "currency_id" => "BRL",
+              "unit_price" => $assinatura_valor
+            )
+          ),
+          "payment_methods" => [
+          "default_payment_method_id" => "master",
+          "excluded_payment_types" => array(
+            array(
+              "id" => "ticket"
+            )
+          ),
+          "installments"  => 12,
+          "default_installments" => 1
+        ]
+      ]);
+      
+
 
         // Cria um item na preferência
         $payer = new MercadoPago\Payer();
         $payer->email = $email_cliente;
-        $item = new MercadoPago\Item();
-        $item->title = $assinatura_nome;
-        $item->quantity = 1;
-        $item->unit_price = $assinatura_valor;
-        $preference->items = array($item);
-        $preference->external_reference = $transaction_ref;
+        //$item = new MercadoPago\Item();
+        //$item->title = $assinatura_nome;
+        //$item->quantity = 1;
+        //$item->unit_price = $assinatura_valor;
+       // $preference->items = [$item];
+       // $preference->external_reference = $transaction_ref;
         $preference->back_urls = array(
             "success" => get_just_url()."/painel/plano?msg=obrigado",
             "failure" => get_just_url()."/painel/plano?msg=erro",
@@ -136,7 +169,7 @@ MercadoPago\SDK::setAccessToken($mp_acess_token);
             "installments" => $assinatura_parcelas
           );
         }
-        $preference->statement_descriptor = "VeloxImports";
+        $preference->statement_descriptor = "EstouOn";
         $preference->notification_url = get_just_url()."/postback.php?token=".$external_token;
         $preference->save();
 
