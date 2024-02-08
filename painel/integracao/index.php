@@ -59,7 +59,7 @@ function update_estabelecimento( $db_con, $public_key, $secret_key, $eid)
 	// Sanitizar os dados
     $public_key = mysqli_real_escape_string($db_con, $public_key);
     $secret_key = mysqli_real_escape_string($db_con, $secret_key);
-
+var_dump($secret_key);
     // Preparar a consulta SQL
     $sql = "UPDATE estabelecimentos SET public_key = ?, secret_key = ? WHERE id = ?";
 
@@ -106,7 +106,7 @@ if ($formdata) {
 		//tem como atualizar sem passar todas as colunas?
 		if( update_estabelecimento( $db_con, $public_key, $secret_key, $id) ) {
   
-			var_dump($id);
+			echo('funcao executada');
 		  //header("Location: index.php?msg=sucesso&id=".$id);
   
 		} else {
