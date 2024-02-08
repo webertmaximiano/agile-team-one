@@ -54,20 +54,20 @@ if (isset($_POST['formdata'])) {
 //var_dump($secret_key);
 
 //cria a funcao para atualizar a tabela estabelecimento
-function update_estabelecimento( $db_con, $public_key, $secret_key, $eid)
+function update_estabelecimento( $db_con, $public_key, $secret_key, $id)
 {
 	// Sanitizar os dados
     $public_key = mysqli_real_escape_string($db_con, $public_key);
     $secret_key = mysqli_real_escape_string($db_con, $secret_key);
-var_dump($secret_key);
-    // Preparar a consulta SQL
+
+	// Preparar a consulta SQL
     $sql = "UPDATE estabelecimentos SET public_key = ?, secret_key = ? WHERE id = ?";
 
     // Criar um statement
     $stmt = mysqli_prepare($db_con, $sql);
 
     // Vincular os parâmetros
-    mysqli_stmt_bind_param($stmt, "sss", $public_key, $secret_key, $eid);
+    mysqli_stmt_bind_param($stmt, "sss", $public_key, $secret_key, $id);
 
     // Executar a consulta
     mysqli_stmt_execute($stmt);
