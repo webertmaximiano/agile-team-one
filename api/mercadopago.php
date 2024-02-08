@@ -28,3 +28,7 @@ if( isset($dados['elements'][0]) ) {
 }
 
 }
+
+function createPreference() {
+    
+}

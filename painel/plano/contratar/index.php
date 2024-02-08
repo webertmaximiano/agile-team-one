@@ -25,12 +25,19 @@ global $mp_acess_token;
 global $mp_client_id;
 global $mp_client_secret;
 global $external_token;
-require_once '../../../vendor/autoload.php';
+//require_once '../../../api/mercadopago.php';
+
+require_once '../../../vendor/mercadopago/src/MercadoPago/MercadoPagoConfig.php';
+require_once '../../../vendor/mercadopago/src/MercadoPago/Client/Preference/PreferenceClient.php';
+require_once '../../../vendor/mercadopago/src/MercadoPago/Exceptions/MPApiException.php';
+
 use MercadoPago\MercadoPagoConfig;
+
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\Exceptions\MPApiException;
 
-MercadoPagoConfig::setAccessToken($mp_acess_token);
+ $config = MercadoPagoConfig::setAccessToken($mp_acess_token);
+ var_dump($config);
 //MercadoPago\SDK::setAccessToken($mp_acess_token);
 ?>
 
