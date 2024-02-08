@@ -39,7 +39,7 @@ if (mysqli_num_rows($result) > 0) {
     $secret_key = $row['secret_key'];
 }
 
-var_dump($secret_key);
+//var_dump($public_key);
 // Preenchimento dos campos do formulário
 if (isset($_POST['formdata'])) {
     $public_key = htmlclean($_POST['input-public-key']);
@@ -251,14 +251,15 @@ if ($formdata) {
 						<div class="col-md-9">
 							<div class="form-field-default">
 								<label for="input-public-key">Sua Public Key:</label>
-								<input type="text" id="input-public-key" name="input-public-key" value="<?php echo htmlclean( $_POST['input-public-key'] ); ?>">
+								<input type="text" id="input-public-key" name="input-public-key" value="<?php echo isset($public_key); ?>">
+
 							</div>
 						</div>
 
 						<div class="col-md-9">
 							<div class="form-field-default">
 								<label for="input-secret-key">Sua Secret Key:</label>
-								<input type="text" id="input-secret-key" name="input-secret-key" value="<?php echo htmlclean( $_POST['input-secret-key'] ); ?>">
+								<input type="text" id="input-secret-key" name="input-secret-key" value="<?php echo isset($secret_key); ?>">
 							</div>
 						</div>
 
