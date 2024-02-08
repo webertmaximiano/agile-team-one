@@ -251,7 +251,7 @@ if ($formdata) {
 						<div class="col-md-9">
 							<div class="form-field-default">
 								<label for="input-public-key">Sua Public Key:</label>
-								<input type="text" id="input-public-key" name="input-public-key" value="<?php echo isset($public_key); ?>">
+								<input type="text" id="input-public-key" name="input-public-key" value="<?php echo $public_key; ?>">
 
 							</div>
 						</div>
@@ -259,7 +259,7 @@ if ($formdata) {
 						<div class="col-md-9">
 							<div class="form-field-default">
 								<label for="input-secret-key">Sua Secret Key:</label>
-								<input type="text" id="input-secret-key" name="input-secret-key" value="<?php echo isset($secret_key); ?>">
+								<input type="text" id="input-secret-key" name="input-secret-key" value="<?php echo $secret_key; ?>">
 							</div>
 						</div>
 
