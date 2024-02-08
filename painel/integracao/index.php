@@ -19,6 +19,7 @@ global $db_con;
 $eid = isset($_SESSION['estabelecimento']['id']); //estabelecimento logado
 $meudominio = $httprotocol.data_info("estabelecimentos",$_SESSION['estabelecimento']['id'],"subdominio").".".$simple_url;
 
+var_dump($eid);
 // Variáveis de inicialização
 $public_key = "";
 $secret_key = "";
@@ -43,7 +44,7 @@ if (isset($_POST['formdata'])) {
 	$formdata = $_POST['formdata'];
 }
 
-var_dump($formdata);
+
 
 // verificando se os valores foram atribuidos
 //var_dump($public_key);
@@ -102,11 +103,12 @@ if ($formdata) {
 		//tem como atualizar sem passar todas as colunas?
 		if( update_estabelecimento( $db_con, $public_key, $secret_key, $eid) ) {
   
-		  header("Location: index.php?msg=sucesso&id=".$id);
+			var_dump($public_key);
+		  //header("Location: index.php?msg=sucesso&id=".$id);
   
 		} else {
   
-		  header("Location: index.php?msg=erro&id=".$id);
+		 // header("Location: index.php?msg=erro&id=".$id);
   
 		}
   
