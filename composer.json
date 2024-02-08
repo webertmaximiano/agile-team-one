@@ -1,37 +1,5 @@
 {
-    "name": "mercadopago/agile_team",
-    "type": "library",
-    "description": "curso integracao mercado pago",
-    "keywords": ["mercadopago", "agile", "clubesiga", "php" ],
-    "homepage": "https://clubesiga.com.br",
-    "license" : "MIT",
-    "authors": [
-        {
-            "name": "Webert Maximiano",
-            "email": "ceo@clubesiga.com.br"
-        },
-        {
-            "name": "Agile Team One - Clube Siga",
-            "homepage": "https://clubesiga.com.br/agile-team-one"
-        }
-    ],
     "require": {
-        "php": ">=8.2",
         "mercadopago/dx-php": "3.0.2"
-    },
-    "require-dev": {
-        "symfony/console": "^6.4|^7.0",
-        "symfony/process": "^6.4|^7.0"
-    },
-    "conflict": {
-        "symfony/console": "<6.4",
-        "symfony/process": "<6.4"
-    },
-    "autoload": {
-        "psr-4": { "Symfony\\Component\\Dotenv\\": "" },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
-    },
-    "minimum-stability": "dev"
+    }
 }

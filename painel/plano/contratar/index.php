@@ -26,20 +26,11 @@ global $mp_client_id;
 global $mp_client_secret;
 global $external_token;
 
-//require_once '../../../api/mercadopago.php';
+require_once 'vendor/autoload.php';
 
-include('../../vendor/mercadopago/dx-php/src/MercadoPago/MercadoPagoConfig.php');
-//require_once '../../../vendor/mercadopago/src/MercadoPago/Client/Preference/PreferenceClient.php';
-//require_once '../../../vendor/mercadopago/src/MercadoPago/Exceptions/MPApiException.php';
-
-//use MercadoPago\MercadoPagoConfig;
-
-//use MercadoPago\Client\Preference\PreferenceClient;
-//use MercadoPago\Exceptions\MPApiException;
-
- //$config = MercadoPagoConfig::setAccessToken($mp_acess_token);
- ///var_dump($config);
-//MercadoPago\SDK::setAccessToken($mp_acess_token);
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Exceptions\MPApiException;
 ?>
 
 <?php
@@ -126,38 +117,12 @@ include('../../vendor/mercadopago/dx-php/src/MercadoPago/MercadoPagoConfig.php')
         $assinatura_nome = $data['nome']." - ".$seo_title;
         $assinatura_valor = $data['valor_total'];
         $assinatura_parcelas = intval( $data['duracao_meses'] );
+
+
+
       }
     }
   }
-        //$preference = new MercadoPago\Preference();
-//        $client = new PreferenceClient();
-      /*
-        $preference = $client->create([
-          "external_reference" => $transaction_ref,
-          "items"=> array(
-            array(
-              "id" => "4567",
-              "title" => $assinatura_nome,
-              //"description" => "Dummy description",
-              //"picture_url" => "http://www.myapp.com/myimage.jpg",
-              //"category_id" => "eletronico",
-              "quantity" => 1,
-              "currency_id" => "BRL",
-              "unit_price" => $assinatura_valor
-            )
-          ),
-          "payment_methods" => [
-          "default_payment_method_id" => "master",
-          "excluded_payment_types" => array(
-            array(
-              "id" => "ticket"
-            )
-          ),
-          "installments"  => 12,
-          "default_installments" => 1
-        ]
-        ]);
-      */
 
 
         // Cria um item na preferência
