@@ -18,8 +18,8 @@ include('../_layout/modal.php');
 global $db_con;
 $eid = isset($_SESSION['estabelecimento']['id']); //estabelecimento logado
 $meudominio = $httprotocol.data_info("estabelecimentos",$_SESSION['estabelecimento']['id'],"subdominio").".".$simple_url;
-
-var_dump($eid);
+$id = $_SESSION['estabelecimento']['id'];
+var_dump($id);
 // Variáveis de inicialização
 $public_key = "";
 $secret_key = "";
