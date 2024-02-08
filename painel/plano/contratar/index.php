@@ -113,13 +113,13 @@ use MercadoPago\Exceptions\MPApiException;
         $transaction_ref = "REF-".$_SESSION['user']['id']."-".date("dmYHis")."-".random_key(4);
 
         // Executar compra
-
         $assinatura_nome = $data['nome']." - ".$seo_title;
         $assinatura_valor = $data['valor_total'];
         $assinatura_parcelas = intval( $data['duracao_meses'] );
 
-
-
+        // Step 2: Set production or sandbox access token
+        $config = MercadoPagoConfig::setAccessToken($mp_acess_token);
+        var_dump($config);
       }
     }
   }
