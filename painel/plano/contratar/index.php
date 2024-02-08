@@ -27,9 +27,9 @@ global $mp_client_secret;
 global $external_token;
 //require_once '../../../api/mercadopago.php';
 
-require_once '../../../vendor/mercadopago/src/MercadoPago/MercadoPagoConfig.php';
-require_once '../../../vendor/mercadopago/src/MercadoPago/Client/Preference/PreferenceClient.php';
-require_once '../../../vendor/mercadopago/src/MercadoPago/Exceptions/MPApiException.php';
+require_once __DIR__ . '/vendor/mercadopago/src/MercadoPago/MercadoPagoConfig.php';
+//require_once '../../../vendor/mercadopago/src/MercadoPago/Client/Preference/PreferenceClient.php';
+//require_once '../../../vendor/mercadopago/src/MercadoPago/Exceptions/MPApiException.php';
 
 use MercadoPago\MercadoPagoConfig;
 
