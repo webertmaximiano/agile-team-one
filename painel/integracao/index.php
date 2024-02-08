@@ -106,12 +106,11 @@ if ($formdata) {
 		//tem como atualizar sem passar todas as colunas?
 		if( update_estabelecimento( $db_con, $public_key, $secret_key, $id) ) {
   
-			echo('funcao executada');
-		  //header("Location: index.php?msg=sucesso&id=".$id);
+		  header("Location: index.php?msg=sucesso&id=".$id);
   
 		} else {
   
-		 // header("Location: index.php?msg=erro&id=".$id);
+		 header("Location: index.php?msg=erro&id=".$id);
   
 		}
   
