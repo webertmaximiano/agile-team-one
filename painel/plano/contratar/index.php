@@ -1,6 +1,6 @@
 <?php
 // CORE
-include('../../../_core/_includes/config.php');
+include "../../../_core/_includes/config.php";
 // RESTRICT
 restrict_estabelecimento();
 // SEO
@@ -11,10 +11,10 @@ $seo_description = "";
 $seo_keywords = "";
 // HEADER
 $system_header .= "";
-include('../../_layout/head.php');
-include('../../_layout/top.php');
-include('../../_layout/sidebars.php');
-include('../../_layout/modal.php');
+include "../../_layout/head.php";
+include "../../_layout/top.php";
+include "../../_layout/sidebars.php";
+include "../../_layout/modal.php";
 ?>
 
 <?php
@@ -26,7 +26,7 @@ global $mp_client_id;
 global $mp_client_secret;
 global $external_token;
 
-require_once '../../../vendor/autoload.php';
+require_once "../../../vendor/autoload.php";
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
@@ -34,105 +34,184 @@ use MercadoPago\Exceptions\MPApiException;
 ?>
 
 <?php
+// Globals
 
-  // Globals
+global $numeric_data;
+global $gallery_max_files;
 
-  global $numeric_data;
-  global $gallery_max_files;
+$preference_id = '';
 
-  $voucher = mysqli_real_escape_string( $db_con, $_GET['voucher'] );
-  $voucher_query = mysqli_query( $db_con, "SELECT * FROM vouchers WHERE codigo = '$voucher' AND status = '1' LIMIT 1");
-  $has_voucher = mysqli_num_rows( $voucher_query );
-  $data_voucher = mysqli_fetch_array( $voucher_query );
+$voucher = mysqli_real_escape_string($db_con, $_GET["voucher"]);
+$voucher_query = mysqli_query(
+    $db_con,
+    "SELECT * FROM vouchers WHERE codigo = '$voucher' AND status = '1' LIMIT 1"
+);
+$has_voucher = mysqli_num_rows($voucher_query);
+$data_voucher = mysqli_fetch_array($voucher_query);
 
-  if( $has_voucher ) {
-    $id = $data_voucher['rel_planos_id'];
-  } else {
-    $id = mysqli_real_escape_string( $db_con, $_GET['plano'] );
-  }
+if ($has_voucher) {
+    $id = $data_voucher["rel_planos_id"];
+} else {
+    $id = mysqli_real_escape_string($db_con, $_GET["plano"]);
+}
 
-  $eid = $_SESSION['estabelecimento']['id'];
-  $edit = mysqli_query( $db_con, "SELECT * FROM planos WHERE id = '$id' AND status = '1' LIMIT 1");
-  $hasdata = mysqli_num_rows( $edit );
-  $data = mysqli_fetch_array( $edit );
+$eid = $_SESSION["estabelecimento"]["id"];
+$edit = mysqli_query(
+    $db_con,
+    "SELECT * FROM planos WHERE id = '$id' AND status = '1' LIMIT 1"
+);
+$hasdata = mysqli_num_rows($edit);
+$data = mysqli_fetch_array($edit);
 
-  // Checar se formulário foi executado
+// Checar se formulário foi executado
 
-  $formdata = $_POST['formdata'];
+$formdata = $_POST["formdata"];
 
-  if( $formdata ) {
-
+if ($formdata) {
     // Setar campos
 
-    $termos = mysqli_real_escape_string( $db_con, $_POST['termos'] );
+    $termos = mysqli_real_escape_string($db_con, $_POST["termos"]);
 
     // Checar Erros
 
     $checkerrors = 0;
-    $errormessage = array();
+    $errormessage = [];
 
-      // -- Compravel
+    // -- Compravel
 
-      if( $data['status'] != "1" ) {
+    if ($data["status"] != "1") {
         $checkerrors++;
         $errormessage[] = "Ação inválida";
-      }
+    }
 
-      // -- Termos
+    // -- Termos
 
-      if( $termos ) {
+    if ($termos) {
         $checkerrors++;
         $errormessage[] = "Você deve aceitar os termos";
-      }
+    }
 
     // Executar registro
 
-    if( !$checkerrors ) {
+    if (!$checkerrors) {
+        if ($has_voucher) {
+            if (aplicar_voucher($eid, $voucher)) {
+                atualiza_estabelecimento(
+                    $_SESSION["estabelecimento"]["id"],
+                    "offline"
+                );
 
-      if( $has_voucher ) {
-
-        if( aplicar_voucher( $eid,$voucher ) ) {
-
-          atualiza_estabelecimento( $_SESSION['estabelecimento']['id'],"offline" );
-
-          header("Location: ../index.php?msg=aplicado");
-
+                header("Location: ../index.php?msg=aplicado");
+            } else {
+                header("Location: ../index.php?msg=naoaplicado");
+            }
         } else {
+            $eid = $_SESSION["estabelecimento"]["id"];
+            $define_query = mysqli_query(
+                $db_con,
+                "SELECT email FROM estabelecimentos WHERE id = '$eid' LIMIT 1"
+            );
+            $define_data = mysqli_fetch_array($define_query);
+            $email_cliente = $define_data["email"];
 
-          header("Location: ../index.php?msg=naoaplicado");
+            $transaction_ref =
+                "REF-" .
+                $_SESSION["user"]["id"] .
+                "-" .
+                date("dmYHis") .
+                "-" .
+                random_key(4);
 
+            // Executar compra
+            $assinatura_id = $data["id"];
+            $assinatura_nome = $data["nome"] . " - " . $seo_title;
+            $assinatura_valor = $data["valor_total"];
+            $assinatura_parcelas = intval($data["duracao_meses"]);
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, [
+                CURLOPT_URL => "https://api.mercadopago.com/checkout/preferences",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => json_encode([
+                    "payer" => [
+                      "email" => $email_cliente,
+                    ],
+                    "back_urls" => [
+                        "success" =>
+                            get_just_url() . "/painel/plano?msg=obrigado",
+                        "pending" =>
+                            get_just_url() . "/painel/plano?msg=obrigado",
+                        "failure" => get_just_url() . "/painel/plano?msg=erro",
+                    ],
+                    "external_reference" => $transaction_ref,
+                    "notification_url" =>
+                        get_just_url() .
+                        "/postback.php?token=" .
+                        $external_token,
+                    "auto_return" => "approved",
+                    "items" => [
+                        [
+                            "id" => $assinatura_id,
+                            "title" => $assinatura_nome,
+                            //"description" => "Dummy description",
+                            //"picture_url" => "http://www.myapp.com/myimage.jpg",
+                            //"category_id" => "car_electronics",
+                            "quantity" => 1,
+                            "currency_id" => "BRL",
+                            "unit_price" => $assinatura_valor,
+                        ],
+                    ],
+                    "payment_methods" => [
+                        "excluded_payment_methods" => [[]],
+                        "excluded_payment_types" => [["id" => "ticket"]],
+                        "installments" => $assinatura_parcelas,
+                    ],
+                ]),
+                CURLOPT_HTTPHEADER => [
+                    // Headers da requisição
+                    "Content-Type: application/json",
+                    "Authorization: Bearer " . $mp_acess_token,
+                ],
+            ]);
+            $response = curl_exec($curl);
+var_dump($response);
+            curl_close($curl);
+
+            $obj = json_decode($response);
+
+            if (isset($obj->id)) {
+                if ($obj->id != null) {
+                    if (isset($card)) {
+                        $preference_id = $obj->id;
+                    } else {
+                        $link_externo = $obj->init_point;
+                        $external_reference = $obj->external_reference;
+
+                        echo "<h3>{$assinatura_valor} #{$external_reference}</h3> <br />";
+                        echo "<a href='{$link_externo}' target='_blank' >Link externo</a>";
+                    }
+                }
+            }
         }
-
-      } else {
-
-        $eid = $_SESSION['estabelecimento']['id'];
-        $define_query = mysqli_query( $db_con, "SELECT email FROM estabelecimentos WHERE id = '$eid' LIMIT 1");
-        $define_data = mysqli_fetch_array( $define_query );
-        $email_cliente = $define_data['email'];
-
-        $transaction_ref = "REF-".$_SESSION['user']['id']."-".date("dmYHis")."-".random_key(4);
-
-        // Executar compra
-        $assinatura_nome = $data['nome']." - ".$seo_title;
-        $assinatura_valor = $data['valor_total'];
-        $assinatura_parcelas = intval( $data['duracao_meses'] );
-
-        $curl = curl_init();
-        var_dump(isset($curl ));
-      }
     }
-  }
+}
 
-
-        // Cria um item na preferência
-      //  $payer = new MercadoPago\Payer();
-        //$payer->email = $email_cliente;
-        //$item = new MercadoPago\Item();
-        //$item->title = $assinatura_nome;
-        //$item->quantity = 1;
-        //$item->unit_price = $assinatura_valor;
-       // $preference->items = [$item];
-       // $preference->external_reference = $transaction_ref;
+// Cria um item na preferência
+//  $payer = new MercadoPago\Payer();
+//$payer->email = $email_cliente;
+//$item = new MercadoPago\Item();
+//$item->title = $assinatura_nome;
+//$item->quantity = 1;
+//$item->unit_price = $assinatura_valor;
+// $preference->items = [$item];
+// $preference->external_reference = $transaction_ref;
 /*
        $preference->back_urls = array(
             "success" => get_just_url()."/painel/plano?msg=obrigado",
@@ -220,7 +299,7 @@ use MercadoPago\Exceptions\MPApiException;
 
     <div class="data box-white mt-16">
 
-      <?php if( $hasdata ) { ?>
+      <?php if ($hasdata) { ?>
 
       <form id="the_form" class="form-default" method="POST" enctype="multipart/form-data">
 
@@ -228,17 +307,22 @@ use MercadoPago\Exceptions\MPApiException;
 
             <div class="col-md-12">
 
-              <?php if( $checkerrors ) { list_errors(); } ?>
+              <?php if ($checkerrors) {
+                  list_errors();
+              } ?>
 
-              <?php if( $_GET['msg'] == "erro" ) { ?>
+              <?php if ($_GET["msg"] == "erro") { ?>
 
-                <?php modal_alerta("Erro, tente novamente mais tarde!","erro"); ?>
+                <?php modal_alerta(
+                    "Erro, tente novamente mais tarde!",
+                    "erro"
+                ); ?>
 
               <?php } ?>
 
-              <?php if( $_GET['msg'] == "sucesso" ) { ?>
+              <?php if ($_GET["msg"] == "sucesso") { ?>
 
-                <?php modal_alerta("Editado com sucesso!","sucesso"); ?>
+                <?php modal_alerta("Editado com sucesso!", "sucesso"); ?>
 
               <?php } ?>
 
@@ -269,17 +353,25 @@ use MercadoPago\Exceptions\MPApiException;
       						<div class="col-md-12">
       							<div class="cover">
 <!--       								<div class="foto">
-      									<img src="<?php echo imager( $data['destaque'] ); ?>"/>
+      									<img src="<?php echo imager($data["destaque"]); ?>"/>
       								</div> -->
-      								<span class="titulo"><?php echo $data['nome']; ?></span>
-      								<div class="desc <?php if( $has_voucher ) { echo 'noborderbottom'; } ?>">
-      									<?php echo nl2br( bbzap( $data['descricao'] ) ); ?>
+      								<span class="titulo"><?php echo $data["nome"]; ?></span>
+      								<div class="desc <?php if ($has_voucher) {
+                  echo "noborderbottom";
+              } ?>">
+      									<?php echo nl2br(bbzap($data["descricao"])); ?>
       								</div>
-                      <?php if( !$has_voucher ) { ?>
+                      <?php if (!$has_voucher) { ?>
       								<div class="valor">
-      									<span class="parcela"><?php echo $data['duracao_meses']; ?>x de</span>
-      									<span class="mensal">R$ <?php echo dinheiro( $data['valor_mensal'], "BR" ); ?> por mês</span>
-      									<span class="total">sem juros ou R$ <?php echo dinheiro( $data['valor_total'], "BR" ); ?> á vista</span>
+      									<span class="parcela"><?php echo $data["duracao_meses"]; ?>x de</span>
+      									<span class="mensal">R$ <?php echo dinheiro(
+                   $data["valor_mensal"],
+                   "BR"
+               ); ?> por mês</span>
+      									<span class="total">sem juros ou R$ <?php echo dinheiro(
+                   $data["valor_total"],
+                   "BR"
+               ); ?> á vista</span>
       								</div>
                       <?php } ?>
       							</div>
@@ -293,11 +385,16 @@ use MercadoPago\Exceptions\MPApiException;
 
       		<div class="row">
 
+
       		  <div class="col-md-12">
 
       		    <div class="title-line mt-0 pd-0">
       		      <i class="lni lni-question-circle"></i>
-      		      <span>Termos de <?php if( $has_voucher ){ echo 'adesão'; } else { echo 'compra'; }; ?></span>
+      		      <span>Termos de <?php if ($has_voucher) {
+                  echo "adesão";
+              } else {
+                  echo "compra";
+              } ?></span>
       		      <div class="clear"></div>
       		    </div>
 
@@ -313,14 +410,24 @@ use MercadoPago\Exceptions\MPApiException;
 
                   <label>Termos de uso</label>
                   <textarea rows="6" DISABLED>
-                  	<?php echo $data['termos']; ?>
+                  	<?php echo $data["termos"]; ?>
                   </textarea>
                   <br/><br/>
 
                   <div class="form-field-terms">
-                    <input type="hidden" name="afiliado" value="<?php echo htmlclean( $_GET['afiliado'] ); ?>"/>
+                    <input type="hidden" name="afiliado" value="<?php echo htmlclean(
+                        $_GET["afiliado"]
+                    ); ?>"/>
                     <input type="hidden" name="formdata" value="1"/>
-                    <input type="radio" name="terms" value="1" <?php if( $_POST['terms'] ){ echo 'CHECKED'; }; ?>> Eu aceito os termos de <?php if( $has_voucher ){ echo 'adesão'; } else { echo 'compra'; }; ?>
+                    <input type="radio" name="terms" value="1" <?php if (
+                        $_POST["terms"]
+                    ) {
+                        echo "CHECKED";
+                    } ?>> Eu aceito os termos de <?php if ($has_voucher) {
+                        echo "adesão";
+                    } else {
+                        echo "compra";
+                    } ?>
                   </div>
 
               </div>
@@ -343,7 +450,11 @@ use MercadoPago\Exceptions\MPApiException;
               <input type="hidden" name="formdata" value="true"/>
               <div class="form-field form-field-submit">
                 <button class="pull-right">
-                  <span><?php if( $has_voucher ){ echo 'Aderir'; } else { echo 'Contratar'; }; ?> <i class="lni lni-chevron-right"></i></span>
+                  <span><?php if ($has_voucher) {
+                      echo "Aderir";
+                  } else {
+                      echo "Contratar";
+                  } ?> <i class="lni lni-chevron-right"></i></span>
                 </button>
               </div>
             </div>
@@ -359,7 +470,21 @@ use MercadoPago\Exceptions\MPApiException;
       <?php } ?>
 
     </div>
+    <!-- Se obter uma preference id renderiza o checkout pro-->
+    <?php if ($preference_id) { ?>
+      <div id="wallet_container">
+    <?php } ?>
+    <script>
+      const mp = new MercadoPago($mp_public_key, {
+        locale: 'pt-BR'
+      });
 
+      mp.bricks().create("wallet", "wallet_container", {
+        initialization: {
+            preferenceId: $preference_id,
+        },
+      });
+  </script>
     <!-- / Content -->
 
   </div>
@@ -368,14 +493,13 @@ use MercadoPago\Exceptions\MPApiException;
 
 <div class="just-ajax"></div>
 
-<?php 
+<?php
 // FOOTER
 $system_footer .= "";
-include('../../_layout/rdp.php');
-include('../../_layout/footer.php');
+include "../../_layout/rdp.php";
+include "../../_layout/footer.php";
 ?>
 
-<script src="https://sdk.mercadopago.com/js/v2"></script>
 
 <script>
   const mp = new MercadoPago($mp_public_key);
