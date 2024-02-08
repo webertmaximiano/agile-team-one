@@ -25,7 +25,7 @@ global $mp_acess_token;
 global $mp_client_id;
 global $mp_client_secret;
 global $external_token;
-require_once '../../../_core/_includes/functions/mercadopago/vendor/autoload.php';
+require_once '../../../vendor/autoload.php';
 MercadoPago\SDK::setAccessToken($mp_acess_token);
 ?>
 
