@@ -414,6 +414,10 @@ include('../../_layout/footer.php');
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 
 <script>
+  const mp = new MercadoPago($mp_public_key);
+</script>
+
+<script>
 
 $(document).ready( function() {
           
