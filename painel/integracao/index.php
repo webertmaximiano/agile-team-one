@@ -19,11 +19,35 @@ global $db_con;
 $eid = isset($_SESSION['estabelecimento']['id']); //estabelecimento logado
 $meudominio = $httprotocol.data_info("estabelecimentos",$_SESSION['estabelecimento']['id'],"subdominio").".".$simple_url;
 
-//setar as variaveis
-$public_key = $_POST['input-public-key'];
-$secret_key = $_POST['input-secret-key'];
+// Variáveis de inicialização
+$public_key = "";
+$secret_key = "";
 
-var_dump($public_key);
+// Consultar as chaves do banco de dados
+$sql = "SELECT public_key, secret_key FROM estabelecimentos WHERE id = ?";
+$stmt = mysqli_prepare($db_con, $sql);
+mysqli_stmt_bind_param($stmt, "i", $eid);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $public_key = $row['public_key'];
+    $secret_key = $row['secret_key'];
+}
+
+// Preenchimento dos campos do formulário
+if (isset($_POST['formdata'])) {
+    $public_key = htmlclean($_POST['input-public-key']);
+    $secret_key = htmlclean($_POST['input-secret-key']);
+	$formdata = $_POST['formdata'];
+}
+
+var_dump($formdata);
+
+// verificando se os valores foram atribuidos
+//var_dump($public_key);
+//var_dump($secret_key);
 
 //cria a funcao para atualizar a tabela estabelecimento
 function update_estabelecimento( $db_con, $public_key, $secret_key, $eid)
@@ -52,10 +76,11 @@ function update_estabelecimento( $db_con, $public_key, $secret_key, $eid)
 
 }
 
-// Checar se formulário foi executado
-$formdata = $_POST['formdata'];
+
+
 //se o botao salvar for clicado vai executar o post do form
 if ($formdata) {
+	
 	// Checar Erros gerados se nao enviar os dados
 	 $checkerrors = 0;
 	 $errormessage = []; //declara um array
@@ -89,43 +114,8 @@ if ($formdata) {
 
 }
 ?>
-<!--
-<script>
-//bonus javascript validacao
-$(document).ready( function() {
-          
-  // Globais
-  $("#the_form").validate({
 
-      /* REGRAS DE VALIDAÇÃO DO FORMULÁRIO */
-      rules:{
-        public_key:{
-        required: true
-        },
-        secret_key:{
-        required: true
-        }
-      },
-          
-      /* DEFINIÇÃO DAS MENSAGENS DE ERRO */
-              
-      messages:{
 
-        public_key:{
-          required: "Esse campo é obrigatório"
-        },
-        secret_key:{
-          required: "Cadastre e selecione uma categoria"
-        },        
-
-      }
-
-    });
-
-  });
-
-</script>
--->
 
 <div class="middle minfit bg-gray">
 
@@ -249,51 +239,37 @@ $(document).ready( function() {
 				<!-- Mercado Pago -->
 				<div class="row">
 
-					<form id="the_form" class="form-default" method="POST" enctype="multipart/form-data">
+				<form id="the_form" class="form-default" method="POST" enctype="multipart/form-data">
+
+					<div class="row">
 
 						<div class="col-md-9">
-							
 							<div class="form-field-default">
-
-								<label>Sua Public Key:</label>
+								<label for="input-public-key">Sua Public Key:</label>
 								<input type="text" id="input-public-key" name="input-public-key" value="<?php echo htmlclean( $_POST['input-public-key'] ); ?>">
+							</div>
+						</div>
 
-								<label>Sua Secret Key:</label>
+						<div class="col-md-9">
+							<div class="form-field-default">
+								<label for="input-secret-key">Sua Secret Key:</label>
 								<input type="text" id="input-secret-key" name="input-secret-key" value="<?php echo htmlclean( $_POST['input-secret-key'] ); ?>">
-
 							</div>
+						</div>
 
-							<div class="col-md-9">
-
-							<?php if( $checkerrors ) { list_errors(); } ?>
-
-							<?php if( isset($_GET['msg']) == "erro" ) { ?>
-
-								<?php modal_alerta("Erro, tente novamente!","erro"); ?>
-
-							<?php } ?>
-
-							<?php if( isset($_GET['msg']) == "sucesso" ) { ?>
-
-								<?php modal_alerta("Alterado com sucesso!","sucesso"); ?>
-
-							<?php } ?>
-
-							</div>
-							</div>
-
-							<div class="col-md-3">
+						<div class="col-md-3">
 							<input type="hidden" name="formdata" value="true"/>
 							<div class="form-default form-field-submit">
 								<button class="pull-right">
 									<span>Salvar <i class="lni lni-chevron-right"></i></span>
 								</button>
 							</div>
-							</div>
-
 						</div>
 
-					</form>	
+					</div>
+
+				</form>
+
 				</div>
 
 			</div>
