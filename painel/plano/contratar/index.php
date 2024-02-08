@@ -118,7 +118,8 @@ use MercadoPago\Exceptions\MPApiException;
         $assinatura_parcelas = intval( $data['duracao_meses'] );
 
         // Step 2: Set production or sandbox access token
-        $config = MercadoPagoConfig::setAccessToken($mp_acess_token);
+        $config = new MercadoPagoConfig();
+        $config->setAccessToken($mp_acess_token);
         var_dump(isset($config));
       }
     }
