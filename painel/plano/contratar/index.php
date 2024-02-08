@@ -26,7 +26,7 @@ global $mp_client_id;
 global $mp_client_secret;
 global $external_token;
 
-require_once 'vendor/autoload.php';
+require_once '../../../vendor/autoload.php';
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
