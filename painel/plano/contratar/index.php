@@ -165,7 +165,7 @@ if ($formdata) {
                             //"category_id" => "car_electronics",
                             "quantity" => 1,
                             "currency_id" => "BRL",
-                            "unit_price" => $assinatura_valor,
+                            "unit_price" => floatval($assinatura_valor),
                         ],
                     ],
                     "payment_methods" => [
