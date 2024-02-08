@@ -226,9 +226,9 @@ global $external_token;
 ?>
 
 <div class="middle minfit bg-gray">
-<script src="https://sdk.mercadopago.com/js/v2"></script>
   <div class="container">
-
+   
+    
     <div class="row">
 
       <div class="col-md-12">
@@ -410,6 +410,8 @@ $system_footer .= "";
 include('../../_layout/rdp.php');
 include('../../_layout/footer.php');
 ?>
+
+<script src="https://sdk.mercadopago.com/js/v2"></script>
 
 <script>
 
