@@ -26,6 +26,8 @@ global $mp_client_id;
 global $mp_client_secret;
 global $external_token;
 
+$preference_id = '';
+
 require_once "../../../vendor/autoload.php";
 
 use MercadoPago\MercadoPagoConfig;
@@ -34,12 +36,12 @@ use MercadoPago\Exceptions\MPApiException;
 ?>
 
 <?php
-// Globals
+// Globals $has_voucher
 
 global $numeric_data;
 global $gallery_max_files;
+$has_voucher = '';
 
-$preference_id = '';
 
 //se in informar um voucher isset($_GET["voucher"])
 $codigo_voucher = isset($_GET["voucher"]);
@@ -58,7 +60,6 @@ if ($codigo_voucher ){
 
   //Dados do Voucher
   $data_voucher = mysqli_fetch_array($voucher_query);
-  var_dump($data_voucher);
   
   //se existi pega o ID do plano do voucher informado
   if ($has_voucher) {
@@ -88,11 +89,9 @@ $formdata = isset($_POST["formdata"]);
 
 if ($formdata) {
     // Setar campos
-
     $termos = mysqli_real_escape_string($db_con, isset($_POST["termos"]));
 
     // Checar Erros
-
     $checkerrors = 0;
     $errormessage = [];
 
@@ -109,8 +108,8 @@ if ($formdata) {
     }
 
     // Executar registro
-
     if (!$checkerrors) {
+       //se tiver um voucher aplica como pagamento
         if ($has_voucher) {
             if (aplicar_voucher($eid, $voucher)) {
                 atualiza_estabelecimento(
@@ -122,6 +121,7 @@ if ($formdata) {
             } else {
                 header("Location: ../index.php?msg=naoaplicado");
             }
+           // se nao tiver voucher executa o mercado pago 
         } else {
             $eid = $_SESSION["estabelecimento"]["id"];
             $define_query = mysqli_query(

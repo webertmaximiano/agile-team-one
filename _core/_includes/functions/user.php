@@ -183,25 +183,25 @@ function restrict_estabelecimento() {
 
 	$actualurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-	if( $_SESSION['user']['logged'] != "1" ) {
+	if( isset($_SESSION['user']['logged']) != "1" ) {
 
 		header("Location: ".get_just_url()."/login?msg=restrict&redirect=".$actualurl);
 
 	}
 
-	if( $_SESSION['estabelecimento']['logged'] != "1" ) {
+	if( isset($_SESSION['estabelecimento']['logged']) != "1" ) {
 
 		header("Location: ".get_just_url()."/login?msg=restrict&redirect=".$actualurl);
 
 	}
 
-	if( $_SESSION['estabelecimento']['status_force'] == "1" ) {
+	if( isset($_SESSION['estabelecimento']['status_force']) == "1" ) {
 
 		header("Location: ".get_just_url()."/painel/inativo");
 
 	}
 
-	if( $_SESSION['estabelecimento']['excluded'] == "1" ) {
+	if( isset($_SESSION['estabelecimento']['excluded']) == "1" ) {
 
 		header("Location: ".get_just_url()."/painel/configuracoes/reativacao");
 
