@@ -53,7 +53,7 @@ $data_voucher = mysqli_fetch_array($voucher_query);
 if ($has_voucher) {
     $id = $data_voucher["rel_planos_id"];
 } else {
-    $id = mysqli_real_escape_string($db_con, $_GET["plano"]);
+    $id = mysqli_real_escape_string($db_con, isset($_GET["plano"]));
 }
 
 $eid = $_SESSION["estabelecimento"]["id"];
