@@ -44,35 +44,43 @@ $preference_id = '';
 //se in informar um voucher isset($_GET["voucher"])
 $codigo_voucher = isset($_GET["voucher"]);
 if ($codigo_voucher ){
+  
   //verifica e trata o codigo enviado evitando sql inject
-  $voucher = mysqli_real_escape_string($db_con, $codigo_voucher );
+  $voucher = mysqli_real_escape_string($db_con, $_GET["voucher"] );
   //resultado da consulta no Banco pelo voucher 
   $voucher_query = mysqli_query(
       $db_con,
       "SELECT * FROM vouchers WHERE codigo = '$voucher' AND status = '1' LIMIT 1"
   );
+
   // define se exite ou nao o voucher se retornar uma linha 
   $has_voucher = mysqli_num_rows($voucher_query) > 0;
 
-}
-
-
-$data_voucher = mysqli_fetch_array($voucher_query);
-
-if ($has_voucher) {
+  //Dados do Voucher
+  $data_voucher = mysqli_fetch_array($voucher_query);
+  var_dump($data_voucher);
+  
+  //se existi pega o ID do plano do voucher informado
+  if ($has_voucher) {
     $id = $data_voucher["rel_planos_id"];
-} else {
-    $id = mysqli_real_escape_string($db_con, isset($_GET["plano"]));
-}
+  } else {
+      $id = mysqli_real_escape_string($db_con, isset($_GET["plano"]));
+  }
 
-$eid = $_SESSION["estabelecimento"]["id"];
+  //pega o ID do estabelecimento logado
+  $eid = $_SESSION["estabelecimento"]["id"];
 
-$edit = mysqli_query(
+  //acao de editar o estabelecimento
+  $edit = mysqli_query(
     $db_con,
     "SELECT * FROM planos WHERE id = '$id' AND status = '1' LIMIT 1"
-);
-$hasdata = mysqli_num_rows($edit);
-$data = mysqli_fetch_array($edit);
+  );
+
+  $hasdata = mysqli_num_rows($edit);
+  $data = mysqli_fetch_array($edit);
+  //print("<pre>".print_r($data)."</pre>");
+
+}
 
 // Checar se formulário foi executado
 
