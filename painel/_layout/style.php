@@ -179,7 +179,7 @@ background: <?php echo $cor; ?> !important;
 
 }
 
-}
+
 
 /* ALL DESK */
 
