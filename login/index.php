@@ -19,6 +19,9 @@ if( isset($_SESSION['user']['logged']) == "1" ) {
 	}
 
 }
+//variaveis
+$email = '';
+$pass = '';
 ?>
 
 <!DOCTYPE html>
@@ -70,16 +73,26 @@ if ("serviceWorker" in navigator) {
 
 		<?php
 
-		$redirect = mysqli_real_escape_string( $db_con, $_GET['redirect'] );
+		$redirect = mysqli_real_escape_string( $db_con, isset($_GET['redirect']) );
 		// if( !$redirect ) {
 		// 	$redirect = $_SERVER['HTTP_REFERER'];
 		// }
-		$email = strtolower( mysqli_real_escape_string( $db_con, $_POST['email'] ) );
-		$pass = mysqli_real_escape_string( $db_con, $_POST['pass'] );
-		$keepalive = mysqli_real_escape_string( $db_con, $_POST['keepalive'] );
+		if(isset($_POST['email'])){
+			$email = strtolower( mysqli_real_escape_string( $db_con, $_POST['email']) );
+		}
+		
+		if(isset($_POST['pass'])) {
+			$pass = mysqli_real_escape_string( $db_con, $_POST['pass']);
+		}
+		
+		if (isset($_POST['keepalive'])){
+			$keepalive = mysqli_real_escape_string( $db_con, $_POST['keepalive']);
+		}
+
 		if( !$keepalive ) {
 			$keepalive = 0;
 		}
+		
 		$method = "login";
 
 		if( notnull($email) && notnull($pass) ) {
@@ -135,7 +148,7 @@ if ("serviceWorker" in navigator) {
 
 												</div>
 
-												<?php if( $_GET['msg'] == "erro" ) { ?>
+												<?php if( isset($_GET['msg']) == "erro" ) { ?>
 
 												<div class="row">
 
@@ -152,7 +165,7 @@ if ("serviceWorker" in navigator) {
 
 												<?php } ?>
 
-												<?php if( $_GET['msg'] == "alterada" ) { ?>
+												<?php if( isset($_GET['msg']) == "alterada" ) { ?>
 
 												<div class="row">
 
@@ -176,7 +189,7 @@ if ("serviceWorker" in navigator) {
 														<div class="form-field form-field-icon form-field-text">
 
 															<i class="form-icon lni lni-user"></i>
-															<input type="text" name="email" placeholder="E-mail" value="<?php echo htmlclean( $_GET['email'] ); ?>"/>
+															<input type="text" name="email" placeholder="E-mail" value="<?php echo htmlclean( isset($_GET['email']) ); ?>"/>
 
 														</div>
 

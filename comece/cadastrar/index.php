@@ -78,8 +78,13 @@ $afiliado = $_SESSION['afiliado'];
       }*/
 
       // Afiliado
-
+      if(isset($_POST['afiliado'])){
         $afiliado = mysqli_real_escape_string( $db_con, $_POST['afiliado'] );
+      } else{
+        $afiliado = 1;
+      }
+
+        
 
       // Dados gerais
 

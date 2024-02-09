@@ -19,22 +19,21 @@ include('../../_layout/modal.php');
 <?php
 
   // Globals
-
-  $uid = $_SESSION['user']['id'];
-  $eid = $_SESSION['estabelecimento']['id'];
   global $db_con;
-
+  //usuario
+  $uid = $_SESSION['user']['id'];
+  //estabelecimento
+  $eid = $_SESSION['estabelecimento']['id'];
+ 
   // Checar se formulário foi executado
-
   $formdata = isset($_POST['formdata']);
 
   if( $formdata ) {
 
     // Setar campos
-
-    $pass = mysqli_real_escape_string( $db_con, $_POST['pass'] );
-    $repass = mysqli_real_escape_string( $db_con, $_POST['repass'] );
-    $termos = mysqli_real_escape_string( $db_con, $_POST['termos'] );
+    $pass = mysqli_real_escape_string( $db_con, isset($_POST['pass']) );
+    $repass = mysqli_real_escape_string( $db_con, isset($_POST['repass']) );
+    $termos = mysqli_real_escape_string( $db_con, isset($_POST['termos']) );
 
     // Checar Erros
 
@@ -48,7 +47,7 @@ include('../../_layout/modal.php');
         $errormessage[] = "As senhas não coincidem";
       }
 
-      if( md5( $pass ) != data_info("users",$uid,"password") ) {
+      if( hash( 'sha256', $pass ) != data_info("users",$uid,"password") ) {
         $checkerrors++;
         $errormessage[] = "A senha é inválida";
       }

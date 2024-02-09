@@ -42,9 +42,9 @@ function make_login( $email, $pass, $method, $keepalive ) {
 
 	session_destroy();
 	session_start();
-
-	$pass = md5( $pass );
-
+	//md5 pra sha256
+	$pass = hash('sha256' , $pass );
+	
 	global $db_con;
 	
 	if( $method == "login" ) {
@@ -1263,6 +1263,7 @@ function change_assinatura_status( $reference,$status ) {
 		$edit = mysqli_query( $db_con, "SELECT * FROM assinaturas WHERE gateway_ref = '$reference' LIMIT 1");
 		$hasdata = mysqli_num_rows( $edit );
 		$data = mysqli_fetch_array( $edit );
+		
 		if( $hasdata ) {
 			$eid = $data['rel_estabelecimentos_id'];
 			mysqli_query( $db_con," UPDATE assinaturas SET gateway_payment='$status',status='$status_pagamento',gateway_transaction = '$transaction' WHERE gateway_ref = '$reference' ");

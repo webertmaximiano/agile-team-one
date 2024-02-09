@@ -446,72 +446,68 @@ function gera_thumb( $file,$largura,$altura ) {
 
     $file_info = explode(".", $file);
     
-    if (isset($file_info)) {
-    
-      $file_name = $file_info[0];
-      $file_ext = $file_info[1];
-      $uploadpathfull = str_replace($file_name.".".$file_ext, "", $file_tmp);
+    $file_name = $file_info[0];
+    $file_ext = $file_info[1];
+    $uploadpathfull = str_replace($file_name.".".$file_ext, "", $file_tmp);
 
-      $random_key = @random_key(10);
-      $new_name = $file_name."_thumb";
+    $random_key = @random_key(10);
+    $new_name = $file_name."_thumb";
 
-      if( $file_ext == "jpg" ) {
-         $newimage = imagecreatefromjpeg($file_tmp);
-         $new_name .= ".jpg";
-      } 
+     if( $file_ext == "jpg" ) {
+        $newimage = imagecreatefromjpeg($file_tmp);
+        $new_name .= ".jpg";
+     } 
 
-      if( $file_ext == "jpeg" ) {
-         $newimage = imagecreatefromjpeg($file_tmp);
-         $new_name .= ".jpeg";
-      } 
+     if( $file_ext == "jpeg" ) {
+        $newimage = imagecreatefromjpeg($file_tmp);
+        $new_name .= ".jpeg";
+     } 
 
-      if( $file_ext == "png" ) {
-         $newimage = imagecreatefrompng($file_tmp);
-         $new_name .= ".png";
-      } 
+     if( $file_ext == "png" ) {
+        $newimage = imagecreatefrompng($file_tmp);
+        $new_name .= ".png";
+     } 
 
-      if( $file_ext == "gif" ) {
-         $newimage = imagecreatefromgif($file_tmp);
-         $new_name .= ".gif";
-      }
+     if( $file_ext == "gif" ) {
+        $newimage = imagecreatefromgif($file_tmp);
+        $new_name .= ".gif";
+     }
 
-      if( $file_ext == "bmp" ) {
-         $newimage = imagecreatefrombmp($file_tmp);
-         $new_name .= ".jpg";
-      }
+     if( $file_ext == "bmp" ) {
+        $newimage = imagecreatefrombmp($file_tmp);
+        $new_name .= ".jpg";
+     }
 
-      // Target dimensions
-      $max_width = $image_max_width;
-      $max_height = $image_max_height;
+     // Target dimensions
+     $max_width = $image_max_width;
+     $max_height = $image_max_height;
 
-      // Get current dimensions
-      $old_width  = imagesx($newimage);
-      $old_height = imagesy($newimage);
+     // Get current dimensions
+     $old_width  = imagesx($newimage);
+     $old_height = imagesy($newimage);
 
-      if($old_width > $max_height) {
+     if($old_width > $max_height) {
 
-         // Calculate the scaling we need to do to fit the image inside our frame
-         $scale = min($max_width/$old_width, $max_height/$old_height);
+        // Calculate the scaling we need to do to fit the image inside our frame
+        $scale = min($max_width/$old_width, $max_height/$old_height);
 
-         // Get the new dimensions
-         $new_width  = ceil($scale*$old_width);
-         $new_height = ceil($scale*$old_height);
+        // Get the new dimensions
+        $new_width  = ceil($scale*$old_width);
+        $new_height = ceil($scale*$old_height);
 
-         // Create new empty image
-         $new = imagecreatetruecolor($new_width, $new_height);
+        // Create new empty image
+        $new = imagecreatetruecolor($new_width, $new_height);
 
-         if( $file_ext == "png" ) {
-            imagealphablending($new, false);
-            imagesavealpha($new,true);
-            $transparent = imagecolorallocatealpha($new, 255, 255, 255, 127);
-            imagefilledrectangle($new, 0, 0, $new_width, $new_height, $transparent); 
-         }
+        if( $file_ext == "png" ) {
+           imagealphablending($new, false);
+           imagesavealpha($new,true);
+           $transparent = imagecolorallocatealpha($new, 255, 255, 255, 127);
+           imagefilledrectangle($new, 0, 0, $new_width, $new_height, $transparent); 
+        }
 
-         // Resize old image into new
-         imagecopyresampled($new, $newimage, 0, 0, 0, 0, $new_width, $new_height, $old_width, $old_height);
+        // Resize old image into new
+        imagecopyresampled($new, $newimage, 0, 0, 0, 0, $new_width, $new_height, $old_width, $old_height);
 
-      }
-    
      } else {
 
         $new = $newimage;
@@ -606,12 +602,11 @@ function thumber( $img,$width ) {
   $width = "512";
 
   $thumb = explode( ".",$img );
-  
-   $thumb_name = $thumb[0]."_thumb";
-   $thumb_extension = $thumb[1];
-   $thumb = $thumb_name.".".$thumb_extension;
-   $file = $uploadpath.$thumb;
-  
+  $thumb_name = $thumb[0]."_thumb";
+  $thumb_extension = $thumb[1];
+  $thumb = $thumb_name.".".$thumb_extension;
+  $file = $uploadpath.$thumb;
+
   if( file_exists($file) ) {
     $thumburl = $thumb;
   } else {
