@@ -92,26 +92,23 @@ function make_login( $email, $pass, $method, $keepalive ) {
 
 				$query2 = mysqli_query( $db_con, "SELECT * FROM estabelecimentos WHERE( rel_users_id = '$uid' ) LIMIT 1");
 				$data2 = mysqli_fetch_array( $query2 );
-				if (isset($data2)){
-
-					$_SESSION['estabelecimento']['id'] = $data2['id'];
-					$_SESSION['estabelecimento']['avatar'] = $data2['avatar'];
-					$_SESSION['estabelecimento']['perfil'] = $data2['perfil'];
-					$_SESSION['estabelecimento']['nome'] = $data2['nome'];
-					$_SESSION['estabelecimento']['subdominio'] = $data2['subdominio'];
-					$_SESSION['estabelecimento']['logged'] = 1;
-					$_SESSION['estabelecimento']['level'] = $data['level'];
-					$_SESSION['estabelecimento']['funcionalidade_marketplace'] = $data2['funcionalidade_marketplace'];
-					$_SESSION['estabelecimento']['funcionalidade_banners'] = $data2['funcionalidade_banners'];
-					$_SESSION['estabelecimento']['funcionalidade_variacao'] = $data2['funcionalidade_variacao'];
-					$_SESSION['estabelecimento']['status'] = $data2['status'];
-					$_SESSION['estabelecimento']['status_force'] = $data2['status_force'];
-					$_SESSION['estabelecimento']['excluded'] = $data2['excluded'];
-					$_SESSION['estabelecimento']['expiracao'] = $data2['expiracao'];
-					atualiza_estabelecimento( $data2['id'], "online" );
-
-				}
 				
+				$_SESSION['estabelecimento']['id'] = $data2['id'];
+				$_SESSION['estabelecimento']['avatar'] = $data2['avatar'];
+				$_SESSION['estabelecimento']['perfil'] = $data2['perfil'];
+				$_SESSION['estabelecimento']['nome'] = $data2['nome'];
+				$_SESSION['estabelecimento']['subdominio'] = $data2['subdominio'];
+				$_SESSION['estabelecimento']['logged'] = 1;
+				$_SESSION['estabelecimento']['level'] = $data['level'];
+				$_SESSION['estabelecimento']['funcionalidade_marketplace'] = $data2['funcionalidade_marketplace'];
+				$_SESSION['estabelecimento']['funcionalidade_banners'] = $data2['funcionalidade_banners'];
+				$_SESSION['estabelecimento']['funcionalidade_variacao'] = $data2['funcionalidade_variacao'];
+				$_SESSION['estabelecimento']['status'] = $data2['status'];
+				$_SESSION['estabelecimento']['status_force'] = $data2['status_force'];
+				$_SESSION['estabelecimento']['excluded'] = $data2['excluded'];
+				$_SESSION['estabelecimento']['expiracao'] = $data2['expiracao'];
+				atualiza_estabelecimento( $data2['id'], "online" );
+
 			}
 
 		// Ultimo login
@@ -186,25 +183,25 @@ function restrict_estabelecimento() {
 
 	$actualurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-	if( isset($_SESSION['user']['logged']) != "1" ) {
+	if( $_SESSION['user']['logged'] != "1" ) {
 
 		header("Location: ".get_just_url()."/login?msg=restrict&redirect=".$actualurl);
 
 	}
 
-	if( isset($_SESSION['estabelecimento']['logged']) != "1" ) {
+	if( $_SESSION['estabelecimento']['logged'] != "1" ) {
 
 		header("Location: ".get_just_url()."/login?msg=restrict&redirect=".$actualurl);
 
 	}
 
-	if( isset($_SESSION['estabelecimento']['status_force']) == "1" ) {
+	if( $_SESSION['estabelecimento']['status_force'] == "1" ) {
 
 		header("Location: ".get_just_url()."/painel/inativo");
 
 	}
 
-	if( isset($_SESSION['estabelecimento']['excluded']) == "1" ) {
+	if( $_SESSION['estabelecimento']['excluded'] == "1" ) {
 
 		header("Location: ".get_just_url()."/painel/configuracoes/reativacao");
 
@@ -1045,9 +1042,8 @@ function contratar_plano( $eid,$plano,$gateway_transaction,$gateway_ref,$gateway
 	// Dados
 
 	$rel_planos_id = $plano;
-	//usar para controle de indicacao
-	//$afiliado = data_info( "planos", $plano, "afiliado" );
-	$afiliado = 1;
+
+	$afiliado = data_info( "planos", $plano, "afiliado" );
 	$rel_estabelecimentos_id = $eid;
 	$rel_estabelecimentos_nome = data_info( "estabelecimentos", $eid, "nome" );
 	$rel_estabelecimentos_subdominio = data_info( "estabelecimentos", $eid, "subdominio" );
@@ -1374,7 +1370,7 @@ function atualiza_estabelecimento( $eid,$mode ) {
 		WHERE id = '$eid'
 	");
 
-	if( isset($_SESSION['estabelecimento']['id']) == $eid ) {
+	if( $_SESSION['estabelecimento']['id'] == $eid ) {
 
 		$_SESSION['estabelecimento']['funcionalidade_marketplace'] = $funcionalidade_marketplace;
 		$_SESSION['estabelecimento']['funcionalidade_variacao'] = $funcionalidade_variacao;
@@ -1583,7 +1579,7 @@ function aplicar_voucher( $eid,$voucher ) {
 
 }
 
-function aplicar_plano( $eid, $plano) {
+function aplicar_plano( $eid,$plano ) {
 
 	global $db_con;
 	global $_SESSION;
@@ -1716,7 +1712,7 @@ function consulta_pagamento( $gateway_ref ) {
 	$dados = json_decode($res,1);
 	// print("<pre>".print_r($dados,true)."</pre>");
 
-	if( isset($dados['elements'][0]) ) {
+	if( isse($dados['elements'][0]) ) {
 		$consulta = $dados['elements'][0];
 		$retorno['gateway_ref'] = $consulta['external_reference'];
 		$retorno['status'] = $consulta['order_status'];
