@@ -15,9 +15,9 @@ include('../_layout/top.php');
 include('../_layout/sidebars.php');
 include('../_layout/modal.php');
 
-$acao = $_GET['acao'];
+$acao = isset($_GET['acao']);
 $eid = $_SESSION['estabelecimento']['id'];
-$id = mysqli_real_escape_string( $db_con, $_GET['id'] );
+$id = mysqli_real_escape_string( $db_con, isset($_GET['id']) );
 
 if( $acao == "remover" ) {
 
