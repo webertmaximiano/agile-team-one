@@ -19,9 +19,6 @@ if( isset($_SESSION['user']['logged']) == "1" ) {
 	}
 
 }
-//variaveis
-$email = '';
-$pass = '';
 ?>
 
 <!DOCTYPE html>
@@ -77,22 +74,13 @@ if ("serviceWorker" in navigator) {
 		// if( !$redirect ) {
 		// 	$redirect = $_SERVER['HTTP_REFERER'];
 		// }
-		if(isset($_POST['email'])){
-			$email = strtolower( mysqli_real_escape_string( $db_con, $_POST['email']) );
-		}
-		
-		if(isset($_POST['pass'])) {
-			$pass = mysqli_real_escape_string( $db_con, $_POST['pass']);
-		}
-		
-		if (isset($_POST['keepalive'])){
-			$keepalive = mysqli_real_escape_string( $db_con, $_POST['keepalive']);
-		}
+		$email = strtolower( mysqli_real_escape_string( $db_con, isset($_POST['email']) ) );
+		$pass = mysqli_real_escape_string( $db_con, isset($_POST['pass']) );
+		$keepalive = mysqli_real_escape_string( $db_con, isset($_POST['keepalive']) );
 
 		if( !$keepalive ) {
 			$keepalive = 0;
 		}
-		
 		$method = "login";
 
 		if( notnull($email) && notnull($pass) ) {
@@ -189,7 +177,7 @@ if ("serviceWorker" in navigator) {
 														<div class="form-field form-field-icon form-field-text">
 
 															<i class="form-icon lni lni-user"></i>
-															<input type="text" name="email" placeholder="E-mail" value="<?php echo htmlclean( isset($_GET['email']) ); ?>"/>
+															<input type="text" name="email" placeholder="E-mail" value="<?php echo htmlclean( $_GET['email'] ); ?>"/>
 
 														</div>
 

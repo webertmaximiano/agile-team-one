@@ -47,7 +47,7 @@ include('../../_layout/modal.php');
         $errormessage[] = "As senhas não coincidem";
       }
 
-      if( hash( 'sha256', $pass ) != data_info("users",$uid,"password") ) {
+      if( md5( $pass ) != data_info("users",$uid,"password") ) {
         $checkerrors++;
         $errormessage[] = "A senha é inválida";
       }
