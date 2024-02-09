@@ -80,7 +80,7 @@ $eid = $_SESSION['estabelecimento']['id'];
 
 <?php } ?>
 
-<?php if( $_GET['msg'] == "erro" ) { ?>
+<?php if( isset($_GET['msg']) == "erro" ) { ?>
 
 <?php modal_alerta("Erro ao tentar realizar ação, tente novamente mais tarde!","erro"); ?>
 
