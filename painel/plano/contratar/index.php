@@ -169,7 +169,7 @@ if ($formdata) {
                         ],
                     ],
                     "payment_methods" => [
-                        "excluded_payment_methods" => [[]],
+                        "excluded_payment_methods" => [],
                         "excluded_payment_types" => [["id" => "ticket"]],
                         "installments" => $assinatura_parcelas,
                     ],
