@@ -176,13 +176,10 @@ function notnull($a) {
 function random_key($a) {
 
 	$size = $a;
-
 	$chars[1] = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','x','y','z');
-
 	$chars[2] = array('0','1','2','3','4','5','6','7','8','9');
 
 	$value = null;
-
 	while( strlen($value) != $size ) {
 
 		$rand1 = rand(1,2);
@@ -197,8 +194,7 @@ function random_key($a) {
 
 		}
 
-		$value .= $chars[ $rand1 ][ rand(0,$rand2) ];
-
+		$value .= isset($chars[ $rand1 ][ rand(0,$rand2) ]);
 	}
 
 	return $value;

@@ -169,7 +169,8 @@
 
 		$edit = mysqli_query( $db_con, "SELECT $info FROM $table WHERE id = '$id' LIMIT 1");
 		$data = mysqli_fetch_array( $edit );
-		return isset($data[$info]);
+		
+		return $data[$info];
 
 	}
 

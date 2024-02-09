@@ -22,10 +22,10 @@ $eid = $_SESSION['estabelecimento']['id'];
 
 // Variables
 
-$estabelecimento = mysqli_real_escape_string( $db_con, $_GET['estabelecimento_id'] );
-$numero = mysqli_real_escape_string( $db_con, $_GET['numero'] );
-$nome = mysqli_real_escape_string( $db_con, $_GET['nome'] );
-$status = mysqli_real_escape_string( $db_con, $_GET['status'] );
+$estabelecimento = mysqli_real_escape_string( $db_con, isset($_GET['estabelecimento_id']) );
+$numero = mysqli_real_escape_string( $db_con, isset($_GET['numero']) );
+$nome = mysqli_real_escape_string( $db_con, isset($_GET['nome']) );
+$status = mysqli_real_escape_string( $db_con, isset($_GET['status']) );
 
 $getdata = "";
 
@@ -38,7 +38,7 @@ foreach($_GET as $query_string_variable => $value) {
 // Config
 
 $limite = 20;
-$pagina = $_GET["pagina"] == "" ? 1 : $_GET["pagina"];
+$pagina = isset($_GET["pagina"]) == "" ? 1 : isset($_GET["pagina"]);
 $inicio = ($pagina * $limite) - $limite;
 
 // Query inicia vazia para evitar erros

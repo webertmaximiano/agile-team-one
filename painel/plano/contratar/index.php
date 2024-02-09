@@ -72,7 +72,7 @@ $formdata = isset($_POST["formdata"]);
 if ($formdata) {
     // Setar campos
 
-    $termos = mysqli_real_escape_string($db_con, $_POST["termos"]);
+    $termos = mysqli_real_escape_string($db_con, isset($_POST["termos"]));
 
     // Checar Erros
 
@@ -188,17 +188,7 @@ if ($formdata) {
 
             if (isset($obj->id)) {
                 if ($obj->id != null) {
-                  /*
-                    if (isset($card)) {
-                        $preference_id = $obj->id;
-                    } else {
-                        $link_externo = $obj->init_point;
-                        $external_reference = $obj->external_reference;
-
-                        echo "<h3>{$assinatura_valor} #{$external_reference}</h3> <br />";
-                        echo "<a href='{$link_externo}' target='_blank' >Link externo</a>";
-                    } 
-                   */
+                 
                   // Setar gateway
                   //Numero do Pedido
                   $gateway_ref = $obj->external_reference;
@@ -216,8 +206,8 @@ if ($formdata) {
                   //print("<pre>".print_r($obj,true)."</pre>");
 
                   if( $gateway_link ) {
-
-                    if( contratar_plano( $eid,$id,$gateway_transaction,$gateway_ref,$gateway_link ) ) {
+                    
+                    if( contratar_plano( $eid, $id, $gateway_transaction,$gateway_ref,$gateway_link ) ) {
           
                       unset( $_POST );
                       header("Location: ".$gateway_link);
