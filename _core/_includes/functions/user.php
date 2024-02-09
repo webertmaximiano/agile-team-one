@@ -92,23 +92,26 @@ function make_login( $email, $pass, $method, $keepalive ) {
 
 				$query2 = mysqli_query( $db_con, "SELECT * FROM estabelecimentos WHERE( rel_users_id = '$uid' ) LIMIT 1");
 				$data2 = mysqli_fetch_array( $query2 );
-				
-				$_SESSION['estabelecimento']['id'] = $data2['id'];
-				$_SESSION['estabelecimento']['avatar'] = $data2['avatar'];
-				$_SESSION['estabelecimento']['perfil'] = $data2['perfil'];
-				$_SESSION['estabelecimento']['nome'] = $data2['nome'];
-				$_SESSION['estabelecimento']['subdominio'] = $data2['subdominio'];
-				$_SESSION['estabelecimento']['logged'] = 1;
-				$_SESSION['estabelecimento']['level'] = $data['level'];
-				$_SESSION['estabelecimento']['funcionalidade_marketplace'] = $data2['funcionalidade_marketplace'];
-				$_SESSION['estabelecimento']['funcionalidade_banners'] = $data2['funcionalidade_banners'];
-				$_SESSION['estabelecimento']['funcionalidade_variacao'] = $data2['funcionalidade_variacao'];
-				$_SESSION['estabelecimento']['status'] = $data2['status'];
-				$_SESSION['estabelecimento']['status_force'] = $data2['status_force'];
-				$_SESSION['estabelecimento']['excluded'] = $data2['excluded'];
-				$_SESSION['estabelecimento']['expiracao'] = $data2['expiracao'];
-				atualiza_estabelecimento( $data2['id'], "online" );
+				if (isset($data2)){
 
+					$_SESSION['estabelecimento']['id'] = $data2['id'];
+					$_SESSION['estabelecimento']['avatar'] = $data2['avatar'];
+					$_SESSION['estabelecimento']['perfil'] = $data2['perfil'];
+					$_SESSION['estabelecimento']['nome'] = $data2['nome'];
+					$_SESSION['estabelecimento']['subdominio'] = $data2['subdominio'];
+					$_SESSION['estabelecimento']['logged'] = 1;
+					$_SESSION['estabelecimento']['level'] = $data['level'];
+					$_SESSION['estabelecimento']['funcionalidade_marketplace'] = $data2['funcionalidade_marketplace'];
+					$_SESSION['estabelecimento']['funcionalidade_banners'] = $data2['funcionalidade_banners'];
+					$_SESSION['estabelecimento']['funcionalidade_variacao'] = $data2['funcionalidade_variacao'];
+					$_SESSION['estabelecimento']['status'] = $data2['status'];
+					$_SESSION['estabelecimento']['status_force'] = $data2['status_force'];
+					$_SESSION['estabelecimento']['excluded'] = $data2['excluded'];
+					$_SESSION['estabelecimento']['expiracao'] = $data2['expiracao'];
+					atualiza_estabelecimento( $data2['id'], "online" );
+
+				}
+				
 			}
 
 		// Ultimo login

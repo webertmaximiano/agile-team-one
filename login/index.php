@@ -8,7 +8,7 @@ $seo_keywords = "";
 // HEADER
 $system_header = "";
 // CHECK LOGGED
-if( $_SESSION['user']['logged'] == "1" ) {
+if( isset($_SESSION['user']['logged']) == "1" ) {
 
 	if( $_SESSION['user']['level'] == "1" ) {
 		header("Location: ../administracao/inicio");

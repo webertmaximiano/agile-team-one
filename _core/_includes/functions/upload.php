@@ -606,10 +606,15 @@ function thumber( $img,$width ) {
   $width = "512";
 
   $thumb = explode( ".",$img );
-  $thumb_name = $thumb[0]."_thumb";
-  $thumb_extension = $thumb[1];
-  $thumb = $thumb_name.".".$thumb_extension;
-  $file = $uploadpath.$thumb;
+  if (isset($thumb)) {
+   $thumb_name = $thumb[0]."_thumb";
+   $thumb_extension = $thumb[1];
+   $thumb = $thumb_name.".".$thumb_extension;
+   $file = $uploadpath.$thumb;
+  }
+  
+  
+  
 
   if( file_exists($file) ) {
     $thumburl = $thumb;

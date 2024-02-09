@@ -4,10 +4,13 @@ include('../../_core/_includes/config.php');
 $id = mysqli_real_escape_string( $db_con, $_GET['id'] );
 $define_query = mysqli_query( $db_con, "SELECT cor FROM estabelecimentos WHERE id = '$id' LIMIT 1");
 $define_data = mysqli_fetch_array( $define_query );
-$cor = $define_data['cor'];
-if( !$cor ) {
+if (isset($define_data['cor'])) {
+	$cor = $define_data['cor'];
+
+} else {
 	$cor = "#27293E";
 }
+
 ?>
 
 .naver {
