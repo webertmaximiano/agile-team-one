@@ -177,7 +177,7 @@ if ("serviceWorker" in navigator) {
 														<div class="form-field form-field-icon form-field-text">
 
 															<i class="form-icon lni lni-user"></i>
-															<input type="text" name="email" placeholder="E-mail" value="<?php echo htmlclean( $_GET['email'] ); ?>"/>
+															<input type="text" name="email" placeholder="E-mail" value="<?php echo htmlclean( isset($_GET['email']) ); ?>"/>
 
 														</div>
 
