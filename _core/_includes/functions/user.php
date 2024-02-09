@@ -1371,7 +1371,7 @@ function atualiza_estabelecimento( $eid,$mode ) {
 		WHERE id = '$eid'
 	");
 
-	if( $_SESSION['estabelecimento']['id'] == $eid ) {
+	if( isset($_SESSION['estabelecimento']['id']) == $eid ) {
 
 		$_SESSION['estabelecimento']['funcionalidade_marketplace'] = $funcionalidade_marketplace;
 		$_SESSION['estabelecimento']['funcionalidade_variacao'] = $funcionalidade_variacao;

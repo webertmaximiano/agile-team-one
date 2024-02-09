@@ -434,10 +434,10 @@ if ($formdata) {
       <?php } ?>
 
     </div>
-    <!-- Se obter uma preference id renderiza o checkout pro-->
-    <?php if ($preference_id) { ?>
+    <!-- Se obter uma preference id renderiza o checkout pro
+    <?php //if ($preference_id) { ?>
       <div id="wallet_container">
-    <?php } ?>
+    <?php //} ?>
     <script>
       const mp = new MercadoPago($mp_public_key, {
         locale: 'pt-BR'
@@ -449,6 +449,7 @@ if ($formdata) {
         },
       });
   </script>
+  -->
     <!-- / Content -->
 
   </div>
