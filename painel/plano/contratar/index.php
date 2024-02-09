@@ -41,13 +41,22 @@ global $gallery_max_files;
 
 $preference_id = '';
 
-$voucher = mysqli_real_escape_string($db_con, isset($_GET["voucher"]));
+//se in informar um voucher isset($_GET["voucher"])
+$codigo_voucher = isset($_GET["voucher"]);
+if ($codigo_voucher ){
+  //verifica e trata o codigo enviado evitando sql inject
+  $voucher = mysqli_real_escape_string($db_con, $codigo_voucher );
+  //resultado da consulta no Banco pelo voucher 
+  $voucher_query = mysqli_query(
+      $db_con,
+      "SELECT * FROM vouchers WHERE codigo = '$voucher' AND status = '1' LIMIT 1"
+  );
+  // define se exite ou nao o voucher se retornar uma linha 
+  $has_voucher = mysqli_num_rows($voucher_query) > 0;
 
-$voucher_query = mysqli_query(
-    $db_con,
-    "SELECT * FROM vouchers WHERE codigo = '$voucher' AND status = '1' LIMIT 1"
-);
-$has_voucher = mysqli_num_rows($voucher_query);
+}
+
+
 $data_voucher = mysqli_fetch_array($voucher_query);
 
 if ($has_voucher) {
