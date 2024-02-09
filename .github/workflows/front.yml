@@ -2,7 +2,7 @@ on:
   push:
     branches: front
 
-name: 🚀 Deploy Estou On push Front
+name: 🚀 Deploy Front push Front
 jobs:
   web-deploy:
     name: 🎉 Deploy
