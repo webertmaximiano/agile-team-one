@@ -268,7 +268,7 @@ if ($formdata) {
             <span>/</span>
             <a href="<?php panel_url(); ?>/plano">Planos</a>
             <span>/</span>
-            <a href="<?php panel_url(); ?>/plano/contratar?id=<?php echo $id; ?>&voucher=<?php echo isset($voucher); ?>">Plano</a>
+            <a href="<?php panel_url(); ?>/plano/contratar?id=<?php echo isset($id); ?>&voucher=<?php echo isset($voucher); ?>">Plano</a>
           </div>
         </div>
         
@@ -280,7 +280,7 @@ if ($formdata) {
 
     <div class="data box-white mt-16">
 
-      <?php if ($hasdata) { ?>
+      <?php if (isset($hasdata)) { ?>
 
       <form id="the_form" class="form-default" method="POST" enctype="multipart/form-data">
 
