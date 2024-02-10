@@ -180,7 +180,7 @@ function random_key($a) {
 	$chars[2] = array('0','1','2','3','4','5','6','7','8','9');
 
 	$value = null;
-	while( strlen($value) != $size ) {
+	while( (strlen($value)) != $size ) {
 
 		$rand1 = rand(1,2);
 
