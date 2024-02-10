@@ -42,10 +42,10 @@ global $numeric_data;
 global $gallery_max_files;
 $has_voucher = '';
 
+var_dump($_GET);
 
 //se in informar um voucher isset($_GET["voucher"])
-$codigo_voucher = isset($_GET["voucher"]);
-if ($codigo_voucher ){
+if (isset($_GET["voucher"]) ){
   
   //verifica e trata o codigo enviado evitando sql inject
   $voucher = mysqli_real_escape_string($db_con, $_GET["voucher"] );
