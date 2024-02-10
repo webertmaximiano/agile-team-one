@@ -1,6 +1,12 @@
 <?php
 // CORE
 include "../../../_core/_includes/config.php";
+include "../../../vendor/autoload.php";
+
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Exceptions\MPApiException;
+
 // RESTRICT
 restrict_estabelecimento();
 // SEO
@@ -28,11 +34,7 @@ global $external_token;
 
 $preference_id = '';
 
-require_once "../../../vendor/autoload.php";
 
-use MercadoPago\MercadoPagoConfig;
-use MercadoPago\Client\Preference\PreferenceClient;
-use MercadoPago\Exceptions\MPApiException;
 ?>
 
 <?php
@@ -161,6 +163,68 @@ if ($formdata) {
             $assinatura_valor = ($data["valor_total"]);
             $assinatura_parcelas = intval($data["duracao_meses"]);
             
+            //usando SDK
+            //configura o SDK com token do vendedor
+            MercadoPagoConfig::setAccessToken($mp_acess_token);
+            //inicia o objeto com a classe que fornece o metodo para criar a preferencia
+            $client = new PreferenceClient();
+            //cria um array com as informacoes exigidas pelo Mercado Pago para criar uma Preferencia
+            $createRequest = [
+                "payer" => [
+                  "name" => $nome_cliente,
+                  "email" => $email_cliente,
+                ],
+                "back_urls" => [
+                    "success" =>
+                        get_just_url() . "/painel/plano?msg=obrigado",
+                    "pending" =>
+                        get_just_url() . "/painel/plano?msg=obrigado",
+                    "failure" => get_just_url() . "/painel/plano?msg=erro",
+                ],
+                "external_reference" => $transaction_ref,
+                "notification_url" =>
+                    get_just_url() .
+                    "/postback.php?token=" .
+                    $external_token,
+                "auto_return" => "approved",
+                "items" => [
+                    [
+                        "id" => $assinatura_id,
+                        "title" => $assinatura_nome,
+                        //"description" => "Dummy description",
+                        //"picture_url" => "http://www.myapp.com/myimage.jpg",
+                        //"category_id" => "car_electronics",
+                        "quantity" => 1,
+                        "currency_id" => "BRL",
+                        "unit_price" => floatval($assinatura_valor),
+                    ],
+                ],
+                "payment_methods" => [
+                    "excluded_payment_methods" => [],
+                    "excluded_payment_types" => [["id" => "ticket"]],
+                    "installments" => $assinatura_parcelas,
+                ],
+                "statement_descriptor" => "Assinatura Estou On"
+            ];
+            // chama o metodo responsavel por criar a preferencia e passa o array com as informacoes.
+            $preference = $client->create($createRequest); //ok
+
+            if ($preference->id) {
+              $gateway_ref = $preference->external_reference; //ok
+              $gateway_transaction = $preference->id; //ok
+          
+              if( $mp_sandbox == true ) {
+                $gateway_link = $preference->sandbox_init_point;
+              } else {
+                $gateway_link = $preference->init_point;
+              }
+          
+            }
+
+   //         var_dump($gateway_link);
+            //print("<pre>".print_r($preference,true)."</pre>");
+            //var_dump($preference );
+/*
             // inicia a chamada pra API do Mercado Pago criando a preferencia
             $curl = curl_init();
 
@@ -208,6 +272,7 @@ if ($formdata) {
                         "excluded_payment_types" => [["id" => "ticket"]],
                         "installments" => $assinatura_parcelas,
                     ],
+                    "statement_descriptor" => "Assinatura Estou On"
                 ]),
                 CURLOPT_HTTPHEADER => [
                     // Headers da requisição
@@ -218,7 +283,7 @@ if ($formdata) {
             $response = curl_exec($curl); //ok
              //var_dump($response);
             curl_close($curl); //fecha a conexao
-            
+           
             //converte a resposta JSON em um objeto
             $obj = json_decode($response);
             //se exitir um objeto a resposta foi convertida com sucesso
@@ -237,7 +302,7 @@ if ($formdata) {
                   } else {
                     $gateway_link = $obj->init_point;
                   }
-                
+*/                 
                   //ver retorno chegando
                   //print("<pre>".print_r($obj,true)."</pre>");
 
@@ -263,8 +328,8 @@ if ($formdata) {
                 }
             }
         }
-    }
-}
+//    }
+//}
 
 ?>
 
@@ -470,22 +535,7 @@ if ($formdata) {
       <?php } ?>
 
     </div>
-    <!-- Se obter uma preference id renderiza o checkout pro
-    <?php //if ($preference_id) { ?>
-      <div id="wallet_container">
-    <?php //} ?>
-    <script>
-      const mp = new MercadoPago($mp_public_key, {
-        locale: 'pt-BR'
-      });
-
-      mp.bricks().create("wallet", "wallet_container", {
-        initialization: {
-            preferenceId: $preference_id,
-        },
-      });
-  </script>
-  -->
+    
     <!-- / Content -->
 
   </div>
@@ -501,17 +551,13 @@ include "../../_layout/rdp.php";
 include "../../_layout/footer.php";
 ?>
 
-
 <script>
-  const mp = new MercadoPago($mp_public_key);
-</script>
-
-<script>
+    console.log('public_key', $mp_public_key )
 
 $(document).ready( function() {
           
     // Globais
-
+    var mp = new MercadoPago($mp_public_key);
     var form = $("#the_form");
     form.validate({
         focusInvalid: true,
