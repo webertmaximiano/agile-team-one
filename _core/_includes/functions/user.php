@@ -1038,12 +1038,16 @@ function contratar_plano( $eid,$plano,$gateway_transaction,$gateway_ref,$gateway
 
 	global $db_con;
 	global $_SESSION;
-
+	global $afiliado;
 	// Dados
 
 	$rel_planos_id = $plano;
-
-	$afiliado = data_info( "planos", $plano, "afiliado" );
+	//quem id de quem indicou o plano
+	//data_info() e uma funcao que consulta dados de uma tabela, ela pede o nome da tabela, o id (linha), e a coluna
+	$afiliado = data_info( "planos", $plano, "afiliado" ); // aqui e o problema afiliado e null e por isso gerou erro
+	if(!$afiliado) {
+		$afiliado = 1;
+	}
 	$rel_estabelecimentos_id = $eid;
 	$rel_estabelecimentos_nome = data_info( "estabelecimentos", $eid, "nome" );
 	$rel_estabelecimentos_subdominio = data_info( "estabelecimentos", $eid, "subdominio" );

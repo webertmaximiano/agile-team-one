@@ -41,6 +41,8 @@ use MercadoPago\Exceptions\MPApiException;
 global $numeric_data;
 global $gallery_max_files;
 $has_voucher = '';
+//pega o ID do estabelecimento logado
+$eid = $_SESSION["estabelecimento"]["id"];
 
 //se in informar um voucher isset($_GET["voucher"])
 if (isset($_GET["voucher"]) ){
@@ -72,9 +74,7 @@ if (isset($_GET["voucher"]) ){
 if (isset($_GET["plano"])){
   // id do Plano
   $id = mysqli_real_escape_string($db_con, $_GET["plano"]);
-  //pega o ID do estabelecimento logado
-  $eid = $_SESSION["estabelecimento"]["id"];
-
+  
   //acao de editar o estabelecimento
   $edit = mysqli_query(
     $db_con,
@@ -82,15 +82,12 @@ if (isset($_GET["plano"])){
   );
 
   $hasdata = mysqli_num_rows($edit);
-    
+  //dados da consulta do plano  array data
   $data = mysqli_fetch_array($edit);
-  //var_dump($data); //visualizar conteudo de array e variavel
-
 }
 
 
-// Checar se formulário foi executado
-
+// Checar se formulário foi executado. inicia novo fluxo apos acionar o botao
 $formdata = isset($_POST["formdata"]);
 
 if ($formdata) {
@@ -129,13 +126,25 @@ if ($formdata) {
             }
            // se nao tiver voucher executa o mercado pago 
         } else {
-            $eid = $_SESSION["estabelecimento"]["id"];
+            //busca os dados do estabelecimento para usar no mercado pago
             $define_query = mysqli_query(
                 $db_con,
-                "SELECT email FROM estabelecimentos WHERE id = '$eid' LIMIT 1"
+                "SELECT
+                estabelecimentos.id,
+                estabelecimentos.email,
+                estabelecimentos.nome,
+                estabelecimentos.rel_users_id,
+                users.nome AS nome_usuario
+                FROM estabelecimentos
+                INNER JOIN users ON estabelecimentos.rel_users_id = users.id
+                WHERE estabelecimentos.id = $eid"
             );
-            $define_data = mysqli_fetch_array($define_query);
-            $email_cliente = $define_data["email"];
+
+            //armazenar a consulta no array //dados do usuario e do seu estabelecimento para 0 mercado pago
+            $data_payer = mysqli_fetch_array($define_query);
+            //passar os dados do array pra variavel
+            $nome_cliente = $data_payer["nome_usuario"];
+            $email_cliente = $data_payer["email"];
 
             $transaction_ref =
                 "REF-" .
@@ -144,13 +153,15 @@ if ($formdata) {
                 date("dmYHis") .
                 "-" .
                 random_key(4);
+            
 
-            // Executar compra
+            // dados do array da consulta do plano Linha 86
             $assinatura_id = $data["id"];
             $assinatura_nome = $data["nome"] . " - " . $seo_title;
-            $assinatura_valor = $data["valor_total"];
+            $assinatura_valor = ($data["valor_total"]);
             $assinatura_parcelas = intval($data["duracao_meses"]);
-
+            
+            // inicia a chamada pra API do Mercado Pago criando a preferencia
             $curl = curl_init();
 
             curl_setopt_array($curl, [
@@ -164,6 +175,7 @@ if ($formdata) {
                 CURLOPT_CUSTOMREQUEST => "POST",
                 CURLOPT_POSTFIELDS => json_encode([
                     "payer" => [
+                      "nome" => $nome_cliente,
                       "email" => $email_cliente,
                     ],
                     "back_urls" => [
@@ -203,35 +215,36 @@ if ($formdata) {
                     "Authorization: Bearer " . $mp_acess_token,
                 ],
             ]);
-            $response = curl_exec($curl);
+            $response = curl_exec($curl); //ok
              //var_dump($response);
-            curl_close($curl);
-
+            curl_close($curl); //fecha a conexao
+            
+            //converte a resposta JSON em um objeto
             $obj = json_decode($response);
-
-            if (isset($obj->id)) {
+            //se exitir um objeto a resposta foi convertida com sucesso
+            if (isset($obj)) {
+                //se o id do objeto da preferencia for diferente de nulo ou vazio
                 if ($obj->id != null) {
-                 
                   // Setar gateway
                   //Numero do Pedido
                   $gateway_ref = $obj->external_reference;
                   //numero da referencia criada
                   $gateway_transaction = $obj->id;
-                  
+
                   //Link de Pagamento de acordo com a configuracao teste ou producao
                   if( $mp_sandbox == true ) {
                     $gateway_link = $obj->sandbox_init_point;
                   } else {
                     $gateway_link = $obj->init_point;
                   }
-
-                  //ver retorno
+                
+                  //ver retorno chegando
                   //print("<pre>".print_r($obj,true)."</pre>");
 
                   if( $gateway_link ) {
-                    
-                    if( contratar_plano( $eid, $id, $gateway_transaction,$gateway_ref,$gateway_link ) ) {
-          
+                    //chama a funcao pra contratar um plano e se retornar true, encerra o post e redireciona para o mercado pago
+                    if( contratar_plano( $eid, $id, $gateway_transaction, $gateway_ref, $gateway_link ) ) {
+
                       unset( $_POST );
                       header("Location: ".$gateway_link);
           
