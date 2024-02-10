@@ -41,8 +41,7 @@ use MercadoPago\Exceptions\MPApiException;
 global $numeric_data;
 global $gallery_max_files;
 $has_voucher = '';
-$id = isset($_GET["plano"]);
-//var_dump('<pre>' .$id .'</pre>');
+
 //se in informar um voucher isset($_GET["voucher"])
 if (isset($_GET["voucher"]) ){
   
@@ -63,10 +62,16 @@ if (isset($_GET["voucher"]) ){
   //se existi pega o ID do plano do voucher informado
   if ($has_voucher) {
     $id = $data_voucher["rel_planos_id"];
-  } else {
-      $id = mysqli_real_escape_string($db_con, isset($_GET["plano"]));
-  }
+  } 
 
+  //print("<pre>".print_r($data)."</pre>"); //use quando precisa ver conteudo de variavel
+
+}
+
+//fluxo sem voucher = plano=id
+if (isset($_GET["plano"])){
+  // id do Plano
+  $id = mysqli_real_escape_string($db_con, $_GET["plano"]);
   //pega o ID do estabelecimento logado
   $eid = $_SESSION["estabelecimento"]["id"];
 
@@ -77,10 +82,12 @@ if (isset($_GET["voucher"]) ){
   );
 
   $hasdata = mysqli_num_rows($edit);
+    
   $data = mysqli_fetch_array($edit);
-  //print("<pre>".print_r($data)."</pre>");
+  //var_dump($data); //visualizar conteudo de array e variavel
 
 }
+
 
 // Checar se formulário foi executado
 

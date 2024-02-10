@@ -116,7 +116,7 @@ function make_login( $email, $pass, $method, $keepalive ) {
 		$last_login = date('Y-m-d H:i:s');
 		$nome = $data['nome'];
 		$lid = "";
-		if( $data2['rel_lojas_id'] ) {
+		if( isset($data2['rel_lojas_id']) ) {
 			$lid = $data2['rel_lojas_id'];
 		}
 
@@ -1235,10 +1235,11 @@ function remover_assinatura( $id ) {
 }
 
 
-function change_assinatura_status( $reference,$status ) {
+function change_assinatura_status( $reference, $status ) {
 
 	global $db_con;
 
+	$transaction = isset($transaction);
 	// Aguardando
 	if( $status == "payment_required" OR $status == "payment_in_process" ) {
 		$status_pagamento = "0";
@@ -1260,7 +1261,7 @@ function change_assinatura_status( $reference,$status ) {
 		$hasdata = mysqli_num_rows( $edit );
 		$data = mysqli_fetch_array( $edit );
 		if( $hasdata ) {
-			$eid = $data['rel_estabelecimentos_id'];
+			$eid = isset($data['rel_estabelecimentos_id']);
 			mysqli_query( $db_con," UPDATE assinaturas SET gateway_payment='$status',status='$status_pagamento',gateway_transaction = '$transaction' WHERE gateway_ref = '$reference' ");
 			atualiza_estabelecimento( $eid, "offline" );
 		}
@@ -1268,7 +1269,7 @@ function change_assinatura_status( $reference,$status ) {
 	}
 
 }
-
+//permi
 function atualiza_estabelecimento( $eid,$mode ) {
 
 	global $db_con;
@@ -1370,7 +1371,7 @@ function atualiza_estabelecimento( $eid,$mode ) {
 		WHERE id = '$eid'
 	");
 
-	if( $_SESSION['estabelecimento']['id'] == $eid ) {
+	if( isset($_SESSION['estabelecimento']['id']) == $eid ) {
 
 		$_SESSION['estabelecimento']['funcionalidade_marketplace'] = $funcionalidade_marketplace;
 		$_SESSION['estabelecimento']['funcionalidade_variacao'] = $funcionalidade_variacao;
