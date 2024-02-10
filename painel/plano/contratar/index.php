@@ -145,8 +145,10 @@ if ($formdata) {
             //armazenar a consulta no array //dados do usuario e do seu estabelecimento para 0 mercado pago
             $data_payer = mysqli_fetch_array($define_query);
             //passar os dados do array pra variavel
-            $nome_cliente = $data_payer["nome_usuario"];
-            $email_cliente = $data_payer["email"];
+
+            $nome_cliente = $mp_sandbox ? $mp_user_test : $data_payer["nome_usuario"];
+            //operador ternario se config mp_sandbox = true, carrega o email teste, senao carrega o email do usuario
+            $email_cliente = $mp_sandbox ? $mp_email : $data_payer["email"];
 
             $transaction_ref =
                 "REF-" .
