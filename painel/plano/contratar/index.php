@@ -176,6 +176,7 @@ if ($formdata) {
                   "name" => $nome_cliente,
                   "email" => $email_cliente,
                 ],
+                "sandbox" => $mp_sandbox,
                 "back_urls" => [
                     "success" =>
                         get_just_url() . "/painel/plano?msg=obrigado",
