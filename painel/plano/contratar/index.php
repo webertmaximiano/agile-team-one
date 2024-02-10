@@ -41,9 +41,8 @@ use MercadoPago\Exceptions\MPApiException;
 global $numeric_data;
 global $gallery_max_files;
 $has_voucher = '';
-
-var_dump($_GET);
-
+$id = isset($_GET["plano"]);
+//var_dump('<pre>' .$id .'</pre>');
 //se in informar um voucher isset($_GET["voucher"])
 if (isset($_GET["voucher"]) ){
   

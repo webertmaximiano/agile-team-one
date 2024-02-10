@@ -162,7 +162,7 @@ function upload_image( $relpath,$image ) {
 
          if( $file_ext == "jpg" ) {
 
-            if( imagejpeg( $new,$uploadpathfull."/".$new_name ) ) {;
+            if( imagejpeg( $new,$uploadpathfull.$new_name ) ) {;
                $uploadinfo['status'] = "1";
                $uploadinfo['url'] = $uploadpathreturn."/".$new_name;
                return $uploadinfo;

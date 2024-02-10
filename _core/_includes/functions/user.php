@@ -94,7 +94,7 @@ function make_login( $email, $pass, $method, $keepalive ) {
 				$data2 = mysqli_fetch_array( $query2 );
 				
 				$_SESSION['estabelecimento']['id'] = $data2['id'];
-				$_SESSION['estabelecimento']['avatar'] = $data2['avatar'];
+				$_SESSION['estabelecimento']['avatar'] =  isset($data2['avatar']) || '';
 				$_SESSION['estabelecimento']['perfil'] = $data2['perfil'];
 				$_SESSION['estabelecimento']['nome'] = $data2['nome'];
 				$_SESSION['estabelecimento']['subdominio'] = $data2['subdominio'];
