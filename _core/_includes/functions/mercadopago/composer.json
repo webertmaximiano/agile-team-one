@@ -1,5 +1,0 @@
-{
-    "require": {
-        "mercadopago/dx-php": "^1.9"
-    }
-}

@@ -94,7 +94,7 @@ function make_login( $email, $pass, $method, $keepalive ) {
 				$data2 = mysqli_fetch_array( $query2 );
 				
 				$_SESSION['estabelecimento']['id'] = $data2['id'];
-				$_SESSION['estabelecimento']['avatar'] = $data2['avatar'];
+				$_SESSION['estabelecimento']['avatar'] =  isset($data2['avatar']) || '';
 				$_SESSION['estabelecimento']['perfil'] = $data2['perfil'];
 				$_SESSION['estabelecimento']['nome'] = $data2['nome'];
 				$_SESSION['estabelecimento']['subdominio'] = $data2['subdominio'];
@@ -116,7 +116,7 @@ function make_login( $email, $pass, $method, $keepalive ) {
 		$last_login = date('Y-m-d H:i:s');
 		$nome = $data['nome'];
 		$lid = "";
-		if( $data2['rel_lojas_id'] ) {
+		if( isset($data2['rel_lojas_id']) ) {
 			$lid = $data2['rel_lojas_id'];
 		}
 
@@ -1038,12 +1038,16 @@ function contratar_plano( $eid,$plano,$gateway_transaction,$gateway_ref,$gateway
 
 	global $db_con;
 	global $_SESSION;
-
+	global $afiliado;
 	// Dados
 
 	$rel_planos_id = $plano;
-
-	$afiliado = data_info( "planos", $plano, "afiliado" );
+	//quem id de quem indicou o plano
+	//data_info() e uma funcao que consulta dados de uma tabela, ela pede o nome da tabela, o id (linha), e a coluna
+	$afiliado = data_info( "planos", $plano, "afiliado" ); // aqui e o problema afiliado e null e por isso gerou erro
+	if(!$afiliado) {
+		$afiliado = 1;
+	}
 	$rel_estabelecimentos_id = $eid;
 	$rel_estabelecimentos_nome = data_info( "estabelecimentos", $eid, "nome" );
 	$rel_estabelecimentos_subdominio = data_info( "estabelecimentos", $eid, "subdominio" );
@@ -1235,10 +1239,11 @@ function remover_assinatura( $id ) {
 }
 
 
-function change_assinatura_status( $reference,$status ) {
+function change_assinatura_status( $reference, $status ) {
 
 	global $db_con;
 
+	$transaction = isset($transaction);
 	// Aguardando
 	if( $status == "payment_required" OR $status == "payment_in_process" ) {
 		$status_pagamento = "0";
@@ -1260,7 +1265,7 @@ function change_assinatura_status( $reference,$status ) {
 		$hasdata = mysqli_num_rows( $edit );
 		$data = mysqli_fetch_array( $edit );
 		if( $hasdata ) {
-			$eid = $data['rel_estabelecimentos_id'];
+			$eid = isset($data['rel_estabelecimentos_id']);
 			mysqli_query( $db_con," UPDATE assinaturas SET gateway_payment='$status',status='$status_pagamento',gateway_transaction = '$transaction' WHERE gateway_ref = '$reference' ");
 			atualiza_estabelecimento( $eid, "offline" );
 		}
@@ -1268,7 +1273,7 @@ function change_assinatura_status( $reference,$status ) {
 	}
 
 }
-
+//permi
 function atualiza_estabelecimento( $eid,$mode ) {
 
 	global $db_con;
@@ -1358,7 +1363,8 @@ function atualiza_estabelecimento( $eid,$mode ) {
 		$expiracao = "0";
 
 	}
-
+	
+	$limite_produtos = 0;
 	mysqli_query( $db_con, "UPDATE estabelecimentos SET 
 		status = '$status',
 		funcionalidade_marketplace = '$funcionalidade_marketplace', 
@@ -1369,7 +1375,7 @@ function atualiza_estabelecimento( $eid,$mode ) {
 		WHERE id = '$eid'
 	");
 
-	if( $_SESSION['estabelecimento']['id'] == $eid ) {
+	if( isset($_SESSION['estabelecimento']['id']) == $eid ) {
 
 		$_SESSION['estabelecimento']['funcionalidade_marketplace'] = $funcionalidade_marketplace;
 		$_SESSION['estabelecimento']['funcionalidade_variacao'] = $funcionalidade_variacao;
@@ -1711,7 +1717,7 @@ function consulta_pagamento( $gateway_ref ) {
 	$dados = json_decode($res,1);
 	// print("<pre>".print_r($dados,true)."</pre>");
 
-	if( $dados['elements'][0] ) {
+	if( isset($dados['elements'][0]) ) {
 		$consulta = $dados['elements'][0];
 		$retorno['gateway_ref'] = $consulta['external_reference'];
 		$retorno['status'] = $consulta['order_status'];

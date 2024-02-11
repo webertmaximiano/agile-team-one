@@ -19,22 +19,21 @@ include('../../_layout/modal.php');
 <?php
 
   // Globals
-
-  $uid = $_SESSION['user']['id'];
-  $eid = $_SESSION['estabelecimento']['id'];
   global $db_con;
-
+  //usuario
+  $uid = $_SESSION['user']['id'];
+  //estabelecimento
+  $eid = $_SESSION['estabelecimento']['id'];
+ 
   // Checar se formulário foi executado
-
-  $formdata = $_POST['formdata'];
+  $formdata = isset($_POST['formdata']);
 
   if( $formdata ) {
 
     // Setar campos
-
-    $pass = mysqli_real_escape_string( $db_con, $_POST['pass'] );
-    $repass = mysqli_real_escape_string( $db_con, $_POST['repass'] );
-    $termos = mysqli_real_escape_string( $db_con, $_POST['termos'] );
+    $pass = mysqli_real_escape_string( $db_con, isset($_POST['pass']) );
+    $repass = mysqli_real_escape_string( $db_con, isset($_POST['repass']) );
+    $termos = mysqli_real_escape_string( $db_con, isset($_POST['termos']) );
 
     // Checar Erros
 
@@ -115,9 +114,9 @@ include('../../_layout/modal.php');
 
             <div class="col-md-12">
 
-              <?php if( $checkerrors ) { list_errors(); } ?>
+              <?php if( isset($checkerrors) ) { list_errors(); } ?>
 
-              <?php if( $_GET['msg'] == "erro" ) { ?>
+              <?php if( isset($_GET['msg']) == "erro" ) { ?>
 
                 <?php modal_alerta("Erro, tente novamente!","erro"); ?>
 
@@ -198,9 +197,9 @@ include('../../_layout/modal.php');
               <div class="form-field-default">
 
                   <div class="form-field-terms">
-                    <input type="hidden" name="afiliado" value="<?php echo htmlclean( $_GET['afiliado'] ); ?>"/>
+                    <input type="hidden" name="afiliado" value="<?php echo htmlclean( isset($_GET['afiliado']) ); ?>"/>
                     <input type="hidden" name="formdata" value="1"/>
-                    <input type="radio" name="terms" value="1" <?php if( $_POST['terms'] ){ echo 'CHECKED'; }; ?>> Confirmo que desejo reativar meu catálogo
+                    <input type="radio" name="terms" value="1" <?php if( isset($_POST['terms']) ){ echo 'CHECKED'; }; ?>> Confirmo que desejo reativar meu catálogo
                   </div>
 
               </div>

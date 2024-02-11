@@ -10,7 +10,11 @@ $seo_keywords = "";
 // HEADER
 $system_header = "";
 // CHECK LOGGED
+<<<<<<< HEAD
 if( !empty($_SESSION['user']['logged']) == "1" ) {
+=======
+if( isset($_SESSION['user']['logged']) == "1" ) {
+>>>>>>> main
 
 	if( !empty($_SESSION['user']['level']) == "1" ) {
 		header("Location: ../administracao/inicio");
@@ -72,7 +76,11 @@ if ("serviceWorker" in navigator) {
 
 		<?php
 
+<<<<<<< HEAD
 		$redirect = mysqli_real_escape_string( $db_con, isset($_GET['redirect']) );
+=======
+		$redirect = mysqli_real_escape_string( $db_con, ($_GET['redirect']) );
+>>>>>>> main
 		// if( !$redirect ) {
 		// 	$redirect = $_SERVER['HTTP_REFERER'];
 		// }

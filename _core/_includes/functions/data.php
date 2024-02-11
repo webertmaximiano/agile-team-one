@@ -166,11 +166,19 @@
 	function data_info( $table, $id, $info ) {
 
 		global $db_con;
+		//verifica se esta consultando afiliado, se for retorna o usuario master 1 //solucao pra afiliado nul
+		if($info === "afiliado"){
+			return 1;
+		}
+	
+		$edit = mysqli_query($db_con, "SELECT $info FROM $table WHERE id = '$id' LIMIT 1");
+	
+		if ($edit) {
+			$data = mysqli_fetch_assoc($edit);
+			return $data[$info];
+		}
 
-		$edit = mysqli_query( $db_con, "SELECT $info FROM $table WHERE id = '$id' LIMIT 1");
-		$data = mysqli_fetch_array( $edit );
-		return isset($data[$info]);
-
+		return false;
 	}
 
 	function new_user( $level,$nome,$nascimento,$documento_tipo,$documento,$estado,$cidade,$telefone,$email,$pass ) {

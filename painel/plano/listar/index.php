@@ -22,10 +22,10 @@ $eid = $_SESSION['estabelecimento']['id'];
 
 // Variables
 
-$estabelecimento = mysqli_real_escape_string( $db_con, $_GET['estabelecimento_id'] );
-$numero = mysqli_real_escape_string( $db_con, $_GET['numero'] );
-$nome = mysqli_real_escape_string( $db_con, $_GET['nome'] );
-$status = mysqli_real_escape_string( $db_con, $_GET['status'] );
+$estabelecimento = mysqli_real_escape_string( $db_con, isset($_GET['estabelecimento_id']) );
+$numero = mysqli_real_escape_string( $db_con, isset($_GET['numero']) );
+$nome = mysqli_real_escape_string( $db_con, isset($_GET['nome']) );
+$status = mysqli_real_escape_string( $db_con, isset($_GET['status']) );
 
 $getdata = "";
 
@@ -38,10 +38,11 @@ foreach($_GET as $query_string_variable => $value) {
 // Config
 
 $limite = 20;
-$pagina = $_GET["pagina"] == "" ? 1 : $_GET["pagina"];
+$pagina = isset($_GET["pagina"]) == "" ? 1 : isset($_GET["pagina"]);
 $inicio = ($pagina * $limite) - $limite;
 
-// Query
+// Query inicia vazia para evitar erros
+$query = '';
 
 $query .= "SELECT * FROM planos ";
 
@@ -73,19 +74,19 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 
 ?>
 
-<?php if( $_GET['msg'] == "erro" ) { ?>
+<?php if( isset($_GET['msg']) == "erro" ) { ?>
 
 <?php modal_alerta("Erro, tente novamente!","erro"); ?>
 
 <?php } ?>
 
-<?php if( $_GET['msg'] == "sucesso" ) { ?>
+<?php if( isset($_GET['msg']) == "sucesso" ) { ?>
 
 <?php modal_alerta("Ação efetuada com sucesso!","sucesso"); ?>
 
 <?php } ?>
 
-<?php if( $_GET['msg'] == "bemvindo" ) { ?>
+<?php if( isset($_GET['msg']) == "bemvindo" ) { ?>
 
 <?php modal_alerta("Seu catálogo foi criado com sucesso, contrate um plano para poder usufruir de todas as funcionalidades, ou aproveite o seu período de testes!","sucesso"); ?>
 
@@ -208,7 +209,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 									<div class="row">
 										<div class="col-md-9">
 											<div class="form-field-default">
-												<input type="text" name="voucher" placeholder="Código do voucher" value="<?php echo htmlclean( $_GET['voucher'] ); ?>"/>
+												<input type="text" name="voucher" placeholder="Código do voucher" value="<?php echo htmlclean( isset($_GET['voucher']) ); ?>"/>
 											</div>
 										</div>
 										<div class="col-md-3">
