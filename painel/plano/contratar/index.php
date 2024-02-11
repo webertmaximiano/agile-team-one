@@ -332,13 +332,25 @@ if ($formdata) {
             }
         }
 //    }
-//}
+//}<?php echo isset($mp_public_ke); ?>
 
 ?>
 
 <div class="middle minfit bg-gray">
   <div class="container">
-   
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+  
+  <script>
+      const mp = new MercadoPago("<?php echo isset($mp_public_ke); ?>", {
+        locale: 'pt-BR'
+      });
+
+      mp.bricks().create("wallet", "wallet_container", {
+        initialization: {
+            preferenceId: "<?php echo isset($gateway_transaction); ?>",
+        },
+      });
+  </script>
     
     <div class="row">
 
@@ -555,12 +567,10 @@ include "../../_layout/footer.php";
 ?>
 
 <script>
-    console.log('public_key', $mp_public_key )
-
+   
 $(document).ready( function() {
           
     // Globais
-    var mp = new MercadoPago($mp_public_key);
     var form = $("#the_form");
     form.validate({
         focusInvalid: true,

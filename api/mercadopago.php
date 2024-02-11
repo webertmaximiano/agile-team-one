@@ -1,34 +1,18 @@
 <?php
+include('../../vendor/autoload.php');   
 
-function consulta_pagamento( $gateway_ref ) {
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Exceptions\MPApiException;
 
-global $mp_acess_token;
-
-$url = "https://api.mercadopago.com/merchant_orders?";
-$url .= "access_token=".$mp_acess_token;
-$url .= "&external_reference=".$gateway_ref;
-
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url); 
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-$res = curl_exec($ch);
-$dados = json_decode($res,1);
-// print("<pre>".print_r($dados,true)."</pre>");
-
-if( isset($dados['elements'][0]) ) {
-    $consulta = $dados['elements'][0];
-    $retorno['gateway_ref'] = $consulta['external_reference'];
-    $retorno['status'] = $consulta['order_status'];
-    return $retorno;
-} else {
-    return false;
+function authenticate()
+{
+    // Getting the access token from .env file (create your own function)
+    $mpAccessToken = getVariableFromEnv('mercado_pago_access_token');
+    // Set the token the SDK's config
+    MercadoPagoConfig::setAccessToken($mpAccessToken);
+    // (Optional) Set the runtime enviroment to LOCAL if you want to test on localhost
+    // Default value is set to SERVER
+    MercadoPagoConfig::setRuntimeEnviroment(MercadoPagoConfig::LOCAL);
 }
 
-}
-
-function createPreference() {
-    
-}
