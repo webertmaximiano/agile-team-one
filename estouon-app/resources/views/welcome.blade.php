@@ -4,7 +4,32 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <meta name=description content="Crie seu catálogo online de produtos ou serviços com pedidos via WhatsApp. Simples, rápido e integrado com whatsapp, facebook e instagran." />
+        <meta name=keywords content="estouon, app, menu, menu digital, portifoliio, catalogo online, catalogo digital, catalogo online, cardapio online, catalogo via whatsapp, cardapios online, app de cardapio" />
+        <meta name=resource-type content=document />
+        <meta name=revisit-after content=1 />
+        <meta name=distribution content=Global />
+        <meta name=rating content=General />
+        <meta name=author content="EstouOn - Catálogo Online de Produtos e Serviços" />
+        <meta name=language content=pt-br />
+        <meta name=doc-class content=Completed />
+        <meta name=doc-rights content=Public />
+        <meta name=Subject content="Crie seu catálogo online de produtos ou serviços com pedidos via WhatsApp." />
+        <meta name=audience content=all />
+        <meta name=robots content="index,follow" />
+        <meta name=googlebot content=all />
+        <meta name=copyright content="EstouOn- Catálogo Online de Produtos e Serviços" />
+        <meta name=url content="https://ominichanel.dev" />
+        <meta name=audience content=all />
+        <meta name="viewport" content="width=device-width">
+        <meta property="og:url" content="https://ominichanel.dev/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="EstouOn- O seu catálogo Online de produtos e serviços. Crie o seu grátis agora mesmo." />
+        <meta property="og:description" content="Crie seu catálogo online de produtos e serviços com pedidos via WhatsApp. EstouOn!" />
+        <meta property="og:image" content="https://conheca.ominichanel.dev/assets/img/favicon.png" />
+
+
+        <title>EstouOn - Coloque seu Negócio Online!. Crie sua conta!</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
