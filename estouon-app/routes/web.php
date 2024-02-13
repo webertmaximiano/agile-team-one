@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,7 +17,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
+/* rederizar direto sem controller
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -25,13 +27,8 @@ Route::get('/', function () {
     ]);
 });
 */
-Route::get('/', function () {
-    return Inertia::render('Conheca/Index', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
-});
-
+// rota do site - podemos mudar a pagina no metodo index da class 
+Route::get('/', [SiteController::class, 'index'])->name('site');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
