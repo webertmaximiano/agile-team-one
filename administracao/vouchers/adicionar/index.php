@@ -24,7 +24,7 @@ include('../../_layout/modal.php');
 
   // Checar se formulário foi executado
 
-  $formdata = isset($_POST['formdata']);
+  $formdata = $_POST['formdata'];
 
   if( $formdata ) {
 
@@ -55,8 +55,8 @@ include('../../_layout/modal.php');
     // Executar registro
 
     if( !$checkerrors ) {
-
-      if( new_voucher( $plano,$descricao ) ) {
+//ta gerando o voucher errado tudo 11111111111
+      if( new_voucher( $plano, $descricao ) ) {
 
         header("Location: index.php?msg=sucesso");
 
@@ -109,22 +109,20 @@ include('../../_layout/modal.php');
 
             <div class="col-md-12">
 
-              <?php if( isset($checkerrors) ) { list_errors(); } ?>
+              <?php if( $checkerrors ) { list_errors(); } ?>
 
-              <?php if( isset($_GET['msg'])) { ?>
+              <?php if( $_GET['msg'] == "erro" ) { ?>
 
-                <?php if( $_GET['msg'] == "erro" ) { ?>
+                <?php modal_alerta("Erro, tente novamente!","erro"); ?>
 
-                  <?php modal_alerta("Erro, tente novamente!","erro"); ?>
-
-                <?php } ?>
-
-                <?php if( $_GET['msg'] == "sucesso" ) { ?>
-
-                  <?php modal_alerta("Cadastro efetuado com sucesso!","sucesso"); ?>
-
-                <?php } ?>
               <?php } ?>
+
+              <?php if( $_GET['msg'] == "sucesso" ) { ?>
+
+                <?php modal_alerta("Cadastro efetuado com sucesso!","sucesso"); ?>
+
+              <?php } ?>
+
             </div>
 
           </div>
@@ -146,7 +144,7 @@ include('../../_layout/modal.php');
                       while( $quickdata = mysqli_fetch_array( $quicksql ) ) {
                       ?>
 
-                      <option <?php if( isset($_POST['plano']) == $quickdata['id'] ) { echo "SELECTED"; }; ?> value="<?php echo $quickdata['id']; ?>"><?php echo $quickdata['nome']; ?></option>
+                      <option <?php if( $_POST['plano'] == $quickdata['id'] ) { echo "SELECTED"; }; ?> value="<?php echo $quickdata['id']; ?>"><?php echo $quickdata['nome']; ?></option>
 
                       <?php } ?>
 
@@ -166,7 +164,7 @@ include('../../_layout/modal.php');
               <div class="form-field-default">
 
                   <label>Descrição:</label>
-                  <input type="text" id="input-descricao" name="descricao" placeholder="Descrição" value="<?php echo htmlclean( isset($_POST['descricao']) ); ?>">
+                  <input type="text" id="input-descricao" name="descricao" placeholder="Descrição" value="<?php echo htmlclean( $_POST['descricao'] ); ?>">
 
               </div>
 
