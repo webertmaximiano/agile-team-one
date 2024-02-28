@@ -1,8 +1,6 @@
 <?php
 // CORE
 include('../_core/_includes/config.php');
-//require_once(__DIR__ . '/../app/config/config.php');
-
 // SEO
 $seo_subtitle = "Login";
 $seo_description = "";
@@ -10,17 +8,13 @@ $seo_keywords = "";
 // HEADER
 $system_header = "";
 // CHECK LOGGED
-<<<<<<< HEAD
-if( !empty($_SESSION['user']['logged']) == "1" ) {
-=======
-if( isset($_SESSION['user']['logged']) == "1" ) {
->>>>>>> main
+if( $_SESSION['user']['logged'] == "1" ) {
 
-	if( !empty($_SESSION['user']['level']) == "1" ) {
+	if( $_SESSION['user']['level'] == "1" ) {
 		header("Location: ../administracao/inicio");
 	}
 
-	if( !empty($_SESSION['user']['level']) == "2" ) {
+	if( $_SESSION['user']['level'] == "2" ) {
 		header("Location: ../painel/inicio");
 	}
 
@@ -76,17 +70,13 @@ if ("serviceWorker" in navigator) {
 
 		<?php
 
-<<<<<<< HEAD
-		$redirect = mysqli_real_escape_string( $db_con, isset($_GET['redirect']) );
-=======
-		$redirect = mysqli_real_escape_string( $db_con, ($_GET['redirect']) );
->>>>>>> main
+		$redirect = mysqli_real_escape_string( $db_con, $_GET['redirect'] );
 		// if( !$redirect ) {
 		// 	$redirect = $_SERVER['HTTP_REFERER'];
 		// }
-		$email = strtolower( mysqli_real_escape_string( $db_con, isset($_POST['email']) ) );
-		$pass = mysqli_real_escape_string( $db_con, isset($_POST['pass']) );
-		$keepalive = mysqli_real_escape_string( $db_con, isset($_POST['keepalive']) );
+		$email = strtolower( mysqli_real_escape_string( $db_con, $_POST['email'] ) );
+		$pass = mysqli_real_escape_string( $db_con, $_POST['pass'] );
+		$keepalive = mysqli_real_escape_string( $db_con, $_POST['keepalive'] );
 		if( !$keepalive ) {
 			$keepalive = 0;
 		}
@@ -145,7 +135,7 @@ if ("serviceWorker" in navigator) {
 
 												</div>
 
-												<?php if( isset($_GET['msg']) == "erro" ) { ?>
+												<?php if( $_GET['msg'] == "erro" ) { ?>
 
 												<div class="row">
 
@@ -162,7 +152,7 @@ if ("serviceWorker" in navigator) {
 
 												<?php } ?>
 
-												<?php if( isset($_GET['msg']) == "alterada" ) { ?>
+												<?php if( $_GET['msg'] == "alterada" ) { ?>
 
 												<div class="row">
 
@@ -186,7 +176,7 @@ if ("serviceWorker" in navigator) {
 														<div class="form-field form-field-icon form-field-text">
 
 															<i class="form-icon lni lni-user"></i>
-															<input type="text" name="email" placeholder="E-mail" value="<?php echo htmlclean( isset($_GET['email']) ); ?>"/>
+															<input type="text" name="email" placeholder="E-mail" value="<?php echo htmlclean( $_GET['email'] ); ?>"/>
 
 														</div>
 
@@ -281,4 +271,3 @@ if ("serviceWorker" in navigator) {
 
 <script src="<?php just_url(); ?>/_core/_cdn/jquery/js/jquery.min.js"></script>
 <script src="<?php just_url(); ?>/_core/_cdn/panel/js/template.js"></script>
-
