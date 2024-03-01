@@ -56,6 +56,7 @@ include('../../_layout/modal.php');
 
     if( !$checkerrors ) {
 //ta gerando o voucher errado tudo 11111111111
+
       if( new_voucher( $plano, $descricao ) ) {
 
         header("Location: index.php?msg=sucesso");

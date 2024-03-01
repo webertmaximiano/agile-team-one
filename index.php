@@ -126,8 +126,8 @@ include('_core/_includes/config.php');
     if( $insubdominio ) {
       include("404.php");
     } else {
-      //include("localizacao/index.php");// DESMASCAR PARA USAR MARKETPLACE COMO PAGINA PADRAO
-      header("Location: https://conheca.ominichanel.redewe2m.com.br/");
+      include("localizacao/index.php");// DESMASCAR PARA USAR MARKETPLACE COMO PAGINA PADRAO
+      //header("Location: https://conheca.ominichanel.redewe2m.com.br/");
     }
 
   }
