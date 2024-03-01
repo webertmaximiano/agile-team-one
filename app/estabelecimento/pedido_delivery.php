@@ -29,7 +29,7 @@ include($virtualpath.'/_layout/modal.php');
 <?php
 
   // Globals
-
+//estabelecimento id pega as credenciais
   $eid = $app['id'];
   global $numeric_data;
 
@@ -158,7 +158,7 @@ include($virtualpath.'/_layout/modal.php');
     // Executar registro
 
     if( !$checkerrors ) {
-
+//Acredito que seja aqui o envio do pedido
       if( $pedido = new_pedido(
       	$token,
 		$rel_segmentos_id,

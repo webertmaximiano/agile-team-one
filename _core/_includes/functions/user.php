@@ -506,6 +506,7 @@ function checkout_salvar( $nome,$whatsapp,$forma_entrega,$estado,$cidade,$endere
 
 }
 
+//Gera Comprovante //eid = id do estabelecimento
 function gera_comprovante($eid,$modo,$tamanho,$numero) {
 
 	global $_SESSION;
@@ -742,6 +743,7 @@ function new_pedido(
 	global $db_con;
 	global $_SESSION;
 	session_id( $token );
+	//descobrir qual e o status 1
 	$status = "1";
 
 	if( mysqli_query( $db_con, "INSERT INTO pedidos (

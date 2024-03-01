@@ -1494,6 +1494,7 @@ include('../../_core/_layout/footer.php');
   $( "#input-estado" ).change(function() {
     exibe_cidades();
   });
+  
   <?php if( $_POST['estado'] ) { ?>
     exibe_cidades();
   <?php } ?>
