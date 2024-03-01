@@ -27,7 +27,7 @@ include('../../_layout/modal.php');
 
   // Checar se formulário foi executado
 
-  $formdata = $_POST['formdata'];
+  $formdata = isset($_POST['formdata']);
 
   if( $formdata ) {
 
@@ -116,15 +116,15 @@ include('../../_layout/modal.php');
 
             <div class="col-md-12">
 
-              <?php if( $checkerrors ) { list_errors(); } ?>
+              <?php if( isset($checkerrors) ) { list_errors(); } ?>
 
-              <?php if( $_GET['msg'] == "erro" ) { ?>
+              <?php if( isset($_GET['msg']) == "erro" ) { ?>
 
                 <?php modal_alerta("Erro, tente novamente!","erro"); ?>
 
               <?php } ?>
 
-              <?php if( $_GET['msg'] == "sucesso" ) { ?>
+              <?php if( isset($_GET['msg']) == "sucesso" ) { ?>
 
                 <?php modal_alerta("Alterado com sucesso!","sucesso"); ?>
 
@@ -142,7 +142,7 @@ include('../../_layout/modal.php');
 
                   <label>Estabelecimento:</label>
                   <input class="autocompleter <?php if( $data['rel_estabelecimentos_id'] ) { echo "autocomplete-selected"; } ?>" type="text" name="estabelecimento" placeholder="Estabelecimento" value="<?php echo htmlclean( data_info('estabelecimentos',$data['rel_estabelecimentos_id'],'nome') ); ?>" completer_url="<?php just_url(); ?>/_core/_ajax/autocomplete_estabelecimentos.php" completer_field="estabelecimento_id"/>
-                  <input class="fakehidden" type="text" name="estabelecimento_id" value="<?php echo $data['rel_estabelecimentos_id']; ?>"/>
+                  <input class="fakehidden" type="text" name="estabelecimento_id" value="<?php echo isset($data['rel_estabelecimentos_id']); ?>"/>
 
               </div>
 

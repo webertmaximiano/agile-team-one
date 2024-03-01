@@ -8,22 +8,21 @@ $subtitle = "Gerenciar";
 
 <?php
 
-	$id = $_GET['id'];
+	$id = isset($_GET['id']);
 	$id = mysqli_real_escape_string( $db_con, $_GET['id'] );
 
 	$queryestabelecimento = mysqli_query( $db_con, "SELECT * FROM estabelecimentos WHERE id = '$id' LIMIT 1");
 	$hasdataestabelecimento = mysqli_num_rows( $queryestabelecimento );
 	$dataestabelecimento = mysqli_fetch_array( $queryestabelecimento );
-
 	if( $dataestabelecimento ) {
 
 		$_SESSION['estabelecimento']['id'] = $dataestabelecimento['id'];
-		$_SESSION['estabelecimento']['avatar'] = $dataestabelecimento['avatar'];
+		$_SESSION['estabelecimento']['avatar'] = isset($dataestabelecimento['avatar']);
 		$_SESSION['estabelecimento']['perfil'] = $dataestabelecimento['perfil'];
 		$_SESSION['estabelecimento']['nome'] = $dataestabelecimento['nome'];
 		$_SESSION['estabelecimento']['subdominio'] = $dataestabelecimento['subdominio'];
 		$_SESSION['estabelecimento']['logged'] = 1;
-		$_SESSION['estabelecimento']['level'] = $data['level'];
+		$_SESSION['estabelecimento']['level'] = isset($data['level']);
 		$_SESSION['estabelecimento']['funcionalidade_marketplace'] = $dataestabelecimento['funcionalidade_marketplace'];
 		$_SESSION['estabelecimento']['funcionalidade_banners'] = $dataestabelecimento['funcionalidade_banners'];
 		$_SESSION['estabelecimento']['funcionalidade_variacao'] = $dataestabelecimento['funcionalidade_variacao'];

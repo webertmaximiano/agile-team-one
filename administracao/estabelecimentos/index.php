@@ -23,96 +23,102 @@ global $httprotocol;
 
 // Variables
 
-$subdominio = mysqli_real_escape_string( $db_con, isset($_GET['subdominio']) );
-$nome = mysqli_real_escape_string( $db_con, isset($_GET['nome']) );
-$estado = mysqli_real_escape_string( $db_con, isset($_GET['estado']) );
-$cidade = mysqli_real_escape_string( $db_con, isset($_GET['cidade']) );
-$excluded = mysqli_real_escape_string( $db_con, isset($_GET['excluded']) );
+$subdominio = mysqli_real_escape_string($db_con, isset($_GET['subdominio']));
+$nome = mysqli_real_escape_string($db_con, isset($_GET['nome']));
+$estado = mysqli_real_escape_string($db_con, isset($_GET['estado']));
+$cidade = mysqli_real_escape_string($db_con, isset($_GET['cidade']));
+$excluded = mysqli_real_escape_string($db_con, isset($_GET['excluded']));
 
 $getdata = "";
 
 foreach($_GET as $query_string_variable => $value) {
-  if( $query_string_variable != "pagina" ) {
-    $getdata .= "&$query_string_variable=".htmlclean($value);
-  }
+    if($query_string_variable != "pagina") {
+        $getdata .= "&$query_string_variable=" . htmlclean($value);
+    }
 }
 
 // Config
 
 $limite = 20;
-$pagina = $_GET["pagina"] == "" ? 1 : $_GET["pagina"];
+$pagina = isset($_GET["pagina"]) == "" ? 1 : isset($_GET["pagina"]);
 $inicio = ($pagina * $limite) - $limite;
 
 // Query
-$query='';
-$query .= "SELECT id,nome,perfil,cidade,estado,status,excluded,subdominio FROM estabelecimentos ";
+$query = '';
+$query .= "SELECT e.id, e.nome, e.perfil, c.nome AS cidade, es.nome AS estado, e.status, e.excluded, e.subdominio ";
+$query .= "FROM estabelecimentos AS e ";
+$query .= "JOIN cidades AS c ON e.cidade = c.id ";
+$query .= "JOIN estados AS es ON e.estado = es.id ";
+$query .= "WHERE 1=1 ";
 
-if($oper != 1 ) {
-$query .= "WHERE 1=1 AND cidade = $cidop ";
-} else { 
-$query .= "WHERE 1=1 ";   
-}
-
-
-if( $subdominio ) {
-  $query .= "AND subdominio LIKE '$nome%' ";
-}
-
-if( $nome ) {
-  $query .= "AND nome LIKE '$nome%' ";
-}
-
-if( $estado ) {
-  $query .= "AND level = '$estado' ";
-}
-
-if( $cidade ) {
-  $query .= "AND cidade = '$cidade' ";
-}
-
-if( $excluded ) {
-	$query .= "AND excluded = '$excluded' ";
+if($oper != 1) {
+    $query .= "AND cidade = $cidop ";
 } else {
-	$query .= "AND excluded != '1' ";
+    $query .= "AND 1=1 ";
+}
+
+
+if($subdominio) {
+    $query .= "AND subdominio LIKE '$nome%' ";
+}
+
+if($nome) {
+    $query .= "AND nome LIKE '$nome%' ";
+}
+
+if($estado) {
+    $query .= "AND level = '$estado' ";
+}
+
+if($cidade) {
+    $query .= "AND cidade = '$cidade' ";
+}
+
+if($excluded) {
+    $query .= "AND excluded = '$excluded' ";
+} else {
+    $query .= "AND excluded != '1' ";
 }
 
 
 $query_full = $query;
 
 if($oper == 1) {
-$query .= "ORDER BY created DESC LIMIT $inicio,$limite";
-} else { 
-$query .= "ORDER BY created DESC LIMIT $inicio,$limite";
+    $query .= "ORDER BY created DESC LIMIT $inicio,$limite";
+} else {
+    $query .= "ORDER BY created DESC LIMIT $inicio,$limite";
 }
+
 // Run
 //var_dump($query);
-$sql = mysqli_query( $db_con, $query );
+$sql = mysqli_query($db_con, $query);
 
-$total_results = mysqli_num_rows( $sql );
+$total_results = mysqli_num_rows($sql);
 
-$sql_full = mysqli_query( $db_con, $query_full );
+$sql_full = mysqli_query($db_con, $query_full);
 
-$total_results_full = mysqli_num_rows( $sql_full );
+$total_results_full = mysqli_num_rows($sql_full);
 
 $total_paginas = Ceil($total_results_full / $limite) + ($limite / $limite);
 
-if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
+if(!$pagina or $pagina > $total_paginas or !is_numeric($pagina)) {
 
     $pagina = 1;
 
 }
 
+
 ?>
 
-<?php if( $_GET['msg'] == "erro" ) { ?>
+<?php if(isset($_GET['msg']) == "erro") { ?>
 
-<?php modal_alerta("Erro, tente novamente!","erro"); ?>
+<?php modal_alerta("Erro, tente novamente!", "erro"); ?>
 
 <?php } ?>
 
-<?php if( $_GET['msg'] == "sucesso" ) { ?>
+<?php if(isset($_GET['msg']) == "sucesso") { ?>
 
-<?php modal_alerta("Ação efetuada com sucesso!","sucesso"); ?>
+<?php modal_alerta("Ação efetuada com sucesso!", "sucesso"); ?>
 
 <?php } ?>
 
@@ -158,7 +164,9 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 								</a>
 							</h4>
 						</div>
-						<div id="collapse-filtros" class="panel-collapse collapse <?php if( $_GET['filtered'] ) { echo 'in'; }; ?>">
+						<div id="collapse-filtros" class="panel-collapse collapse <?php if(isset($_GET['filtered'])) {
+						    echo 'in';
+						}; ?>">
 							<div class="panel-body">
 
 								<form class="form-filters form-100" method="GET">
@@ -167,13 +175,13 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 										<div class="col-md-6">
 											<div class="form-field-default">
 												<label>Subdominio:</label>
-												<input type="text" name="subdominio" placeholder="Subdominio" value="<?php echo htmlclean( $subdominio ); ?>"/>
+												<input type="text" name="subdominio" placeholder="Subdominio" value="<?php echo htmlclean($subdominio); ?>"/>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-field-default">
 												<label>Nome:</label>
-												<input type="text" name="nome" placeholder="Nome" value="<?php echo htmlclean( $nome ); ?>"/>
+												<input type="text" name="nome" placeholder="Nome" value="<?php echo htmlclean($nome); ?>"/>
 											</div>
 										</div>
 									</div>
@@ -186,12 +194,14 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 													<select id="input-estado" name="estado">
 
 													    <option value="">Estado</option>
-													    <?php 
-													    $quicksql = mysqli_query( $db_con, "SELECT * FROM estados ORDER BY nome ASC LIMIT 999" );
-													    while( $quickdata = mysqli_fetch_array( $quicksql ) ) {
-													    ?>
+													    <?php
+                                                        $quicksql = mysqli_query($db_con, "SELECT * FROM estados ORDER BY nome ASC LIMIT 999");
+														while($quickdata = mysqli_fetch_array($quicksql)) {
+															?>
 
-													      <option <?php if( $_POST['estado'] == $quickdata['id'] ) { echo "SELECTED"; }; ?> value="<?php echo $quickdata['id']; ?>"><?php echo $quickdata['nome']; ?></option>
+													      <option <?php if(isset($_POST['estado']) == $quickdata['id']) {
+													          echo "SELECTED";
+													      }; ?> value="<?php echo $quickdata['id']; ?>"><?php echo $quickdata['nome']; ?></option>
 
 													    <?php } ?>
 
@@ -219,8 +229,12 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 						                          <i class="lni lni-chevron-down"></i>
 						                          <select name="excluded">
 						                            <option value=""></option>
-						                            <option <?php if( $excluded == "1" ) { echo "SELECTED"; }; ?> value="1">Sim</option>
-						                            <option <?php if( $excluded == "" ) { echo "SELECTED"; }; ?> value="">Não</option>
+						                            <option <?php if($excluded == "1") {
+						                                echo "SELECTED";
+						                            }; ?> value="1">Sim</option>
+						                            <option <?php if($excluded == "") {
+						                                echo "SELECTED";
+						                            }; ?> value="">Não</option>
 						                          </select>
 						                          <div class="clear"></div>
 						                      </div>
@@ -237,7 +251,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 											</div>
 										</div>
 									</div>
-									<?php if( $_GET['filtered'] ) { ?>
+									<?php if(isset($_GET['filtered'])) { ?>
 									<div class="row">
 										<div class="col-md-12">
 										    <a href="<?php admin_url(); ?>/estabelecimentos" class="limpafiltros"><i class="lni lni-close"></i> Limpar filtros</a>
@@ -293,10 +307,10 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 						<tbody>
 
 							<?php
-                            while ( $data = mysqli_fetch_array( $sql ) ) {
-                            $gourl = $httprotocol.$data['subdominio'].".".$simple_url;
-                            $gourlclean = $data['subdominio'].".".$simple_url;
-                            ?>
+                            while ($data = mysqli_fetch_array($sql)) {
+                                $gourl = $httprotocol . $data['subdominio'] . "." . $simple_url;
+                                $gourlclean = $data['subdominio'] . "." . $simple_url;
+                                ?>
 
 							<tr>
 								<td>
@@ -304,8 +318,8 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
                                     	<a target="_blank" href="<?php echo $gourl; ?>">
 	                                    	<div class="rounded-thumb-holder">
 		                                    	<div class="rounded-thumb">
-		                                    		<img src="<?php echo thumber( $data['perfil'], "100" ); ?>"/>
-		                                    		<img class="blurred" src="<?php echo thumber( $data['perfil'], "300" ); ?>"/>
+		                                    		<img src="<?php echo thumber($data['perfil'], "100"); ?>"/>
+		                                    		<img class="blurred" src="<?php echo thumber($data['perfil'], "300"); ?>"/>
 		                                    	</div>
 	                                    	</div>
                                     	</a>
@@ -322,19 +336,19 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 								<td>
 									<a target="_blank" href="<?php echo $gourl; ?>">
 	                                    <span class="fake-table-title hidden-xs hidden-sm">Nome</span>
-	                                    <div class="fake-table-data"><?php echo htmlclean( $data['nome'] ); ?></div>
+	                                    <div class="fake-table-data"><?php echo htmlclean($data['nome']); ?></div>
 	                                    <div class="fake-table-break"></div>
                                 	</a>
 								</td>
 								<td class="hidden-xs hidden-sm">
-                                    <span class="fake-table-title hidden-xs hidden-sm">Cidade</span>
-                                    <div class="fake-table-data"><?php echo data_info( "cidades", $data['cidade'], "nome" ); ?></div>
-                                    <div class="fake-table-break"></div>
+									<span class="fake-table-title hidden-xs hidden-sm">Cidade</span>
+									<div class="fake-table-data"><?php echo $data['cidade']; ?></div>
+									<div class="fake-table-break"></div>
 								</td>
 								<td class="hidden-xs hidden-sm">
-                                    <span class="fake-table-title hidden-xs hidden-sm">Estado</span>
-                                    <div class="fake-table-data"><?php echo data_info( "estados", $data['estado'], "nome" ); ?></div>
-                                    <div class="fake-table-break"></div>
+									<span class="fake-table-title hidden-xs hidden-sm">Estado</span>
+									<div class="fake-table-data"><?php echo $data['estado']; ?></div>
+									<div class="fake-table-break"></div>
 								</td>
 								<td>
 									<span class="fake-table-title">Ações</span>
@@ -342,7 +356,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 										<div class="form-actions pull-right">
 											<a target="_blank" class="color-white" href="<?php admin_url(); ?>/estabelecimentos/gerenciar?id=<?php echo $data['id']; ?>" title="Gerenciar"><i class="lni lni-lock"></i></a>
 											<a class="color-yellow" href="<?php admin_url(); ?>/assinaturas?estabelecimento_id=<?php echo $data['id']; ?>&filtered=1" title="Assinaturas"><i class="lni lni-star"></i></a>
-											<a class="color-red" onclick="if(confirm('Tem certeza que deseja remover este estabelecimento?')) document.location = '<?php admin_url(); ?>/estabelecimentos/deletar/?id=<?php echo $data['id']; ?>&mode=<?php echo $_GET['mode']; ?>'" href="#" title="Ed"><i class="lni lni-trash"></i></a>
+											<a class="color-red" onclick="if(confirm('Tem certeza que deseja remover este estabelecimento?')) document.location = '<?php admin_url(); ?>/estabelecimentos/deletar/?id=<?php echo isset($data['id']); ?>&mode=<?php echo isset($_GET['mode']); ?>'" href="#" title="Ed"><i class="lni lni-trash"></i></a>
 										</div>
                                     </div>
                                     <div class="fake-table-break"></div>
@@ -351,7 +365,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 
                             <?php } ?>
 
-                            <?php if( $total_results == 0 ) { ?>
+                            <?php if($total_results == 0) { ?>
 
                                <tr>
                                 <td colspan="6">
@@ -383,42 +397,42 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 
             <?php
             $paginationpath = "estabelecimentos";
-            if($pagina > 1) {
-              $back = $pagina-1;
-              echo '<li class="page-item pagination-back"><a class="page-link" href=" '.get_system_url().'/'.$paginationpath.'/?pagina='.$back.$getdata.' "><i class="lni lni-chevron-left"></i></a></li>';
-            }
-     
-              for($i=$pagina-1; $i <= $pagina-1; $i++) {
+if($pagina > 1) {
+    $back = $pagina - 1;
+    echo '<li class="page-item pagination-back"><a class="page-link" href=" ' . get_system_url() . '/' . $paginationpath . '/?pagina=' . $back . $getdata . ' "><i class="lni lni-chevron-left"></i></a></li>';
+}
 
-                  if($i > 0) {
-                  
-                      echo '<li class="page-item pages-before"><a class="page-link" href=" '.get_system_url().'/'.$paginationpath.'/?pagina='.$i.$getdata.' ">'.$i.'</a></li>';
-                  }
+for($i = $pagina - 1; $i <= $pagina - 1; $i++) {
 
-              }
+    if($i > 0) {
 
-              if( $pagina >= 1 ) {
+        echo '<li class="page-item pages-before"><a class="page-link" href=" ' . get_system_url() . '/' . $paginationpath . '/?pagina=' . $i . $getdata . ' ">' . $i . '</a></li>';
+    }
 
-                echo '<li class="page-item active"><a class="page-link" href=" '.get_system_url().'/'.$paginationpath.'/?pagina='.$i.$getdata.'" class="page-link">'.$i.'</a></li>';
+}
 
-              }
+if($pagina >= 1) {
 
-              for($i=$pagina+1; $i <= $pagina+1; $i++) {
+    echo '<li class="page-item active"><a class="page-link" href=" ' . get_system_url() . '/' . $paginationpath . '/?pagina=' . $i . $getdata . '" class="page-link">' . $i . '</a></li>';
 
-                  if($i >= $total_paginas) {
-                    break;
-                  }  else {
-                      echo '<li class="page-item pages-after"><a class="page-link" href=" '.get_system_url().'/'.$paginationpath.'/?pagina='.$i.$getdata.' ">'.$i.'</a></li> ';
-                  }
-              
-              }
+}
 
-            if($pagina < $total_paginas-1) {
-              $next = $pagina+1;
-              echo '<li class="page-item pagination-next"><a class="page-link" href=" '.get_system_url().'/'.$paginationpath.'/?pagina='.$next.$getdata.' "><i class="lni lni-chevron-right"></i></a></li>';
-            }
+for($i = $pagina + 1; $i <= $pagina + 1; $i++) {
 
-            ?>
+    if($i >= $total_paginas) {
+        break;
+    } else {
+        echo '<li class="page-item pages-after"><a class="page-link" href=" ' . get_system_url() . '/' . $paginationpath . '/?pagina=' . $i . $getdata . ' ">' . $i . '</a></li> ';
+    }
+
+}
+
+if($pagina < $total_paginas - 1) {
+    $next = $pagina + 1;
+    echo '<li class="page-item pagination-next"><a class="page-link" href=" ' . get_system_url() . '/' . $paginationpath . '/?pagina=' . $next . $getdata . ' "><i class="lni lni-chevron-right"></i></a></li>';
+}
+
+?>
 
           </ul>
 
@@ -430,7 +444,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 
 </div>
 
-<?php 
+<?php
 // FOOTER
 $system_footer .= "";
 include('../_layout/rdp.php');
@@ -449,7 +463,7 @@ include('../_layout/footer.php');
   $( "#input-estado" ).change(function() {
     exibe_cidades();
   });
-  <?php if( $_POST['estado'] ) { ?>
+  <?php if(isset($_POST['estado'])) { ?>
     exibe_cidades();
   <?php } ?>
 

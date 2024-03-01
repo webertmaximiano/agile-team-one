@@ -17,7 +17,7 @@
 
 					<form class="align-middle" action="<?php panel_url(); ?>/produtos" method="GET">
 
-						<input type="text" name="nome" placeholder="Buscar produtos..." value="<?php echo htmlclean( $_GET['busca'] ); ?>"/>
+						<input type="text" name="nome" placeholder="Buscar produtos..." value="<?php echo htmlclean(isset($_GET['busca']) ); ?>"/>
 						<input type="hidden" name="filtered" value="1"/>
 						<button>
 							<i class="lni lni-search-alt"></i>

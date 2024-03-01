@@ -1,4 +1,5 @@
 <?php
+//remover em producao
 include('_core/_includes/config.php'); 
 global $db_con;
 global $mp_acess_token;

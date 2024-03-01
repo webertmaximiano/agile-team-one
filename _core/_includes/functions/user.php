@@ -1004,7 +1004,7 @@ function delete_plano( $id ) {
 	global $db_con;
 	global $rootpath;
 
-	$nome = data_info("planos", $id, "nome");
+	$nome = data_info("plano",$id,"nome");
 
 	if( mysqli_query( $db_con, "DELETE FROM planos WHERE id = '$id'") ) {
 

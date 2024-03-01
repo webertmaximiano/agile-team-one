@@ -1,13 +1,13 @@
 <?php 
-include('_core/_includes/config.php'); 
+include('_core/_includes/config.php');
 
-// Globais
-global $rootpath;
-global $httprotocol;
-global $simple_url;
-$gowww = $httprotocol.$simple_url;
-$firstdomain = explode(".", $simple_url);
-$firstdomain = $firstdomain[0];
+  // Globais
+  $rootpath;
+  $httprotocol;
+  $simple_url;
+  $gowww = $httprotocol.$simple_url;
+  $firstdomain = explode(".", $simple_url);
+  $firstdomain = $firstdomain[0];
 
 // Mapeando subdominio //
 
@@ -57,135 +57,73 @@ $firstdomain = $firstdomain[0];
   }
 
   // Se existe o subdominio
+    if ($insubdominio) {
 
-  if( $has_insubdominio ) {
+      // Tipo do subdominio
+      switch ($insubdominio) {
+        case 'estabelecimento':
+          $insubdominiotipo = 1;
+          break;
+        case 'cidade':
+          $insubdominiotipo = 2;
+          break;
+        default:
+          $insubdominiotipo = 0;
+      }
 
-    $insubdominiourl = $insubdominio;
+
 
     // Roteando
-    $router = $_GET['inrouter'];
-    $router = explode("/", $router);
+    $router = isset($_GET['inrouter']);
+    $router = explode('/', $router);
     $inacao = $router[0];
     $inparametro = $router[1];
 
     // Estabelecimento
-
-    if( $insubdominiotipo == "1" ) {
-
-      $virtualpath = $rootpath."/app/estabelecimento";
-
-      if( !$inacao ) {
-        $chamar = $virtualpath."/index.php";
+    if ($insubdominiotipo == 1) {
+      $virtualpath = $rootpath.'/app/estabelecimento';
+      switch ($inacao) {
+        case '':
+          $chamar = $virtualpath.'/index.php';
+          break;
+        case 'categoria':
+          $chamar = $virtualpath.'/categoria.php';
+          break;
+        case 'produto':
+          $chamar = $virtualpath.'/produto.php';
+          break;
+        case 'sacola':
+          $chamar = $virtualpath.'/sacola.php';
+          break;
+        case 'pedido':
+          $chamar = $virtualpath.'/pedido.php';
+          break;
+        default:
+          $chamar = $virtualpath.'/404.php';
       }
-
-      if( $inacao == "categoria" ) {
-        $chamar = $virtualpath."/categoria.php";
-      }
-
-      if( $inacao == "produto" ) {
-        $chamar = $virtualpath."/produto.php";
-      }
-
-      if( $inacao == "sacola" ) {
-        $chamar = $virtualpath."/sacola.php";
-      }
-
-      if( $inacao == "pedido" ) {
-        $chamar = $virtualpath."/pedido.php";
-      }
-      
-      if( $inacao == "pedido_delivery" ) {
-        $chamar = $virtualpath."/pedido_delivery.php";
-      }
-      
-      if( $inacao == "pedido_balcao" ) {
-        $chamar = $virtualpath."/pedido_balcao.php";
-      }
-      
-      if( $inacao == "pedido_outros" ) {
-        $chamar = $virtualpath."/pedido_outros.php";
-      }
-      
-      if( $inacao == "pedidosabertos" ) {
-        $chamar = $virtualpath."/pedidosabertos.php";
-      }
-      
-      if( $inacao == "pedidosfechados" ) {
-        $chamar = $virtualpath."/pedidosfechados.php";
-      }
-
-      if( $inacao == "desativado" ) {
-        $chamar = $virtualpath."/desativado.php";
-      }
-
-      if( $inacao == "fechado" ) {
-        $chamar = $virtualpath."/fechado.php";
-      }
-
-      if( $inacao == "obrigado" ) {
-        $chamar = $virtualpath."/obrigado.php";
-      }
-
-      if( $inacao == "manifest.webmanifest" ) {
-        $chamar = $virtualpath."/_layout/manifest.php";
-      }
-
-      if( $inacao == "favicon.png" ) {
-        $chamar = $virtualpath."/_layout/favicon.php";
-      }
-
-      if( $inacao == "serviceworker.js" ) {
-        $chamar = $virtualpath."/js/serviceworker.php";
-      }
-
-      if( $inacao == "addtohome.js" ) {
-        $chamar = $virtualpath."/js/addtohome.js";
-      }
-
-      if( $inacao == "index.html" ) {
-        $chamar = $virtualpath."/index.php";
-      }
-
-      if( $inacao == "shopping.xml" ) {
-        $chamar = $virtualpath."/integracao/shopping.php";
-      }
-
-      if( $inacao != "index.html" && $inacao != "serviceworker.js" && $inacao != "shopping.xml" && $inacao != "addtohome.js" && $inacao != "manifest.webmanifest" && $inacao != "favicon.png" && $inacao != "categoria" && $inacao != "produto" && $inacao != "sacola" && $inacao != "pedido" && $inacao != "pedido_delivery" && $inacao != "pedido_balcao" && $inacao != "pedido_outros" && $inacao != "pedidosabertos" && $inacao != "pedidosfechados" && $inacao != "desativado" && $inacao != "fechado" && $inacao != "obrigado" && $inacao != "" ) {
-        $chamar = $virtualpath."/404.php";
-      }
-
-      include($chamar);
-
     }
 
     // Cidade
 
-    if( $insubdominiotipo == "2" ) {
-
-      $virtualpath = $rootpath."/app/cidade";
-
-      if( !$inacao ) {
-        $chamar = $virtualpath."/index.php";
+   // Cidade
+    if ($insubdominiotipo == 2) {
+      $virtualpath = $rootpath.'/app/cidade';
+      switch ($inacao) {
+        case '':
+          $chamar = $virtualpath.'/index.php';
+          break;
+        case 'produtos':
+          $chamar = $virtualpath.'/produtos.php';
+          break;
+        case 'estabelecimentos':
+          $chamar = $virtualpath.'/estabelecimentos.php';
+          break;
+        case 'sacola':
+          $chamar = $virtualpath.'/sacola.php';
+          break;
+        default:
+          $chamar = $virtualpath.'/404.php';
       }
-
-      if( $inacao == "produtos" ) {
-        $chamar = $virtualpath."/produtos.php";
-      }
-
-      if( $inacao == "estabelecimentos" ) {
-        $chamar = $virtualpath."/estabelecimentos.php";
-      }
-
-      if( $inacao == "sacola" ) {
-        $chamar = $virtualpath."/sacola.php";
-      }
-
-      if( $inacao != "estabelecimentos" && $inacao != "produtos" && $inacao != "sacola" && $inacao != "" ) {
-        $chamar = $virtualpath."/404.php";
-      }
-
-      include($chamar);
-
     }
 
   } else {
@@ -193,8 +131,8 @@ $firstdomain = $firstdomain[0];
     if( $insubdominio ) {
       include("404.php");
     } else {
-      include("localizacao/index.php");// DESMASCAR PARA USAR MARKETPLACE COMO PAGINA PADRAO
-      //header("Location: https://conheca.ominichanel.redewe2m.com.br/");
+      //include("localizacao/index.php");// DESMASCAR PARA USAR MARKETPLACE COMO PAGINA PADRAO
+      header("Location: https://ominichanel.redewe2m.com.br/conheca");
     }
 
   }

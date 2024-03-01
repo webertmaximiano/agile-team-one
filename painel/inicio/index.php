@@ -33,7 +33,9 @@ include('../_layout/modal.php');
   
   // soma vendas
   
-  $querytotalvendas = mysqli_query( $db_con, "SELECT v_pedido, SUM(v_pedido) AS soma1 FROM pedidos WHERE rel_estabelecimentos_id = '$id' AND status = '2'");
+  //$querytotalvendas = mysqli_query( $db_con, "SELECT v_pedido, SUM(v_pedido) AS soma1 FROM pedidos WHERE rel_estabelecimentos_id = '$id' AND status = '2'");
+  $querytotalvendas = mysqli_query( $db_con, "SELECT id, SUM(v_pedido) AS soma1 FROM pedidos WHERE rel_estabelecimentos_id = '$id' AND status = '2' GROUP BY id");
+
   $datatotalvendas = mysqli_fetch_array( $querytotalvendas );
   
   // total de pedidos
@@ -43,25 +45,25 @@ include('../_layout/modal.php');
   
     // soma vendas mês
   $mesatual = date("m");
-  $querytotalvendasm = mysqli_query( $db_con, "SELECT v_pedido, SUM(v_pedido) AS soma2 FROM pedidos WHERE MONTH(data_hora) = '$mesatual' AND rel_estabelecimentos_id = '$id' AND status = '2'");
+  $querytotalvendasm = mysqli_query($db_con, "SELECT MONTH(data_hora) AS mes, SUM(v_pedido) AS soma2 FROM pedidos WHERE rel_estabelecimentos_id = '$id' AND status = '2' GROUP BY mes");
   $datatotalvendasm = mysqli_fetch_array( $querytotalvendasm );
   
   
 ?>
 
-<?php if( $_GET['msg'] == "inativo" ) { ?>
+<?php if( isset($_GET['msg']) == "inativo" ) { ?>
 
 <?php modal_alerta("Seu plano encontrasse inativo, contrate um novo plano para continuar a usar os serviços!","erro"); ?>
 
 <?php } ?>
 
-<?php if( $_GET['msg'] == "funcaodesativada" ) { ?>
+<?php if( isset($_GET['msg']) == "funcaodesativada" ) { ?>
 
 <?php modal_alerta("Seu plano não tem acesso a essa funcionalidade, contrate um correspondente verificando a aba meu plano!","erro"); ?>
 
 <?php } ?>
 
-<?php if( $_GET['msg'] == "bemvindo" ) { ?>
+<?php if( isset($_GET['msg']) == "bemvindo" ) { ?>
 
 <?php modal_alerta("Seu catálogo foi criado com sucesso. Aproveite o seu período de testes!<br/><br/>Ao final do período você deve escolher um plano para continuar utilizando o sistema.","sucesso"); ?>
 
@@ -74,7 +76,7 @@ include('../_layout/modal.php');
 			<div class="lista-menus">
 				<div class="col-md-4">
 					<div class="lista-menus-menu">
-						<a class="bt" href="<?php echo $meudominio; ?>" target="_blank">
+						<a class="bt" href="<?php echo isset($meudominio); ?>" target="_blank">
 							<i class="lni lni-home"></i>
 							<span>Ver meu catalogo</span>
 							<i class="lni lni-chevron-right"></i>
@@ -95,7 +97,7 @@ include('../_layout/modal.php');
 						<div class="lista-menus-menu lista-menus-nocounter">
 							<a class="bt" href="#">
 								<i class="lni lni-calculator"></i>
-								<span>Faturado na Plataforma<br/>R$: <?php print number_format($datatotalvendas['soma1'], 2, ',', '.');?></span>
+								<span>Faturado na Plataforma<br/>R$: <?php print number_format(isset($datatotalvendas['soma1']), 2, ',', '.');?></span>
 								<div class="clear"></div>
 							</a>
 						</div>
@@ -104,7 +106,7 @@ include('../_layout/modal.php');
 						<div class="lista-menus-menu lista-menus-nocounter">
 							<a class="bt" href="#">
 								<i class="lni lni-coin" style="color:#FFFFFF"></i>
-								<span>Vendas do mês <?php print date("m");?>/<?php print date("Y");?><br/>R$: <?php print number_format($datatotalvendasm['soma2'], 2, ',', '.');?></span>
+								<span>Vendas do mês <?php print date("m");?>/<?php print date("Y");?><br/>R$: <?php print number_format(isset($datatotalvendasm['soma2']), 2, ',', '.');?></span>
 								<div class="clear"></div>
 							</a>
 						</div>

@@ -271,4 +271,3 @@ if ("serviceWorker" in navigator) {
 
 <script src="<?php just_url(); ?>/_core/_cdn/jquery/js/jquery.min.js"></script>
 <script src="<?php just_url(); ?>/_core/_cdn/panel/js/template.js"></script>
-

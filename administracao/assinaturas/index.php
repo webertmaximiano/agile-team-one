@@ -165,7 +165,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 								</a>
 							</h4>
 						</div>
-						<div id="collapse-filtros" class="panel-collapse collapse <?php if( $_GET['filtered'] ) { echo 'in'; }; ?>">
+						<div id="collapse-filtros" class="panel-collapse collapse <?php if( isset($_GET['filtered']) ) { echo 'in'; }; ?>">
 							<div class="panel-body">
 
 								<form class="form-filters form-100" method="GET">
@@ -181,7 +181,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 							              <div class="form-field-default">
 							                  <label>Estabelecimento:</label>
 							                  <input class="autocompleter <?php if( $_GET['estabelecimento'] && $_GET['estabelecimento_id'] ) { echo "autocomplete-selected"; } ?>" type="text" name="estabelecimento" placeholder="Estabelecimento" value="<?php echo htmlclean( $_GET['estabelecimento'] ); ?>" completer_url="<?php just_url(); ?>/_core/_ajax/autocomplete_estabelecimentos.php" completer_field="estabelecimento_id"/>
-							                  <input class="fakehidden" type="text" name="estabelecimento_id" value="<?php echo htmlclean( $_GET['estabelecimento_id'] ); ?>"/>
+							                  <input class="fakehidden" type="text" name="estabelecimento_id" value="<?php echo htmlclean( isset($_GET['estabelecimento_id']) ); ?>"/>
 							              </div>
 										</div>
 										<div class="col-md-3">
@@ -192,7 +192,7 @@ if( !$pagina OR $pagina > $total_paginas OR !is_numeric($pagina) ) {
 												<select name="status">
 													<option></option>
 		                                            <?php for( $x = 0; $x < count( $numeric_data['assinatura_status'] ); $x++ ) { ?>
-		                                            <option value="<?php echo $numeric_data['assinatura_status'][$x]['value']; ?>" <?php if( $_GET['status'] == $numeric_data['assinatura_status'][$x]['value'] ) { echo 'SELECTED'; }; ?>><?php echo $numeric_data['assinatura_status'][$x]['name']; ?></option>
+		                                            <option value="<?php echo isset($numeric_data['assinatura_status'][$x]['value']); ?>" <?php if( isset($_GET['status']) == $numeric_data['assinatura_status'][$x]['value'] ) { echo 'SELECTED'; }; ?>><?php echo isset($numeric_data['assinatura_status'][$x]['name']); ?></option>
 		                                            <?php } ?>
 												</select>
 												<div class="clear"></div>

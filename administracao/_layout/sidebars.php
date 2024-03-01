@@ -17,7 +17,7 @@
 
 					<form class="align-middle">
 
-						<input type="text" name="busca" placeholder="Digite sua busca..." value="<?php echo htmlclean( isset($_GET['busca']) ); ?>"/>
+						<input type="text" name="busca" placeholder="Digite sua busca..." value="<?php echo htmlclean( $_GET['busca']); ?>"/>
 						<button>
 							<i class="lni lni-search-alt"></i>
 						</button>

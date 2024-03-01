@@ -7,14 +7,12 @@
 			<div class="row align-middle hidden-sm hidden-xs">
 
 				<div class="col-md-3">
-
 					<div class="brand">
 						<a href="<?php panel_url(); ?>">
 							<img src="<?php echo thumber( $_SESSION['estabelecimento']['perfil'], 150 ); ?>" alt="<?php echo $_SESSION['estabelecimento']['nome']; ?>"/>
 							<span><?php echo $_SESSION['estabelecimento']['nome']; ?><strong class="colored">.</strong></span>
 						</a>
 					</div>
-
 				</div>
 
 				<div class="col-md-6">
