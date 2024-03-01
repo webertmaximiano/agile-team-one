@@ -5,13 +5,13 @@ namespace App\Config;
 // Credenciais de banco de dados producao
 const DB_HOST = 'localhost';
 const DB_USER = 'webert';
-const DB_PASS = 'W4m@x2r7';
+const DB_PASS = 'Senha';
 const DB_NAME = 'ominichanel';
 
 // Credenciais de banco de dados teste
 const DB_HOST_TEST = 'localhost';
 const DB_USER_TEST = 'webert';
-const DB_PASS_TEST = 'W4m@x2r7';
+const DB_PASS_TEST = 'Senha';
 const DB_NAME_TEST = 'ominichanel';
 
 // Tokens e chaves
