@@ -55,7 +55,7 @@ include('../../_layout/modal.php');
     // Executar registro
 
     if( !$checkerrors ) {
-//ta gerando o voucher errado tudo 11111111111
+      //ta gerando o voucher errado tudo 11111111111
 
       if( new_voucher( $plano, $descricao ) ) {
 
