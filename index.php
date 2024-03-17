@@ -5,7 +5,7 @@ include('_core/_includes/config.php');
   $rootpath;
   $httprotocol;
   $simple_url;
-  
+
   $gowww = $httprotocol.$simple_url;
   echo('$gowww');
   var_dump($gowww);
@@ -76,7 +76,7 @@ include('_core/_includes/config.php');
 
 
     // Roteando
-    $router = isset($_GET['inrouter']);
+    $router = $_GET['inrouter'];
     $router = explode('/', $router);
     $inacao = $router[0];
     $inparametro = $router[1];
