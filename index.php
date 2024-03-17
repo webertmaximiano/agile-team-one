@@ -14,8 +14,12 @@ include('_core/_includes/config.php');
   echo('Firstdomain');
   var_dump($firstdomain);
 
+  
+  //$hostParts = explode('.', $_SERVER['HTTP_HOST']);
+  //subdominio = $hostParts[0]; // Assuming first element is the subdomain
+
   // Mapeando subdominio
-  $insubdominio = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
+  $insubdominio = explode('.', $_SERVER['HTTP_HOST']);
   echo('Subdominio: ');
   var_dump( $insubdominio);
   if (strpos(isset($insubdominio), '.') !== false) {
