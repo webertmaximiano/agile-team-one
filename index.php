@@ -14,9 +14,6 @@ include('_core/_includes/config.php');
   echo('Firstdomain : ' . $firstdomain);
   //var_dump($firstdomain);
 
-  
-  //$hostParts = explode('.', $_SERVER['HTTP_HOST']);
-  //subdominio = $hostParts[0]; // Assuming first element is the subdomain
 
   // Mapeando subdominio
   $insubdominio = explode('.', $_SERVER['HTTP_HOST']);
