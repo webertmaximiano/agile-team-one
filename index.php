@@ -7,12 +7,12 @@ include('_core/_includes/config.php');
   $simple_url;
 
   $gowww = $httprotocol.$simple_url;
-  echo('$gowww');
-  var_dump($gowww);
+  echo('$gowww : ' . $gowww);
+  //var_dump($gowww);
   $firstdomain = explode(".", $simple_url);
   $firstdomain = $firstdomain[0];
-  echo('Firstdomain');
-  var_dump($firstdomain);
+  echo('Firstdomain : ' . $firstdomain);
+  //var_dump($firstdomain);
 
   
   //$hostParts = explode('.', $_SERVER['HTTP_HOST']);
