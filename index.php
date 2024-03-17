@@ -20,8 +20,8 @@ include('_core/_includes/config.php');
 
   // Mapeando subdominio
   $insubdominio = explode('.', $_SERVER['HTTP_HOST']);
-  echo('Subdominio: ');
-  var_dump( $insubdominio);
+  echo('$insubdominio : ' . $insubdominio);
+  //var_dump( $insubdominio);
   if (strpos(isset($insubdominio), '.') !== false) {
     $insubdominio = substr($insubdominio, 0, strpos($insubdominio, '.'));
   }
@@ -81,21 +81,24 @@ include('_core/_includes/config.php');
 
     // Roteando
     $router = $_GET['inrouter'];
-    echo('$router');
-    var_dump($router);
+    echo('$router ' . $router);
+    //var_dump($router);
 
     $router = explode('/', $router);
-    echo('$router explode:');
-    var_dump($router);
+    echo(' $router explode: ' . $router);
+    //var_dump($router);
 
     $inacao = $router[0];
-    echo('$inacao');
-    var_dump($inacao);
+    echo('$inacao' . $inacao);
+    //var_dump($inacao);
 
     $inparametro = $router[1];
-    echo('$inparametro');
-    var_dump($inparametro);
-    // Estabelecimento
+    echo(' $inparametro ' . $inparametro);
+    //var_dump($inparametro);
+
+    echo(' $insubdominiotipo ' . $insubdominiotipo);
+    //var_dump($insubdominiotipo);
+    // Estabelecimento de acordo com o tipo ele monta o diretorio e arquivo a ser executado
     if ($insubdominiotipo == 1) {
       $virtualpath = $rootpath.'/app/estabelecimento';
       switch ($inacao) {
@@ -147,8 +150,8 @@ include('_core/_includes/config.php');
     if( $insubdominio ) {
       include("404.php");
     } else {
-      include("localizacao/index.php");// DESMASCAR PARA USAR MARKETPLACE COMO PAGINA PADRAO
-      //header("Location: https://ominichanel.redewe2m.com.br/conheca");
+      //include("localizacao/index.php");// DESMASCAR PARA USAR MARKETPLACE COMO PAGINA PADRAO
+      header("Location: https://ominichanel.redewe2m.com.br/conheca");
     }
 
   }
