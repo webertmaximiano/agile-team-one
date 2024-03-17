@@ -7,17 +7,17 @@ include('_core/_includes/config.php');
   $simple_url;
 
   $gowww = $httprotocol.$simple_url;
-  echo('$gowww : ' . $gowww);
+  //echo('$gowww : ' . $gowww);
   //var_dump($gowww);
   $firstdomain = explode(".", $simple_url);
   $firstdomain = $firstdomain[0];
-  echo('Firstdomain : ' . $firstdomain);
+  //echo('Firstdomain : ' . $firstdomain);
   //var_dump($firstdomain);
 
 
   // Mapeando subdominio
   $insubdominio = explode('.', $_SERVER['HTTP_HOST']);
-  echo('$insubdominio : ' . $insubdominio);
+  //echo('$insubdominio : ' . $insubdominio);
   //var_dump( $insubdominio);
   if (strpos(isset($insubdominio), '.') !== false) {
     $insubdominio = substr($insubdominio, 0, strpos($insubdominio, '.'));
@@ -78,22 +78,22 @@ include('_core/_includes/config.php');
 
     // Roteando
     $router = $_GET['inrouter'];
-    echo('$router ' . $router);
+    //echo('$router ' . $router);
     //var_dump($router);
 
     $router = explode('/', $router);
-    echo(' $router explode: ' . $router);
+    //echo(' $router explode: ' . $router);
     //var_dump($router);
 
     $inacao = $router[0];
-    echo('$inacao' . $inacao);
+    //echo('$inacao' . $inacao);
     //var_dump($inacao);
 
     $inparametro = $router[1];
-    echo(' $inparametro ' . $inparametro);
+   // echo(' $inparametro ' . $inparametro);
     //var_dump($inparametro);
 
-    echo(' $insubdominiotipo ' . $insubdominiotipo);
+  //  echo(' $insubdominiotipo ' . $insubdominiotipo);
     //var_dump($insubdominiotipo);
     // Estabelecimento de acordo com o tipo ele monta o diretorio e arquivo a ser executado
     if ($insubdominiotipo == 1) {
