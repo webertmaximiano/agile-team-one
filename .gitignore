@@ -2,3 +2,8 @@
 /conheca/.htaccess
 /conheca/index.html
 /app/config/config_secret.php
+# Arquivos de configuração do Eclipse
+.classpath
+.project
+.settings/
+.metadata/
