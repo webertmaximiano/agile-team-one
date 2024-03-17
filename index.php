@@ -77,10 +77,20 @@ include('_core/_includes/config.php');
 
     // Roteando
     $router = $_GET['inrouter'];
-    $router = explode('/', $router);
-    $inacao = $router[0];
-    $inparametro = $router[1];
+    echo('$router');
+    var_dump($router);
 
+    $router = explode('/', $router);
+    echo('$router explode:');
+    var_dump($router);
+
+    $inacao = $router[0];
+    echo('$inacao');
+    var_dump($inacao);
+
+    $inparametro = $router[1];
+    echo('$inparametro');
+    var_dump($inparametro);
     // Estabelecimento
     if ($insubdominiotipo == 1) {
       $virtualpath = $rootpath.'/app/estabelecimento';
@@ -133,8 +143,8 @@ include('_core/_includes/config.php');
     if( $insubdominio ) {
       include("404.php");
     } else {
-      include("localizacao/index.php");// DESMASCAR PARA USAR MARKETPLACE COMO PAGINA PADRAO
-      //header("Location: https://ominichanel.redewe2m.com.br/conheca");
+      //include("localizacao/index.php");// DESMASCAR PARA USAR MARKETPLACE COMO PAGINA PADRAO
+      header("Location: https://ominichanel.redewe2m.com.br/conheca");
     }
 
   }
