@@ -6,9 +6,13 @@ include('_core/_includes/config.php');
   $httprotocol;
   $simple_url;
   $gowww = $httprotocol.$simple_url;
+  echo('antes');
+  var_dump($firstdomain);
   $firstdomain = explode(".", $simple_url);
   $firstdomain = $firstdomain[0];
-  
+  echo('depois');
+  var_dump($firstdomain);
+
   // Mapeando subdominio
   $insubdominio = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
   var_dump( $insubdominio);
@@ -16,7 +20,7 @@ include('_core/_includes/config.php');
     $insubdominio = substr($insubdominio, 0, strpos($insubdominio, '.'));
   }
 
-  var_dump($insubdominio);
+ 
 
   // Estabelecimento
   if( mysqli_num_rows( mysqli_query( $db_con, "SELECT id,subdominio FROM estabelecimentos WHERE subdominio = '$insubdominio' AND excluded != '1' LIMIT 1" ) ) ) {
