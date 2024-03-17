@@ -5,16 +5,18 @@ include('_core/_includes/config.php');
   $rootpath;
   $httprotocol;
   $simple_url;
+  
   $gowww = $httprotocol.$simple_url;
-  echo('antes');
-  var_dump($firstdomain);
+  echo('$gowww');
+  var_dump($gowww);
   $firstdomain = explode(".", $simple_url);
   $firstdomain = $firstdomain[0];
-  echo('depois');
+  echo('Firstdomain');
   var_dump($firstdomain);
 
   // Mapeando subdominio
   $insubdominio = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST);
+  echo('Subdominio: ');
   var_dump( $insubdominio);
   if (strpos(isset($insubdominio), '.') !== false) {
     $insubdominio = substr($insubdominio, 0, strpos($insubdominio, '.'));
