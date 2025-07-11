@@ -1,86 +1,46 @@
-Como contribuir com o projeto "Agile Team One" no GitHub:
-1. Crie um fork do repositório:
+# Agile Team One: Laboratório de Refatoração e TDD
 
-Acesse o repositório original: https://github.com/webertmaximiano/agile-team-one
-No canto superior direito, clique em "Fork".
-Isso criará uma cópia do repositório em sua conta.
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![Refactoring](https://img.shields.io/badge/Refactoring-448cff?style=for-the-badge&logo=sonarsource&logoColor=white)
+![TDD](https://img.shields.io/badge/TDD-A4963E?style=for-the-badge&logo=jest&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 
-2. Clone o fork para o seu computador: escolhendo o branch que ira trabalhar main - front - back
+Este repositório serve como um projeto prático e um estudo de caso vivo para os mentorados do projeto social **[Agilizando o Futuro](https://agilizando.clubesiga.com.br)**.
 
-Abra um terminal e navegue até a pasta onde deseja clonar o repositório.
-Execute o seguinte comando:
-git clone https://github.com/<seu_usuario>/agile-team-one.git
+## 🎯 O Projeto
 
-3. Crie uma nova branch para suas alterações:
+`agile-team-one` era originalmente uma plataforma SaaS Omni-channel desenvolvida em **PHP 5.6**, sem um padrão de projeto definido ou a adesão às boas práticas modernas de desenvolvimento.
 
-Navegue até a pasta do projeto clonado no seu computador.
-Execute o seguinte comando para criar uma nova branch:
-git checkout -b <nome_da_sua_branch>
+Hoje, ele é o nosso "paciente" em um grande processo de modernização, onde aplicamos conceitos de engenharia de software para transformá-lo em uma aplicação robusta, testável e escalável.
 
-4. Faça suas alterações e correções:
+##  CHALLENGE O Desafio
 
-Edite os arquivos do projeto de acordo com as suas correções e/ou criações.
-Certifique-se de seguir as diretrizes de estilo e formatação do projeto.
+O código legado apresentava vários desafios técnicos, incluindo:
+* Código altamente acoplado e procedural.
+* Ausência de testes automatizados.
+* Falta de um padrão de arquitetura claro (como MVC).
+* Vulnerabilidades de segurança comuns em versões antigas do PHP.
 
-5. Teste suas alterações:
+## ミッション A Missão
 
-Execute o projeto localmente para verificar se suas alterações funcionam como esperado.
+Nossa missão com este projeto é puramente educacional e prática. Os objetivos são:
+* **Aplicar Test-Driven Development (TDD):** Escrever testes antes de refatorar e desenvolver novas funcionalidades.
+* **Refatorar Código Legado:** Aplicar princípios como SOLID e os padrões de projeto (Design Patterns) para melhorar a estrutura e a manutenibilidade do código.
+* **Modernizar o Stack:** Migrar gradualmente a aplicação para uma versão mais recente do PHP e, eventualmente, para um framework moderno como o Laravel.
+* **Servir de Exemplo:** Criar um ambiente seguro onde desenvolvedores em início de carreira possam aprender a lidar com os desafios de um sistema real.
 
-6. Faça commit das suas alterações:
+## 💻 Tecnologias Envolvidas
 
-Adicione os arquivos modificados ao staging area:
-git add <nome_dos_arquivos>
-Crie um commit com uma mensagem descritiva:
-git commit -m "Mensagem descritiva das alterações"
+* **Stack Original:** PHP 5.6, MySQL, JavaScript procedural.
+* **Stack Alvo:** PHP 8+, Laravel, Pest/PHPUnit, Docker, React/Vue.js.
 
-7. Envie suas alterações para o seu fork:
+## 🤝 Como Participar?
 
-Envie suas alterações para o seu fork remoto:
-git push origin <nome_da_sua_branch>
+Este é um projeto de aprendizado aberto. Se você tem interesse em participar, aprender sobre refatoração, TDD e boas práticas, você é muito bem-vindo!
 
-8. Abra uma pull request:
+Temos um guia detalhado sobre como preparar seu ambiente e fazer sua primeira contribuição.
 
-Acesse o seu fork no GitHub: https://github.com/<seu_usuario>/agile-team-one
-Clique em "Pull requests".
-Clique em "New pull request".
-Selecione a branch que você criou com suas alterações.
-Escreva um título e uma descrição para a sua pull request.
-Clique em "Enviar pull request".
+➡️ **[Consulte nosso Guia de Contribuição (`CONTRIBUTING.md`)](CONTRIBUTING.md)**
 
-9. Aguarde a revisão:
-
-O mantenedor do projeto irá revisar suas alterações e fornecer feedback.
-Você pode precisar fazer alterações adicionais ou responder a perguntas do mantenedor.
-
-10. Merge da pull request:
-Se suas alterações forem aprovadas, o mantenedor irá mergear a sua pull request com o repositório original.
-
-
-Quando o projeto principal é atualizado, o seu fork não é automaticamente atualizado. Você precisa atualizar manualmente o seu fork para incorporar as alterações do projeto principal.
-
-Existem duas maneiras de fazer isso:
-
-1. Sincronizando o seu fork:
-
-Acesse a página do seu fork no GitHub.
-Clique no botão "Sync Fork".
-Isso irá baixar as últimas alterações do projeto principal para o seu fork.
-2. Rebasing o seu branch:
-
-Faça o checkout do seu branch no terminal:
-git checkout <nome_do_seu_branch>
-Faça o rebase do seu branch com o branch principal:
-git rebase upstream/main
-Resolva qualquer conflito de merge que possa surgir.
-Depois de atualizar o seu fork, você pode:
-
-Mergear as alterações do projeto principal no seu branch:
-git merge upstream/main
-Enviar as suas alterações para o seu fork:
-git push origin <nome_do_seu_branch>
-Você não receberá uma notificação automática quando o projeto principal for atualizado. No entanto, você pode configurar o GitHub para enviar notificações por e-mail quando o branch principal for atualizado. Para fazer isso:
-
-Acesse as configurações do seu repositório.
-Clique na aba "Notifications".
-Selecione a opção "Receive notifications for this repository".
-Marque a caixa de seleção ao lado de "Branch updates".
+---
+Este projeto é uma ferramenta de ensino fundamental para o **Agilizando o Futuro**, capacitando a próxima geração de desenvolvedores com experiência prática e relevante.
